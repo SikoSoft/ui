@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "lint": "npx eslint --fix src",
