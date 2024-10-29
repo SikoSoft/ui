@@ -3,14 +3,13 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "npx eslint --fix src",
-    "prepare": "husky install"
+    "lint": "npx eslint --fix src"
   },
   "dependencies": {
     "lit": "~3.1.3",
