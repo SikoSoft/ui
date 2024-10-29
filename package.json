@@ -5,7 +5,10 @@
   "author": "Aaron Wright",
   "version": "1.0.0",
   "type": "module",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "scripts": {
+    "build": "tsc",
     "lint": "npx eslint --fix src",
     "prepare": "husky install"
   },
