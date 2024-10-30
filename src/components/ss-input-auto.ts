@@ -2,6 +2,9 @@ import { html, css, nothing, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
+import { SuggestiontSubmittedEvent } from '../events/suggestion-submitted';
+import { SuggestionChangedEvent } from '../events/suggestion-changed';
+
 import { theme } from '../styles/theme';
 
 @customElement('ss-input-auto')
@@ -92,21 +95,12 @@ export class SSInputAuto extends LitElement {
   }
 
   private _sendSelectedEvent(suggestion: string) {
-    this.dispatchEvent(
-      new CustomEvent('suggestion-selected', {
-        bubbles: true,
-        composed: true,
-        detail: suggestion,
-      }),
-    );
+    this.dispatchEvent(new SuggestionChangedEvent({ value: suggestion }));
   }
 
   private _sendSubmitEvent() {
     this.dispatchEvent(
-      new CustomEvent('submit', {
-        bubbles: true,
-        composed: true,
-      }),
+      new SuggestiontSubmittedEvent({ selectedIndex: this.selectedIndex }),
     );
   }
 

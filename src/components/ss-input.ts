@@ -170,8 +170,8 @@ export class SSInput extends LitElement {
               <ss-input-auto
                 input=${this._value}
                 .suggestions=${this.suggestions}
-                @submit=${this._handleSubmit}
-                @suggestion-selected=${this._suggestionSelectHandler}
+                @suggestion-submitted=${this._handleSubmit}
+                @suggestion-changed=${this._suggestionSelectHandler}
               ></ss-input-auto>
             `
           : nothing}
