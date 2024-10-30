@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { html, css, nothing, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { SuggestiontSubmittedEvent } from '../events/suggestion-submitted';
+import { SuggestionChangedEvent } from '../events/suggestion-changed';
 import { theme } from '../styles/theme';
 let SSInputAuto = class SSInputAuto extends LitElement {
     constructor() {
@@ -89,17 +91,10 @@ let SSInputAuto = class SSInputAuto extends LitElement {
         this.selectedIndex = newIndex;
     }
     _sendSelectedEvent(suggestion) {
-        this.dispatchEvent(new CustomEvent('suggestion-selected', {
-            bubbles: true,
-            composed: true,
-            detail: suggestion,
-        }));
+        this.dispatchEvent(new SuggestionChangedEvent({ value: suggestion }));
     }
     _sendSubmitEvent() {
-        this.dispatchEvent(new CustomEvent('submit', {
-            bubbles: true,
-            composed: true,
-        }));
+        this.dispatchEvent(new SuggestiontSubmittedEvent({ selectedIndex: this.selectedIndex }));
     }
     render() {
         return html `
