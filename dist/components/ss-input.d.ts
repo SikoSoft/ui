@@ -7,6 +7,7 @@ export declare class SSInput extends LitElement {
     value: string;
     autoComplete: boolean;
     placeholder: string;
+    suggestions: string[];
     _value: string;
     inputField: HTMLInputElement;
     autoCompleteNode: HTMLElement;

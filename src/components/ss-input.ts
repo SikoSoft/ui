@@ -25,6 +25,7 @@ export class SSInput extends LitElement {
   @property() value: string = '';
   @property({ type: Boolean }) autoComplete: boolean = false;
   @property() placeholder: string = '';
+  @property({ type: Array }) suggestions: string[] = [];
   @state() _value: string = this.value;
   @query('#input-field') inputField!: HTMLInputElement;
   @query('ss-input-auto') autoCompleteNode!: HTMLElement;
@@ -168,6 +169,7 @@ export class SSInput extends LitElement {
           ? html`
               <ss-input-auto
                 input=${this._value}
+                .suggestions=${this.suggestions}
                 @submit=${this._handleSubmit}
                 @suggestion-selected=${this._suggestionSelectHandler}
               ></ss-input-auto>

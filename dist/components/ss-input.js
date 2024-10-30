@@ -18,6 +18,7 @@ let SSInput = class SSInput extends LitElement {
         this.value = '';
         this.autoComplete = false;
         this.placeholder = '';
+        this.suggestions = [];
         this._value = this.value;
         this.hasFocus = false;
         this.autoDismissed = false;
@@ -144,6 +145,7 @@ let SSInput = class SSInput extends LitElement {
             ? html `
               <ss-input-auto
                 input=${this._value}
+                .suggestions=${this.suggestions}
                 @submit=${this._handleSubmit}
                 @suggestion-selected=${this._suggestionSelectHandler}
               ></ss-input-auto>
@@ -165,6 +167,9 @@ __decorate([
 __decorate([
     property()
 ], SSInput.prototype, "placeholder", void 0);
+__decorate([
+    property({ type: Array })
+], SSInput.prototype, "suggestions", void 0);
 __decorate([
     state()
 ], SSInput.prototype, "_value", void 0);
