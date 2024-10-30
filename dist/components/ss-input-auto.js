@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { html, css, nothing, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
-import { theme } from '@/styles/theme';
+import { theme } from '../styles/theme';
 let SSInputAuto = class SSInputAuto extends LitElement {
     constructor() {
         super(...arguments);
