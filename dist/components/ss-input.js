@@ -9,7 +9,7 @@ import { property, customElement, state, query } from 'lit/decorators.js';
 import { InputType } from '../models/Input';
 import { InputSubmittedEvent } from '../events/input-submitted';
 import { InputChangedEvent } from '../events/input-changed';
-import './components/ss-input-auto';
+import './ss-input-auto';
 import { theme } from '../styles/theme';
 let SSInput = class SSInput extends LitElement {
     constructor() {
