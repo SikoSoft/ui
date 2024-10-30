@@ -2,7 +2,7 @@ import { html, css, nothing, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
-import { theme } from '@/styles/theme';
+import { theme } from '../styles/theme';
 
 @customElement('ss-input-auto')
 export class SSInputAuto extends LitElement {
