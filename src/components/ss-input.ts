@@ -6,9 +6,9 @@ import { InputType } from '../models/Input';
 import { InputSubmittedEvent } from '../events/input-submitted';
 import { InputChangedEvent } from '../events/input-changed';
 
-import '@/components/ss-input-auto';
+import './components/ss-input-auto';
 
-import { theme } from '@/styles/theme';
+import { theme } from '../styles/theme';
 
 @customElement('ss-input')
 export class SSInput extends LitElement {

@@ -1,6 +1,6 @@
 import { LitElement, PropertyValueMap } from 'lit';
 import { InputType } from '../models/Input';
-import '@/components/ss-input-auto';
+import './components/ss-input-auto';
 export declare class SSInput extends LitElement {
     static styles: import("lit").CSSResult[];
     type: InputType;
