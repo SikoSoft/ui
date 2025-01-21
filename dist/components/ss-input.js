@@ -81,8 +81,8 @@ let SSInput = class SSInput extends LitElement {
         };
         this._suggestionSelectHandler = (e) => {
             this.autoDismissed = true;
-            this.inputField.value = e.detail;
-            this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail }));
+            this.inputField.value = e.detail.value;
+            this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail.value }));
         };
     }
     static { this.styles = [

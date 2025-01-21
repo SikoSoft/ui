@@ -9,6 +9,7 @@ import { InputChangedEvent } from '../events/input-changed';
 import './ss-input-auto';
 
 import { theme } from '../styles/theme';
+import { SuggestionChangedEvent } from '@/events/suggestion-changed';
 
 @customElement('ss-input')
 export class SSInput extends LitElement {
@@ -144,10 +145,12 @@ export class SSInput extends LitElement {
     }, 200);
   };
 
-  private _suggestionSelectHandler = (e: CustomEvent): void => {
+  private _suggestionSelectHandler = (e: SuggestionChangedEvent): void => {
     this.autoDismissed = true;
-    this.inputField.value = e.detail;
-    this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail }));
+    this.inputField.value = e.detail.value;
+    this.inputField.dispatchEvent(
+      new InputChangedEvent({ value: e.detail.value }),
+    );
   };
 
   render() {
