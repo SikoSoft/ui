@@ -13,6 +13,10 @@ import { SuggestionChangedEvent } from '@/events/suggestion-changed';
 
 @customElement('ss-input')
 export class SSInput extends LitElement {
+  private clickFocusHandler: (event: MouseEvent) => void = (
+    event: MouseEvent,
+  ) => {};
+
   static styles = [
     theme,
     css`
@@ -30,12 +34,32 @@ export class SSInput extends LitElement {
   @state() _value: string = this.value;
   @query('#input-field') inputField!: HTMLInputElement;
   @query('ss-input-auto') autoCompleteNode!: HTMLElement;
+  @query('span') container!: HTMLSpanElement;
 
   @state() hasFocus: boolean = false;
   @state() autoDismissed: boolean = false;
   @state()
   get showAutoComplete(): boolean {
     return this.autoComplete && !this.autoDismissed && this.value.length > 0;
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    this.clickFocusHandler = (event: MouseEvent) => {
+      const withinBoundaries = event.composedPath().includes(this.container);
+      if (!withinBoundaries) {
+        this.autoDismissed = true;
+      }
+    };
+
+    window.addEventListener('mousedown', this.clickFocusHandler);
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+
+    window.removeEventListener('mousedown', this.clickFocusHandler);
   }
 
   updated(
