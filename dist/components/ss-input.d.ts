@@ -2,6 +2,7 @@ import { LitElement, PropertyValueMap } from 'lit';
 import { InputType } from '../models/Input';
 import './ss-input-auto';
 export declare class SSInput extends LitElement {
+    private clickFocusHandler;
     static styles: import("lit").CSSResult[];
     type: InputType;
     value: string;
@@ -11,9 +12,12 @@ export declare class SSInput extends LitElement {
     _value: string;
     inputField: HTMLInputElement;
     autoCompleteNode: HTMLElement;
+    container: HTMLSpanElement;
     hasFocus: boolean;
     autoDismissed: boolean;
     get showAutoComplete(): boolean;
+    connectedCallback(): void;
+    disconnectedCallback(): void;
     updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void;
     focus(): void;
     clear(): void;

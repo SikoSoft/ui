@@ -14,6 +14,7 @@ import { theme } from '../styles/theme';
 let SSInput = class SSInput extends LitElement {
     constructor() {
         super(...arguments);
+        this.clickFocusHandler = (event) => { };
         this.type = InputType.TEXT;
         this.value = '';
         this.autoComplete = false;
@@ -95,6 +96,20 @@ let SSInput = class SSInput extends LitElement {
     ]; }
     get showAutoComplete() {
         return this.autoComplete && !this.autoDismissed && this.value.length > 0;
+    }
+    connectedCallback() {
+        super.connectedCallback();
+        this.clickFocusHandler = (event) => {
+            const withinBoundaries = event.composedPath().includes(this.container);
+            if (!withinBoundaries) {
+                this.autoDismissed = true;
+            }
+        };
+        window.addEventListener('mousedown', this.clickFocusHandler);
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        window.removeEventListener('mousedown', this.clickFocusHandler);
     }
     updated(changedProperties) {
         super.updated(changedProperties);
@@ -179,6 +194,9 @@ __decorate([
 __decorate([
     query('ss-input-auto')
 ], SSInput.prototype, "autoCompleteNode", void 0);
+__decorate([
+    query('span')
+], SSInput.prototype, "container", void 0);
 __decorate([
     state()
 ], SSInput.prototype, "hasFocus", void 0);
