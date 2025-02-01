@@ -40,6 +40,9 @@ let SSInput = class SSInput extends LitElement {
                 return;
             }
             switch (e.code) {
+                case 'Tab':
+                    this.autoDismissed = true;
+                    return;
                 case 'ArrowUp':
                     this._sendSuggestionUpEvent();
                     e.preventDefault();
