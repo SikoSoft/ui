@@ -158,6 +158,7 @@ let SSInput = class SSInput extends LitElement {
           @blur=${this._handleBlur}
           placeholder=${this.placeholder}
           autocomplete="off"
+          autocapitalize="off"
         />
         ${this.showAutoComplete
             ? html `
