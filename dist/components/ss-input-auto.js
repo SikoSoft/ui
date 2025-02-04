@@ -49,6 +49,7 @@ let SSInputAuto = class SSInputAuto extends LitElement {
         height: 2rem;
         line-height: 2rem;
         color: #888;
+        text-align: left;
       }
 
       li.selected {
