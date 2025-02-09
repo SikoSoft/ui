@@ -5,9 +5,8 @@ export declare class SSButton extends LitElement {
     text: string;
     disabled: boolean;
     loading: boolean;
-    get classes(): {
-        disabled: boolean;
-    };
+    class: string;
+    get classes(): Record<string, boolean>;
     private _handleClick;
     render(): import("lit-html").TemplateResult<1>;
 }

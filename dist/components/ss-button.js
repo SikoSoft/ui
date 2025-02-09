@@ -15,6 +15,7 @@ let SSButton = class SSButton extends LitElement {
         this.text = '';
         this.disabled = false;
         this.loading = false;
+        this.class = '';
         this._handleClick = (e) => {
             this.dispatchEvent(new CustomEvent('ss-button-clicked', {
                 bubbles: true,
@@ -31,7 +32,11 @@ let SSButton = class SSButton extends LitElement {
     `,
     ]; }
     get classes() {
-        return { disabled: this.disabled };
+        const classes = { disabled: this.disabled };
+        this.class.split(' ').forEach(className => {
+            classes[className] = true;
+        });
+        return classes;
     }
     render() {
         return html `
@@ -54,6 +59,9 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], SSButton.prototype, "loading", void 0);
+__decorate([
+    property()
+], SSButton.prototype, "class", void 0);
 __decorate([
     state()
 ], SSButton.prototype, "classes", null);
