@@ -11,6 +11,14 @@ export class SSButton extends LitElement {
   static styles = [
     theme,
     css`
+      .positive {
+        background-color: var(--positive-background-color);
+        color: var(--positive-color);
+      }
+      .negative {
+        background-color: var(--negative-background-color);
+        color: var(--negative-color);
+      }
       button.disabled {
         opacity: 0.5;
       }
@@ -20,11 +28,17 @@ export class SSButton extends LitElement {
   @property() text: string = '';
   @property({ type: Boolean }) disabled: boolean = false;
   @property({ type: Boolean }) loading: boolean = false;
+  @property({ type: Boolean }) positive: boolean = false;
+  @property({ type: Boolean }) negative: boolean = false;
   @property() class: string = '';
 
   @state()
   get classes() {
-    const classes: Record<string, boolean> = { disabled: this.disabled };
+    const classes: Record<string, boolean> = {
+      disabled: this.disabled,
+      positive: this.positive,
+      negative: this.negative,
+    };
     this.class.split(' ').forEach(className => {
       classes[className] = true;
     });
