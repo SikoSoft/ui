@@ -20,10 +20,15 @@ export class SSButton extends LitElement {
   @property() text: string = '';
   @property({ type: Boolean }) disabled: boolean = false;
   @property({ type: Boolean }) loading: boolean = false;
+  @property() class: string = '';
 
   @state()
   get classes() {
-    return { disabled: this.disabled };
+    const classes: Record<string, boolean> = { disabled: this.disabled };
+    this.class.split(' ').forEach(className => {
+      classes[className] = true;
+    });
+    return classes;
   }
 
   private _handleClick = (e: CustomEvent): void => {
