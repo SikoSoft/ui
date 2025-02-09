@@ -15,6 +15,8 @@ let SSButton = class SSButton extends LitElement {
         this.text = '';
         this.disabled = false;
         this.loading = false;
+        this.positive = false;
+        this.negative = false;
         this.class = '';
         this._handleClick = (e) => {
             this.dispatchEvent(new CustomEvent('ss-button-clicked', {
@@ -26,13 +28,25 @@ let SSButton = class SSButton extends LitElement {
     static { this.styles = [
         theme,
         css `
+      .positive {
+        background-color: var(--positive-background-color);
+        color: var(--positive-color);
+      }
+      .negative {
+        background-color: var(--negative-background-color);
+        color: var(--negative-color);
+      }
       button.disabled {
         opacity: 0.5;
       }
     `,
     ]; }
     get classes() {
-        const classes = { disabled: this.disabled };
+        const classes = {
+            disabled: this.disabled,
+            positive: this.positive,
+            negative: this.negative,
+        };
         this.class.split(' ').forEach(className => {
             classes[className] = true;
         });
@@ -59,6 +73,12 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], SSButton.prototype, "loading", void 0);
+__decorate([
+    property({ type: Boolean })
+], SSButton.prototype, "positive", void 0);
+__decorate([
+    property({ type: Boolean })
+], SSButton.prototype, "negative", void 0);
 __decorate([
     property()
 ], SSButton.prototype, "class", void 0);

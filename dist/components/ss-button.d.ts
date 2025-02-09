@@ -5,6 +5,8 @@ export declare class SSButton extends LitElement {
     text: string;
     disabled: boolean;
     loading: boolean;
+    positive: boolean;
+    negative: boolean;
     class: string;
     get classes(): Record<string, boolean>;
     private _handleClick;
