@@ -6,7 +6,7 @@ import { InputType } from '../../models/Input';
 import { InputSubmittedEvent } from '../../events/input-submitted';
 import { InputChangedEvent } from '../../events/input-changed';
 
-import './ss-input-auto';
+import '../ss-input-auto/ss-input-auto';
 
 import { theme } from '../../styles/theme';
 import { SuggestionChangedEvent } from '@/events/suggestion-changed';
