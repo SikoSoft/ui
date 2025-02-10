@@ -28,16 +28,24 @@ let SSButton = class SSButton extends LitElement {
     static { this.styles = [
         theme,
         css `
-      .positive {
-        background-color: var(--positive-background-color);
-        color: var(--positive-color);
-      }
-      .negative {
-        background-color: var(--negative-background-color);
-        color: var(--negative-color);
-      }
-      button.disabled {
-        opacity: 0.5;
+      button {
+        border-radius: 0.5rem;
+
+        &.positive {
+          background-color: var(--positive-background-color);
+          color: var(--positive-color);
+          border-color: var(--positive-color);
+        }
+
+        &.negative {
+          background-color: var(--negative-background-color);
+          color: var(--negative-color);
+          border-color: var(--negative-color);
+        }
+
+        &.disabled {
+          opacity: 0.5;
+        }
       }
     `,
     ]; }
