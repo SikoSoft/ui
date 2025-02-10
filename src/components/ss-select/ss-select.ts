@@ -2,9 +2,9 @@ import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
-import { SelectChangedEvent } from '../events/select-changed';
+import { SelectChangedEvent } from '../../events/select-changed';
 
-import { theme } from '../styles/theme';
+import { theme } from '../../styles/theme';
 
 export interface SelectOption {
   value: string;
