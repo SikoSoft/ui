@@ -8,7 +8,7 @@ import { LitElement, html, css } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import '../components/ss-loader';
-import { theme } from '../styles/theme';
+import { theme } from '../../styles/theme';
 let SSButton = class SSButton extends LitElement {
     constructor() {
         super(...arguments);

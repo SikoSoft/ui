@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ToggleChangedEvent } from '../events/toggle-changed';
+import { ToggleChangedEvent } from '../../events/toggle-changed';
 let SSToggle = class SSToggle extends LitElement {
     constructor() {
         super(...arguments);

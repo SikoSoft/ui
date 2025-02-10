@@ -1,5 +1,5 @@
 import { LitElement, PropertyValueMap } from 'lit';
-import { InputType } from '../models/Input';
+import { InputType } from '../../models/Input';
 import './ss-input-auto';
 export declare class SSInput extends LitElement {
     private clickFocusHandler;

@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
-import { SelectChangedEvent } from '../events/select-changed';
-import { theme } from '../styles/theme';
+import { SelectChangedEvent } from '../../events/select-changed';
+import { theme } from '../../styles/theme';
 let SSSelect = class SSSelect extends LitElement {
     constructor() {
         super(...arguments);
