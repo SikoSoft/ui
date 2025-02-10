@@ -1,14 +1,14 @@
 import { LitElement, html, PropertyValueMap, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 
-import { InputType } from '../models/Input';
+import { InputType } from '../../models/Input';
 
-import { InputSubmittedEvent } from '../events/input-submitted';
-import { InputChangedEvent } from '../events/input-changed';
+import { InputSubmittedEvent } from '../../events/input-submitted';
+import { InputChangedEvent } from '../../events/input-changed';
 
 import './ss-input-auto';
 
-import { theme } from '../styles/theme';
+import { theme } from '../../styles/theme';
 import { SuggestionChangedEvent } from '@/events/suggestion-changed';
 
 @customElement('ss-input')

@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 
 import '../components/ss-loader';
 
-import { theme } from '../styles/theme';
+import { theme } from '../../styles/theme';
 
 @customElement('ss-button')
 export class SSButton extends LitElement {
