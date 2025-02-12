@@ -9,7 +9,7 @@ import { InputChangedEvent } from '../../events/input-changed';
 import '../ss-input-auto/ss-input-auto';
 
 import { theme } from '../../styles/theme';
-import { SuggestionChangedEvent } from '@/events/suggestion-changed';
+import { SuggestionChangedEvent } from '../../events/suggestion-changed';
 
 @customElement('ss-input')
 export class SSInput extends LitElement {
