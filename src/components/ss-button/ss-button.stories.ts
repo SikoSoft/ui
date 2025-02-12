@@ -1,5 +1,3 @@
-import { fn } from '@storybook/test';
-
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 
@@ -23,8 +21,28 @@ const meta = {
       description: 'Whether the field is locked from use',
       control: 'boolean',
     },
+    loading: {
+      description: 'Whether the button shows loader and is disabled',
+      control: 'boolean',
+    },
+    positive: {
+      description: 'Whether to style the button in a positive manner',
+      control: 'boolean',
+    },
+    negative: {
+      description: 'Whether to style the button in a negative manner',
+      control: 'boolean',
+    },
   },
-  render: args => html` <ss-button text=${args.text}></ss-button> `,
+  render: args => html`
+    <ss-button
+      text=${args.text}
+      ?disabled=${args.disabled}
+      ?loading=${args.loading}
+      ?positive=${args.positive}
+      ?negative=${args.negative}
+    ></ss-button>
+  `,
 } satisfies Meta;
 
 export default meta;
@@ -35,5 +53,23 @@ export const Disabled: Story = {
   args: {
     text: "Can't touch this",
     disabled: true,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    loading: true,
+  },
+};
+
+export const Positive: Story = {
+  args: {
+    positive: true,
+  },
+};
+
+export const Negative: Story = {
+  args: {
+    negative: true,
   },
 };
