@@ -14,6 +14,10 @@ export class SSButton extends LitElement {
       button {
         border-radius: 0.5rem;
 
+        &.loading {
+          min-width: 100px;
+        }
+
         &.positive {
           background-color: var(--positive-background-color);
           color: var(--positive-color);
@@ -43,6 +47,7 @@ export class SSButton extends LitElement {
   @state()
   get classes() {
     const classes: Record<string, boolean> = {
+      loading: this.loading,
       disabled: this.disabled,
       positive: this.positive,
       negative: this.negative,
