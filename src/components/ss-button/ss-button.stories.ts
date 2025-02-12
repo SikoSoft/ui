@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 
+import { SSButtonProp, SSButtonProps } from './ss-button';
 import './ss-button';
 
 const meta = {
-  title: 'ss-button',
+  title: 'components/ss-button',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -13,23 +14,23 @@ const meta = {
     text: 'Click me',
   },
   argTypes: {
-    text: {
+    [SSButtonProp.TEXT]: {
       description: 'Human readable content to be displayed',
       control: 'text',
     },
-    disabled: {
+    [SSButtonProp.DISABLED]: {
       description: 'Whether the field is locked from use',
       control: 'boolean',
     },
-    loading: {
+    [SSButtonProp.LOADING]: {
       description: 'Whether the button shows loader and is disabled',
       control: 'boolean',
     },
-    positive: {
+    [SSButtonProp.POSITIVE]: {
       description: 'Whether to style the button in a positive manner',
       control: 'boolean',
     },
-    negative: {
+    [SSButtonProp.NEGATIVE]: {
       description: 'Whether to style the button in a negative manner',
       control: 'boolean',
     },
@@ -43,10 +44,10 @@ const meta = {
       ?negative=${args.negative}
     ></ss-button>
   `,
-} satisfies Meta;
+} satisfies Meta<SSButtonProps>;
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<SSButtonProps>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Disabled: Story = {

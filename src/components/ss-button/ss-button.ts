@@ -6,6 +6,24 @@ import '../ss-loader/ss-loader';
 
 import { theme } from '../../styles/theme';
 
+export enum SSButtonProp {
+  TEXT = 'text',
+  DISABLED = 'disabled',
+  LOADING = 'loading',
+  POSITIVE = 'positive',
+  NEGATIVE = 'negative',
+  CLASS = 'class',
+}
+
+export interface SSButtonProps {
+  [SSButtonProp.TEXT]: string;
+  [SSButtonProp.DISABLED]: boolean;
+  [SSButtonProp.LOADING]: boolean;
+  [SSButtonProp.POSITIVE]: boolean;
+  [SSButtonProp.NEGATIVE]: boolean;
+  [SSButtonProp.CLASS]: string;
+}
+
 @customElement('ss-button')
 export class SSButton extends LitElement {
   static styles = [
@@ -37,12 +55,16 @@ export class SSButton extends LitElement {
     `,
   ];
 
-  @property() text: string = '';
-  @property({ type: Boolean }) disabled: boolean = false;
-  @property({ type: Boolean }) loading: boolean = false;
-  @property({ type: Boolean }) positive: boolean = false;
-  @property({ type: Boolean }) negative: boolean = false;
-  @property() class: string = '';
+  @property() [SSButtonProp.TEXT]: SSButtonProps[SSButtonProp.TEXT] = '';
+  @property({ type: Boolean })
+  [SSButtonProp.DISABLED]: SSButtonProps[SSButtonProp.DISABLED] = false;
+  @property({ type: Boolean })
+  [SSButtonProp.LOADING]: SSButtonProps[SSButtonProp.LOADING] = false;
+  @property({ type: Boolean })
+  [SSButtonProp.POSITIVE]: SSButtonProps[SSButtonProp.POSITIVE] = false;
+  @property({ type: Boolean })
+  [SSButtonProp.NEGATIVE]: SSButtonProps[SSButtonProp.NEGATIVE] = false;
+  @property() [SSButtonProp.CLASS]: SSButtonProps[SSButtonProp.CLASS] = '';
 
   @state()
   get classes() {
