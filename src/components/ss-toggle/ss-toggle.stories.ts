@@ -6,7 +6,7 @@ import { html } from 'lit';
 import './ss-toggle';
 
 const meta = {
-  title: 'ss-toggle',
+  title: 'components/ss-toggle',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
