@@ -26,6 +26,15 @@ export interface SSButtonProps {
 
 @customElement('ss-button')
 export class SSButton extends LitElement {
+  public static prop = {
+    TEXT: 'text',
+    DISABLED: 'disabled',
+    LOADING: 'loading',
+    POSITIVE: 'positive',
+    NEGATIVE: 'negative',
+    CLASS: 'class',
+  };
+
   static styles = [
     theme,
     css`
@@ -56,14 +65,19 @@ export class SSButton extends LitElement {
   ];
 
   @property() [SSButtonProp.TEXT]: SSButtonProps[SSButtonProp.TEXT] = '';
+
   @property({ type: Boolean })
   [SSButtonProp.DISABLED]: SSButtonProps[SSButtonProp.DISABLED] = false;
+
   @property({ type: Boolean })
   [SSButtonProp.LOADING]: SSButtonProps[SSButtonProp.LOADING] = false;
+
   @property({ type: Boolean })
   [SSButtonProp.POSITIVE]: SSButtonProps[SSButtonProp.POSITIVE] = false;
+
   @property({ type: Boolean })
   [SSButtonProp.NEGATIVE]: SSButtonProps[SSButtonProp.NEGATIVE] = false;
+
   @property() [SSButtonProp.CLASS]: SSButtonProps[SSButtonProp.CLASS] = '';
 
   @state()
