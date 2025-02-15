@@ -11,6 +11,71 @@ import '../ss-input-auto/ss-input-auto';
 import { theme } from '../../styles/theme';
 import { SuggestionChangedEvent } from '../../events/suggestion-changed';
 
+export enum SSInputProp {
+  TYPE = 'type',
+  VALUE = 'value',
+  AUTO_COMPLETE = 'autoComplete',
+  PLACEHOLDER = 'placeholder',
+  SUGGESTIONS = 'suggestions',
+}
+
+export interface SSInputProps {
+  [SSInputProp.TYPE]: InputType;
+  [SSInputProp.VALUE]: string;
+  [SSInputProp.AUTO_COMPLETE]: boolean;
+  [SSInputProp.PLACEHOLDER]: string;
+  [SSInputProp.SUGGESTIONS]: string[];
+}
+
+export type SSInputPropConfig = {
+  [Property in keyof SSInputProps]: {
+    default: SSInputProps[Property];
+    description: string;
+  };
+};
+
+export interface PropConfig<T extends keyof SSInputProps> {
+  default: SSInputProps[T];
+}
+
+export type PropKeys = keyof SSInputProps;
+
+export type TypedPropConfig<T extends SSInputProp> = {
+  default: SSInputProps[T];
+};
+
+/*
+export type SSInputPropConfig = {
+  [Property in keyof SSInputProps]: SSInputProps[Property];
+};
+*/
+
+//PropConfig<SSInputProp>
+//TypedRecord<SSInputProp>
+//Record<SSInputProp, TypedPropConfig<SSInputProp>>
+export const ssInputProps: SSInputPropConfig = {
+  [SSInputProp.TYPE]: {
+    default: InputType.TEXT,
+    description: 'test',
+  },
+  [SSInputProp.VALUE]: {
+    default: '',
+    description: 'test',
+  },
+  [SSInputProp.AUTO_COMPLETE]: {
+    default: false,
+    description: 'test',
+  },
+  [SSInputProp.PLACEHOLDER]: {
+    default: '',
+    description: 'test',
+  },
+  [SSInputProp.SUGGESTIONS]: {
+    default: [],
+    description: 'test',
+  },
+};
+
 @customElement('ss-input')
 export class SSInput extends LitElement {
   private clickFocusHandler: (event: MouseEvent) => void = (
@@ -26,11 +91,23 @@ export class SSInput extends LitElement {
     `,
   ];
 
-  @property() type: InputType = InputType.TEXT;
-  @property() value: string = '';
-  @property({ type: Boolean }) autoComplete: boolean = false;
-  @property() placeholder: string = '';
-  @property({ type: Array }) suggestions: string[] = [];
+  @property()
+  [SSInputProp.TYPE]: SSInputProps[SSInputProp.TYPE] =
+    ssInputProps[SSInputProp.TYPE].default;
+
+  @property()
+  [SSInputProp.VALUE]: SSInputProps[SSInputProp.VALUE] = '';
+
+  @property({ type: Boolean })
+  [SSInputProp.AUTO_COMPLETE]: SSInputProps[SSInputProp.AUTO_COMPLETE] = false;
+
+  @property()
+  [SSInputProp.PLACEHOLDER]: SSInputProps[SSInputProp.PLACEHOLDER] = '';
+
+  @property({ type: Array })
+  [SSInputProp.SUGGESTIONS]: SSInputProps[SSInputProp.SUGGESTIONS] =
+    ssInputProps[SSInputProp.SUGGESTIONS].default;
+
   @state() _value: string = this.value;
   @query('#input-field') inputField!: HTMLInputElement;
   @query('ss-input-auto') autoCompleteNode!: HTMLElement;
