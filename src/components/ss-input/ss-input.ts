@@ -44,15 +44,6 @@ export type TypedPropConfig<T extends SSInputProp> = {
   default: SSInputProps[T];
 };
 
-/*
-export type SSInputPropConfig = {
-  [Property in keyof SSInputProps]: SSInputProps[Property];
-};
-*/
-
-//PropConfig<SSInputProp>
-//TypedRecord<SSInputProp>
-//Record<SSInputProp, TypedPropConfig<SSInputProp>>
 export const ssInputProps: SSInputPropConfig = {
   [SSInputProp.TYPE]: {
     default: InputType.TEXT,
