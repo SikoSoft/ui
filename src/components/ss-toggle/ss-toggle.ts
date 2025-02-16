@@ -3,6 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
 import { ToggleChangedEvent } from '../../events/toggle-changed';
+import { SSToggleProp, ssToggleProps, SSToggleProps } from './ss-toggle.models';
 
 @customElement('ss-toggle')
 export class SSToggle extends LitElement {
@@ -54,7 +55,9 @@ export class SSToggle extends LitElement {
     }
   `;
 
-  @property({ type: Boolean }) on: boolean = false;
+  @property({ type: Boolean })
+  [SSToggleProp.ON]: SSToggleProps[SSToggleProp.ON] =
+    ssToggleProps[SSToggleProp.ON].default;
 
   @state()
   get classes() {
