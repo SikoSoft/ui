@@ -17,6 +17,10 @@ const meta = {
   args: {
     text: 'Click me',
     disabled: false,
+    loading: false,
+    positive: false,
+    negative: false,
+    class: '',
   },
   argTypes,
   render: args => html`
