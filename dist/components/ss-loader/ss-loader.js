@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6,19 +5,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var _a;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SSLoader = void 0;
-const lit_1 = require("lit");
-const decorators_js_1 = require("lit/decorators.js");
-const class_map_js_1 = require("lit/directives/class-map.js");
-const ss_loader_models_1 = require("./ss-loader.models");
-let SSLoader = class SSLoader extends lit_1.LitElement {
+import { LitElement, css, html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { SSLoaderProp, ssLoaderProps } from './ss-loader.models';
+let SSLoader = class SSLoader extends LitElement {
     constructor() {
         super(...arguments);
-        this[_a] = ss_loader_models_1.ssLoaderProps[ss_loader_models_1.SSLoaderProp.PADDED].default;
+        this[_a] = ssLoaderProps[SSLoaderProp.PADDED].default;
     }
-    static { _a = ss_loader_models_1.SSLoaderProp.PADDED; }
-    static { this.styles = (0, lit_1.css) `
+    static { _a = SSLoaderProp.PADDED; }
+    static { this.styles = css `
     .container {
       text-align: center;
       height: 16px;
@@ -67,19 +64,19 @@ let SSLoader = class SSLoader extends lit_1.LitElement {
         return { container: true, padded: this.padded };
     }
     render() {
-        return (0, lit_1.html) `<div class=${(0, class_map_js_1.classMap)(this.classes)}>
+        return html `<div class=${classMap(this.classes)}>
       <span class="loader"></span>
     </div>`;
     }
 };
-exports.SSLoader = SSLoader;
 __decorate([
-    (0, decorators_js_1.property)({ type: Boolean })
+    property({ type: Boolean })
 ], SSLoader.prototype, _a, void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSLoader.prototype, "classes", null);
-exports.SSLoader = SSLoader = __decorate([
-    (0, decorators_js_1.customElement)('ss-loader')
+SSLoader = __decorate([
+    customElement('ss-loader')
 ], SSLoader);
+export { SSLoader };
 //# sourceMappingURL=ss-loader.js.map

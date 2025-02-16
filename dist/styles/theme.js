@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.theme = void 0;
-const lit_1 = require("lit");
-exports.theme = (0, lit_1.css) `
+import { css } from 'lit';
+export const theme = css `
   :host {
     --negative-color: #600;
     --negative-background-color: #ffc4c4;

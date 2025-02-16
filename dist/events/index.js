@@ -1,33 +1,7 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ToggleChangedEvent = exports.SuggestionSubmittedEvent = exports.SuggestionChangedEvent = exports.SelectChangedEvent = exports.InputSubmittedEvent = exports.InputChangedEvent = void 0;
-exports.InputChangedEvent = __importStar(require("./input-changed"));
-exports.InputSubmittedEvent = __importStar(require("./input-submitted"));
-exports.SelectChangedEvent = __importStar(require("./select-changed"));
-exports.SuggestionChangedEvent = __importStar(require("./suggestion-changed"));
-exports.SuggestionSubmittedEvent = __importStar(require("./suggestion-submitted"));
-exports.ToggleChangedEvent = __importStar(require("./toggle-changed"));
+export * as InputChangedEvent from './input-changed';
+export * as InputSubmittedEvent from './input-submitted';
+export * as SelectChangedEvent from './select-changed';
+export * as SuggestionChangedEvent from './suggestion-changed';
+export * as SuggestionSubmittedEvent from './suggestion-submitted';
+export * as ToggleChangedEvent from './toggle-changed';
 //# sourceMappingURL=index.js.map

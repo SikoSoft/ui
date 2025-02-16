@@ -1,19 +1,16 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SSInputAuto = void 0;
-const lit_1 = require("lit");
-const decorators_js_1 = require("lit/decorators.js");
-const repeat_js_1 = require("lit/directives/repeat.js");
-const suggestion_submitted_1 = require("../../events/suggestion-submitted");
-const suggestion_changed_1 = require("../../events/suggestion-changed");
-const theme_1 = require("../../styles/theme");
-let SSInputAuto = class SSInputAuto extends lit_1.LitElement {
+import { html, css, nothing, LitElement } from 'lit';
+import { property, customElement, state } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
+import { SuggestiontSubmittedEvent } from '../../events/suggestion-submitted';
+import { SuggestionChangedEvent } from '../../events/suggestion-changed';
+import { theme } from '../../styles/theme';
+let SSInputAuto = class SSInputAuto extends LitElement {
     constructor() {
         super(...arguments);
         this.input = '';
@@ -23,8 +20,8 @@ let SSInputAuto = class SSInputAuto extends lit_1.LitElement {
         this.selectedIndex = -1;
     }
     static { this.styles = [
-        theme_1.theme,
-        (0, lit_1.css) `
+        theme,
+        css `
       div {
         position: relative;
       }
@@ -95,17 +92,17 @@ let SSInputAuto = class SSInputAuto extends lit_1.LitElement {
         this.selectedIndex = newIndex;
     }
     _sendSelectedEvent(suggestion) {
-        this.dispatchEvent(new suggestion_changed_1.SuggestionChangedEvent({ value: suggestion }));
+        this.dispatchEvent(new SuggestionChangedEvent({ value: suggestion }));
     }
     _sendSubmitEvent() {
-        this.dispatchEvent(new suggestion_submitted_1.SuggestiontSubmittedEvent({ selectedIndex: this.selectedIndex }));
+        this.dispatchEvent(new SuggestiontSubmittedEvent({ selectedIndex: this.selectedIndex }));
     }
     render() {
-        return (0, lit_1.html) `
+        return html `
       <div>
         ${this.show
-            ? (0, lit_1.html) ` <ul class="box">
-              ${(0, repeat_js_1.repeat)(this.suggestions, suggestion => suggestion, (suggestion, index) => (0, lit_1.html) `
+            ? html ` <ul class="box">
+              ${repeat(this.suggestions, suggestion => suggestion, (suggestion, index) => html `
                   <li
                     class=${index === this.selectedIndex ? 'selected' : ''}
                     @mouseover=${() => (this.selectedIndex = index)}
@@ -115,31 +112,31 @@ let SSInputAuto = class SSInputAuto extends lit_1.LitElement {
                   </li>
                 `)}
             </ul>`
-            : lit_1.nothing}
+            : nothing}
       </div>
     `;
     }
 };
-exports.SSInputAuto = SSInputAuto;
 __decorate([
-    (0, decorators_js_1.property)()
+    property()
 ], SSInputAuto.prototype, "input", void 0);
 __decorate([
-    (0, decorators_js_1.property)({ type: Number })
+    property({ type: Number })
 ], SSInputAuto.prototype, "maxMatches", void 0);
 __decorate([
-    (0, decorators_js_1.property)({ type: Number })
+    property({ type: Number })
 ], SSInputAuto.prototype, "minInput", void 0);
 __decorate([
-    (0, decorators_js_1.property)({ type: Array })
+    property({ type: Array })
 ], SSInputAuto.prototype, "suggestions", void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSInputAuto.prototype, "selectedIndex", void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSInputAuto.prototype, "show", null);
-exports.SSInputAuto = SSInputAuto = __decorate([
-    (0, decorators_js_1.customElement)('ss-input-auto')
+SSInputAuto = __decorate([
+    customElement('ss-input-auto')
 ], SSInputAuto);
+export { SSInputAuto };
 //# sourceMappingURL=ss-input-auto.js.map

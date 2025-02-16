@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PreSelectedOption = void 0;
-const lit_1 = require("lit");
-const StoryBook_1 = require("../../lib/StoryBook");
-require("./ss-select");
-const ss_select_models_1 = require("./ss-select.models");
-const argTypes = StoryBook_1.StoryBook.buildArgTypes(ss_select_models_1.ssSelectProps);
+import { html } from 'lit';
+import { StoryBook } from '../../lib/StoryBook';
+import './ss-select';
+import { ssSelectProps } from './ss-select.models';
+const argTypes = StoryBook.buildArgTypes(ssSelectProps);
 const meta = {
     title: 'components/ss-select',
     tags: ['autodocs'],
@@ -20,12 +17,12 @@ const meta = {
         ],
     },
     argTypes,
-    render: args => (0, lit_1.html) `
+    render: args => html `
     <ss-select .options=${args.options} selected=${args.selected}></ss-select>
   `,
 };
-exports.default = meta;
-exports.PreSelectedOption = {
+export default meta;
+export const PreSelectedOption = {
     args: {
         options: [
             { label: 'Option 1', value: 'option1' },

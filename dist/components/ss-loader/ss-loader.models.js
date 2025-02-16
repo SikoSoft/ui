@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ssLoaderProps = exports.SSLoaderProp = void 0;
-var SSLoaderProp;
+export var SSLoaderProp;
 (function (SSLoaderProp) {
     SSLoaderProp["PADDED"] = "padded";
-})(SSLoaderProp || (exports.SSLoaderProp = SSLoaderProp = {}));
-exports.ssLoaderProps = {
+})(SSLoaderProp || (SSLoaderProp = {}));
+export const ssLoaderProps = {
     [SSLoaderProp.PADDED]: {
         default: false,
         description: 'Whether to provide padding around the loader',

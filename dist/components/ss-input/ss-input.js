@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6,24 +5,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var _a, _b, _c, _d, _e;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SSInput = void 0;
-const lit_1 = require("lit");
-const decorators_js_1 = require("lit/decorators.js");
-const input_submitted_1 = require("../../events/input-submitted");
-const input_changed_1 = require("../../events/input-changed");
-require("../ss-input-auto/ss-input-auto");
-const theme_1 = require("../../styles/theme");
-const ss_input_models_1 = require("./ss-input.models");
-let SSInput = class SSInput extends lit_1.LitElement {
+import { LitElement, html, nothing, css } from 'lit';
+import { property, customElement, state, query } from 'lit/decorators.js';
+import { InputSubmittedEvent } from '../../events/input-submitted';
+import { InputChangedEvent } from '../../events/input-changed';
+import '../ss-input-auto/ss-input-auto';
+import { theme } from '../../styles/theme';
+import { SSInputProp, ssInputProps } from './ss-input.models';
+let SSInput = class SSInput extends LitElement {
     constructor() {
         super(...arguments);
         this.clickFocusHandler = (event) => { };
-        this[_a] = ss_input_models_1.ssInputProps[ss_input_models_1.SSInputProp.TYPE].default;
+        this[_a] = ssInputProps[SSInputProp.TYPE].default;
         this[_b] = '';
         this[_c] = false;
         this[_d] = '';
-        this[_e] = ss_input_models_1.ssInputProps[ss_input_models_1.SSInputProp.SUGGESTIONS].default;
+        this[_e] = ssInputProps[SSInputProp.SUGGESTIONS].default;
         this._value = this.value;
         this.hasFocus = false;
         this.autoDismissed = false;
@@ -71,7 +68,7 @@ let SSInput = class SSInput extends lit_1.LitElement {
             if (e.target instanceof HTMLInputElement) {
                 value = e.target.value;
             }
-            this.dispatchEvent(new input_changed_1.InputChangedEvent({
+            this.dispatchEvent(new InputChangedEvent({
                 value,
             }));
             this._value = value;
@@ -90,13 +87,13 @@ let SSInput = class SSInput extends lit_1.LitElement {
         this._suggestionSelectHandler = (e) => {
             this.autoDismissed = true;
             this.inputField.value = e.detail.value;
-            this.inputField.dispatchEvent(new input_changed_1.InputChangedEvent({ value: e.detail.value }));
+            this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail.value }));
         };
     }
-    static { _a = ss_input_models_1.SSInputProp.TYPE, _b = ss_input_models_1.SSInputProp.VALUE, _c = ss_input_models_1.SSInputProp.AUTO_COMPLETE, _d = ss_input_models_1.SSInputProp.PLACEHOLDER, _e = ss_input_models_1.SSInputProp.SUGGESTIONS; }
+    static { _a = SSInputProp.TYPE, _b = SSInputProp.VALUE, _c = SSInputProp.AUTO_COMPLETE, _d = SSInputProp.PLACEHOLDER, _e = SSInputProp.SUGGESTIONS; }
     static { this.styles = [
-        theme_1.theme,
-        (0, lit_1.css) `
+        theme,
+        css `
       input:focus {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
@@ -130,7 +127,7 @@ let SSInput = class SSInput extends lit_1.LitElement {
     }
     clear() {
         this.inputField.value = '';
-        this.dispatchEvent(new input_changed_1.InputChangedEvent({
+        this.dispatchEvent(new InputChangedEvent({
             value: '',
         }));
     }
@@ -144,13 +141,13 @@ let SSInput = class SSInput extends lit_1.LitElement {
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select'));
     }
     _sendSubmittedEvent() {
-        this.inputField.dispatchEvent(new input_submitted_1.InputSubmittedEvent({ value: this._value }));
+        this.inputField.dispatchEvent(new InputSubmittedEvent({ value: this._value }));
     }
     _handleSubmit() {
         this._sendSubmittedEvent();
     }
     render() {
-        return (0, lit_1.html) `
+        return html `
       <span>
         <input
           id="input-field"
@@ -166,7 +163,7 @@ let SSInput = class SSInput extends lit_1.LitElement {
           autocapitalize="off"
         />
         ${this.showAutoComplete
-            ? (0, lit_1.html) `
+            ? html `
               <ss-input-auto
                 input=${this._value}
                 .suggestions=${this.suggestions}
@@ -174,49 +171,49 @@ let SSInput = class SSInput extends lit_1.LitElement {
                 @suggestion-changed=${this._suggestionSelectHandler}
               ></ss-input-auto>
             `
-            : lit_1.nothing}
+            : nothing}
       </span>
     `;
     }
 };
-exports.SSInput = SSInput;
 __decorate([
-    (0, decorators_js_1.property)()
+    property()
 ], SSInput.prototype, _a, void 0);
 __decorate([
-    (0, decorators_js_1.property)()
+    property()
 ], SSInput.prototype, _b, void 0);
 __decorate([
-    (0, decorators_js_1.property)({ type: Boolean })
+    property({ type: Boolean })
 ], SSInput.prototype, _c, void 0);
 __decorate([
-    (0, decorators_js_1.property)()
+    property()
 ], SSInput.prototype, _d, void 0);
 __decorate([
-    (0, decorators_js_1.property)({ type: Array })
+    property({ type: Array })
 ], SSInput.prototype, _e, void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSInput.prototype, "_value", void 0);
 __decorate([
-    (0, decorators_js_1.query)('#input-field')
+    query('#input-field')
 ], SSInput.prototype, "inputField", void 0);
 __decorate([
-    (0, decorators_js_1.query)('ss-input-auto')
+    query('ss-input-auto')
 ], SSInput.prototype, "autoCompleteNode", void 0);
 __decorate([
-    (0, decorators_js_1.query)('span')
+    query('span')
 ], SSInput.prototype, "container", void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSInput.prototype, "hasFocus", void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSInput.prototype, "autoDismissed", void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSInput.prototype, "showAutoComplete", null);
-exports.SSInput = SSInput = __decorate([
-    (0, decorators_js_1.customElement)('ss-input')
+SSInput = __decorate([
+    customElement('ss-input')
 ], SSInput);
+export { SSInput };
 //# sourceMappingURL=ss-input.js.map

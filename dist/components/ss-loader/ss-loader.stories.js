@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Padded = void 0;
-const lit_1 = require("lit");
-const StoryBook_1 = require("../../lib/StoryBook");
-require("./ss-loader");
-const ss_loader_models_1 = require("./ss-loader.models");
-const argTypes = StoryBook_1.StoryBook.buildArgTypes(ss_loader_models_1.ssLoaderProps);
+import { html } from 'lit';
+import { StoryBook } from '../../lib/StoryBook';
+import './ss-loader';
+import { ssLoaderProps } from './ss-loader.models';
+const argTypes = StoryBook.buildArgTypes(ssLoaderProps);
 const meta = {
     title: 'components/ss-loader',
     tags: ['autodocs'],
@@ -16,10 +13,10 @@ const meta = {
         padded: false,
     },
     argTypes,
-    render: args => (0, lit_1.html) ` <ss-loader ?padded=${args.padded}></ss-loader> `,
+    render: args => html ` <ss-loader ?padded=${args.padded}></ss-loader> `,
 };
-exports.default = meta;
-exports.Padded = {
+export default meta;
+export const Padded = {
     args: {
         padded: false,
     },

@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6,20 +5,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var _a;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SSToggle = void 0;
-const lit_1 = require("lit");
-const decorators_js_1 = require("lit/decorators.js");
-const class_map_js_1 = require("lit/directives/class-map.js");
-const toggle_changed_1 = require("../../events/toggle-changed");
-const ss_toggle_models_1 = require("./ss-toggle.models");
-let SSToggle = class SSToggle extends lit_1.LitElement {
+import { css, html, LitElement } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { ToggleChangedEvent } from '../../events/toggle-changed';
+import { SSToggleProp, ssToggleProps } from './ss-toggle.models';
+let SSToggle = class SSToggle extends LitElement {
     constructor() {
         super(...arguments);
-        this[_a] = ss_toggle_models_1.ssToggleProps[ss_toggle_models_1.SSToggleProp.ON].default;
+        this[_a] = ssToggleProps[SSToggleProp.ON].default;
     }
-    static { _a = ss_toggle_models_1.SSToggleProp.ON; }
-    static { this.styles = (0, lit_1.css) `
+    static { _a = SSToggleProp.ON; }
+    static { this.styles = css `
     .toggle {
       display: inline-block;
       height: 3rem;
@@ -70,24 +67,24 @@ let SSToggle = class SSToggle extends lit_1.LitElement {
         return { toggle: true, on: this.on };
     }
     _handleClick() {
-        this.dispatchEvent(new toggle_changed_1.ToggleChangedEvent({ on: !this.on }));
+        this.dispatchEvent(new ToggleChangedEvent({ on: !this.on }));
     }
     render() {
-        return (0, lit_1.html) `
-      <span class=${(0, class_map_js_1.classMap)(this.classes)} @click=${this._handleClick}>
+        return html `
+      <span class=${classMap(this.classes)} @click=${this._handleClick}>
         <span class="ball"></span>
       </span>
     `;
     }
 };
-exports.SSToggle = SSToggle;
 __decorate([
-    (0, decorators_js_1.property)({ type: Boolean })
+    property({ type: Boolean })
 ], SSToggle.prototype, _a, void 0);
 __decorate([
-    (0, decorators_js_1.state)()
+    state()
 ], SSToggle.prototype, "classes", null);
-exports.SSToggle = SSToggle = __decorate([
-    (0, decorators_js_1.customElement)('ss-toggle')
+SSToggle = __decorate([
+    customElement('ss-toggle')
 ], SSToggle);
+export { SSToggle };
 //# sourceMappingURL=ss-toggle.js.map

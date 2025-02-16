@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6,32 +5,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var _a, _b;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SSSelect = void 0;
-const lit_1 = require("lit");
-const decorators_js_1 = require("lit/decorators.js");
-const repeat_js_1 = require("lit/directives/repeat.js");
-const select_changed_1 = require("../../events/select-changed");
-const theme_1 = require("../../styles/theme");
-const ss_select_models_1 = require("./ss-select.models");
-let SSSelect = class SSSelect extends lit_1.LitElement {
+import { LitElement, html } from 'lit';
+import { property, customElement, query } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
+import { SelectChangedEvent } from '../../events/select-changed';
+import { theme } from '../../styles/theme';
+import { SSSelectProp, ssSelectProps } from './ss-select.models';
+let SSSelect = class SSSelect extends LitElement {
     constructor() {
         super(...arguments);
-        this[_a] = ss_select_models_1.ssSelectProps[ss_select_models_1.SSSelectProp.OPTIONS].default;
-        this[_b] = ss_select_models_1.ssSelectProps[ss_select_models_1.SSSelectProp.SELECTED].default;
+        this[_a] = ssSelectProps[SSSelectProp.OPTIONS].default;
+        this[_b] = ssSelectProps[SSSelectProp.SELECTED].default;
     }
-    static { _a = ss_select_models_1.SSSelectProp.OPTIONS, _b = ss_select_models_1.SSSelectProp.SELECTED; }
-    static { this.styles = [theme_1.theme]; }
+    static { _a = SSSelectProp.OPTIONS, _b = SSSelectProp.SELECTED; }
+    static { this.styles = [theme]; }
     get value() {
         return this.selectNode.value;
     }
     _handleSelectChanged() {
-        this.dispatchEvent(new select_changed_1.SelectChangedEvent({ value: this.selectNode.value }));
+        this.dispatchEvent(new SelectChangedEvent({ value: this.selectNode.value }));
     }
     render() {
-        return (0, lit_1.html) `
+        return html `
       <select @change=${this._handleSelectChanged}>
-        ${(0, repeat_js_1.repeat)(this.options, option => option.value, option => (0, lit_1.html) `
+        ${repeat(this.options, option => option.value, option => html `
             <option
               value=${option.value}
               ?selected=${this.selected === option.value}
@@ -43,17 +40,17 @@ let SSSelect = class SSSelect extends lit_1.LitElement {
     `;
     }
 };
-exports.SSSelect = SSSelect;
 __decorate([
-    (0, decorators_js_1.property)({ type: Array })
+    property({ type: Array })
 ], SSSelect.prototype, _a, void 0);
 __decorate([
-    (0, decorators_js_1.property)()
+    property()
 ], SSSelect.prototype, _b, void 0);
 __decorate([
-    (0, decorators_js_1.query)('select')
+    query('select')
 ], SSSelect.prototype, "selectNode", void 0);
-exports.SSSelect = SSSelect = __decorate([
-    (0, decorators_js_1.customElement)('ss-select')
+SSSelect = __decorate([
+    customElement('ss-select')
 ], SSSelect);
+export { SSSelect };
 //# sourceMappingURL=ss-select.js.map

@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.StoryBook = void 0;
-class StoryBook {
+export class StoryBook {
     static buildArgTypes(props) {
         const argTypes = {};
         Object.keys(props).forEach(propKey => {
@@ -20,5 +17,4 @@ class StoryBook {
         return argTypes;
     }
 }
-exports.StoryBook = StoryBook;
 //# sourceMappingURL=StoryBook.js.map

@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.On = exports.Off = void 0;
-const lit_1 = require("lit");
-const StoryBook_1 = require("../../lib/StoryBook");
-require("./ss-toggle");
-const ss_toggle_models_1 = require("./ss-toggle.models");
-const argTypes = StoryBook_1.StoryBook.buildArgTypes(ss_toggle_models_1.ssToggleProps);
+import { html } from 'lit';
+import { StoryBook } from '../../lib/StoryBook';
+import './ss-toggle';
+import { ssToggleProps } from './ss-toggle.models';
+const argTypes = StoryBook.buildArgTypes(ssToggleProps);
 const meta = {
     title: 'components/ss-toggle',
     tags: ['autodocs'],
@@ -16,15 +13,15 @@ const meta = {
         on: true,
     },
     argTypes,
-    render: args => (0, lit_1.html) ` <ss-toggle ?on=${args.on}></ss-toggle> `,
+    render: args => html ` <ss-toggle ?on=${args.on}></ss-toggle> `,
 };
-exports.default = meta;
-exports.Off = {
+export default meta;
+export const Off = {
     args: {
         on: false,
     },
 };
-exports.On = {
+export const On = {
     args: {
         on: true,
     },

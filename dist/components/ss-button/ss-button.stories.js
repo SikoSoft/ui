@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Negative = exports.Positive = exports.Loading = exports.Disabled = void 0;
-const lit_1 = require("lit");
-const StoryBook_1 = require("../../lib/StoryBook");
-require("./ss-button");
-const ss_button_models_1 = require("./ss-button.models");
-const argTypes = StoryBook_1.StoryBook.buildArgTypes(ss_button_models_1.ssButtonProps);
+import { html } from 'lit';
+import { StoryBook } from '../../lib/StoryBook';
+import './ss-button';
+import { ssButtonProps } from './ss-button.models';
+const argTypes = StoryBook.buildArgTypes(ssButtonProps);
 const meta = {
     title: 'components/ss-button',
     tags: ['autodocs'],
@@ -17,7 +14,7 @@ const meta = {
         disabled: false,
     },
     argTypes,
-    render: args => (0, lit_1.html) `
+    render: args => html `
     <ss-button
       text=${args.text}
       ?disabled=${args.disabled}
@@ -27,24 +24,24 @@ const meta = {
     ></ss-button>
   `,
 };
-exports.default = meta;
-exports.Disabled = {
+export default meta;
+export const Disabled = {
     args: {
         text: "Can't touch this",
         disabled: true,
     },
 };
-exports.Loading = {
+export const Loading = {
     args: {
         loading: true,
     },
 };
-exports.Positive = {
+export const Positive = {
     args: {
         positive: true,
     },
 };
-exports.Negative = {
+export const Negative = {
     args: {
         negative: true,
     },

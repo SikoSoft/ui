@@ -1,18 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ssInputProps = exports.SSInputProp = void 0;
-const Input_1 = require("../../models/Input");
-var SSInputProp;
+import { InputType } from '../../models/Input';
+export var SSInputProp;
 (function (SSInputProp) {
     SSInputProp["TYPE"] = "type";
     SSInputProp["VALUE"] = "value";
     SSInputProp["AUTO_COMPLETE"] = "autoComplete";
     SSInputProp["PLACEHOLDER"] = "placeholder";
     SSInputProp["SUGGESTIONS"] = "suggestions";
-})(SSInputProp || (exports.SSInputProp = SSInputProp = {}));
-exports.ssInputProps = {
+})(SSInputProp || (SSInputProp = {}));
+export const ssInputProps = {
     [SSInputProp.TYPE]: {
-        default: Input_1.InputType.TEXT,
+        default: InputType.TEXT,
         description: 'What form element type the input behaves as',
         control: 'text',
     },

@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ssButtonProps = exports.SSButtonProp = void 0;
-var SSButtonProp;
+export var SSButtonProp;
 (function (SSButtonProp) {
     SSButtonProp["TEXT"] = "text";
     SSButtonProp["DISABLED"] = "disabled";
@@ -9,8 +6,8 @@ var SSButtonProp;
     SSButtonProp["POSITIVE"] = "positive";
     SSButtonProp["NEGATIVE"] = "negative";
     SSButtonProp["CLASS"] = "class";
-})(SSButtonProp || (exports.SSButtonProp = SSButtonProp = {}));
-exports.ssButtonProps = {
+})(SSButtonProp || (SSButtonProp = {}));
+export const ssButtonProps = {
     [SSButtonProp.TEXT]: {
         default: '',
         description: 'Human readable content to be displayed',
