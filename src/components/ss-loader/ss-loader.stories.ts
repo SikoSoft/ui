@@ -9,29 +9,23 @@ import { SSLoaderProps, ssLoaderProps } from './ss-loader.models';
 const argTypes = StoryBook.buildArgTypes(ssLoaderProps);
 
 const meta = {
-  title: 'components/ss-toggle',
+  title: 'components/ss-loader',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
   args: {
-    on: true,
+    padded: false,
   },
   argTypes,
-  render: args => html` <ss-toggle ?on=${args.on}></ss-toggle> `,
+  render: args => html` <ss-loader ?padded=${args.padded}></ss-loader> `,
 } satisfies Meta<SSLoaderProps>;
 
 export default meta;
 type Story = StoryObj<SSLoaderProps>;
 
-export const Off: Story = {
+export const Padded: Story = {
   args: {
-    on: false,
-  },
-};
-
-export const On: Story = {
-  args: {
-    on: true,
+    padded: false,
   },
 };
