@@ -1,5 +1,18 @@
 import { InputType } from '../../models/Input';
 
+export enum ControlType {
+  BOOLEAN = 'boolean',
+  TEXT = 'text',
+}
+
+export interface ControlMap {
+  //[]: 'text';
+}
+
+export type Test = SSInputProps[SSInputProp.TYPE] extends boolean
+  ? 'boolean'
+  : 'text';
+
 export enum SSInputProp {
   TYPE = 'type',
   VALUE = 'value',
@@ -19,6 +32,7 @@ export interface SSInputProps {
 export type SSInputPropConfig = {
   [Property in keyof SSInputProps]: {
     default: SSInputProps[Property];
+    control: SSInputProps[Property] extends boolean ? 'boolean' : 'text';
     description: string;
   };
 };
@@ -36,22 +50,27 @@ export type TypedPropConfig<T extends SSInputProp> = {
 export const ssInputProps: SSInputPropConfig = {
   [SSInputProp.TYPE]: {
     default: InputType.TEXT,
-    description: 'test',
+    description: 'What form element type the input behaves as',
+    control: 'text',
   },
   [SSInputProp.VALUE]: {
     default: '',
-    description: 'test',
+    description: 'The value as set from the data model',
+    control: 'text',
   },
   [SSInputProp.AUTO_COMPLETE]: {
     default: false,
-    description: 'test',
+    description: 'Should the field provide auto-completion suggestions',
+    control: 'boolean',
   },
   [SSInputProp.PLACEHOLDER]: {
     default: '',
-    description: 'test',
+    description: 'Text to display in the field when no value is present',
+    control: 'text',
   },
   [SSInputProp.SUGGESTIONS]: {
     default: [],
-    description: 'test',
+    description: 'An array of suggestions used for auto-completion',
+    control: 'text',
   },
 };

@@ -26,15 +26,6 @@ export interface SSButtonProps {
 
 @customElement('ss-button')
 export class SSButton extends LitElement {
-  public static prop = {
-    TEXT: 'text',
-    DISABLED: 'disabled',
-    LOADING: 'loading',
-    POSITIVE: 'positive',
-    NEGATIVE: 'negative',
-    CLASS: 'class',
-  };
-
   static styles = [
     theme,
     css`

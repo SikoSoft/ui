@@ -18,6 +18,11 @@ const meta = {
     on: {
       description: 'Whether the toggle is in enabled state',
       control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+      },
     },
   },
   render: args => html` <ss-toggle ?on=${args.on}></ss-toggle> `,
@@ -26,7 +31,6 @@ const meta = {
 export default meta;
 type Story = StoryObj;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const On: Story = {
   args: {
     on: true,

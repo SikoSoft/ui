@@ -12,6 +12,7 @@ const meta = {
   },
   args: {
     text: 'Click me',
+    disabled: false,
   },
   argTypes: {
     [SSButtonProp.TEXT]: {
@@ -49,7 +50,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<SSButtonProps>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Disabled: Story = {
   args: {
     text: "Can't touch this",
