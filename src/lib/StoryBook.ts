@@ -1,6 +1,5 @@
-import { PropTypes } from '@/models/Prop';
-import { PropConfigMap } from '@/models/StoryBook';
 import { Meta } from '@storybook/web-components';
+import { PropConfigMap, PropTypes } from '../models/Prop';
 
 export class StoryBook {
   public static buildArgTypes<Props extends PropTypes>(

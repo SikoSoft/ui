@@ -1,6 +1,5 @@
-import { PropTypes } from '../../models/Prop';
+import { PropConfigMap, PropTypes } from '../../models/Prop';
 import { InputType } from '../../models/Input';
-import { PropConfigMap } from '@/models/StoryBook';
 
 export enum SSInputProp {
   TYPE = 'type',
