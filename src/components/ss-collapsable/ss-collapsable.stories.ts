@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 
+import { StoryBook } from '../../lib/StoryBook';
+
 import './ss-collapsable';
+import {
+  SSCollapsableProps,
+  ssCollapsableProps,
+} from './ss-collapsable.models';
+
+const argTypes = StoryBook.buildArgTypes(ssCollapsableProps);
 
 const meta = {
   title: 'components/ss-collapsable',
@@ -13,25 +21,16 @@ const meta = {
     title: 'Heading',
     open: true,
   },
-  argTypes: {
-    open: {
-      description: 'Whether the content is in opened state',
-      control: 'boolean',
-    },
-    title: {
-      description: 'The heading in which is always displayed',
-      control: 'text',
-    },
-  },
+  argTypes,
   render: args => html`
     <ss-collapsable ?open=${args.open} title=${args.title}
       >This is some content that can be toggled into view.</ss-collapsable
     >
   `,
-} satisfies Meta;
+} satisfies Meta<SSCollapsableProps>;
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<SSCollapsableProps>;
 
 export const Open: Story = {
   args: {
