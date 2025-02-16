@@ -1,17 +1,6 @@
+import { PropTypes } from '../../models/Prop';
 import { InputType } from '../../models/Input';
-
-export enum ControlType {
-  BOOLEAN = 'boolean',
-  TEXT = 'text',
-}
-
-export interface ControlMap {
-  //[]: 'text';
-}
-
-export type Test = SSInputProps[SSInputProp.TYPE] extends boolean
-  ? 'boolean'
-  : 'text';
+import { PropConfigMap } from '@/models/StoryBook';
 
 export enum SSInputProp {
   TYPE = 'type',
@@ -21,7 +10,7 @@ export enum SSInputProp {
   SUGGESTIONS = 'suggestions',
 }
 
-export interface SSInputProps {
+export interface SSInputProps extends PropTypes {
   [SSInputProp.TYPE]: InputType;
   [SSInputProp.VALUE]: string;
   [SSInputProp.AUTO_COMPLETE]: boolean;
@@ -29,25 +18,7 @@ export interface SSInputProps {
   [SSInputProp.SUGGESTIONS]: string[];
 }
 
-export type SSInputPropConfig = {
-  [Property in keyof SSInputProps]: {
-    default: SSInputProps[Property];
-    control: SSInputProps[Property] extends boolean ? 'boolean' : 'text';
-    description: string;
-  };
-};
-
-export interface PropConfig<T extends keyof SSInputProps> {
-  default: SSInputProps[T];
-}
-
-export type PropKeys = keyof SSInputProps;
-
-export type TypedPropConfig<T extends SSInputProp> = {
-  default: SSInputProps[T];
-};
-
-export const ssInputProps: SSInputPropConfig = {
+export const ssInputProps: PropConfigMap<SSInputProps> = {
   [SSInputProp.TYPE]: {
     default: InputType.TEXT,
     description: 'What form element type the input behaves as',

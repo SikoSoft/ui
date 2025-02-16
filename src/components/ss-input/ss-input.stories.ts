@@ -3,31 +3,10 @@ import { html } from 'lit';
 
 import './ss-input';
 import { InputType } from '../../models/Input';
-import {
-  SSInputPropConfig,
-  SSInputProps,
-  ssInputProps,
-} from './ss-input.models';
+import { SSInputProps, ssInputProps } from './ss-input.models';
+import { StoryBook } from '../../lib/StoryBook';
 
-const argTypes: Meta<SSInputProps>['argTypes'] = {};
-
-Object.keys(ssInputProps).forEach(propKey => {
-  const propName = propKey as keyof SSInputPropConfig;
-  const propConfig = ssInputProps[propName];
-  console.log('default', propConfig.default);
-  argTypes[propName] = {
-    description: ssInputProps[propName].description,
-    control: ssInputProps[propName].control,
-    table: {
-      defaultValue: {
-        summary: JSON.stringify(ssInputProps[propName].default).replace(
-          /^"|"$/g,
-          '',
-        ),
-      },
-    },
-  };
-});
+const argTypes = StoryBook.buildArgTypes(ssInputProps);
 
 const meta = {
   title: 'components/ss-input',
