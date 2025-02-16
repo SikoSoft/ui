@@ -9,7 +9,8 @@ import { InputChangedEvent } from '../../events/input-changed';
 import '../ss-input-auto/ss-input-auto';
 
 import { theme } from '../../styles/theme';
-import { SuggestionChangedEvent } from '@/events/suggestion-changed';
+import { SuggestionChangedEvent } from '../../events/suggestion-changed';
+import { SSInputProp, SSInputProps, ssInputProps } from './ss-input.models';
 
 @customElement('ss-input')
 export class SSInput extends LitElement {
@@ -26,11 +27,23 @@ export class SSInput extends LitElement {
     `,
   ];
 
-  @property() type: InputType = InputType.TEXT;
-  @property() value: string = '';
-  @property({ type: Boolean }) autoComplete: boolean = false;
-  @property() placeholder: string = '';
-  @property({ type: Array }) suggestions: string[] = [];
+  @property()
+  [SSInputProp.TYPE]: SSInputProps[SSInputProp.TYPE] =
+    ssInputProps[SSInputProp.TYPE].default;
+
+  @property()
+  [SSInputProp.VALUE]: SSInputProps[SSInputProp.VALUE] = '';
+
+  @property({ type: Boolean })
+  [SSInputProp.AUTO_COMPLETE]: SSInputProps[SSInputProp.AUTO_COMPLETE] = false;
+
+  @property()
+  [SSInputProp.PLACEHOLDER]: SSInputProps[SSInputProp.PLACEHOLDER] = '';
+
+  @property({ type: Array })
+  [SSInputProp.SUGGESTIONS]: SSInputProps[SSInputProp.SUGGESTIONS] =
+    ssInputProps[SSInputProp.SUGGESTIONS].default;
+
   @state() _value: string = this.value;
   @query('#input-field') inputField!: HTMLInputElement;
   @query('ss-input-auto') autoCompleteNode!: HTMLElement;

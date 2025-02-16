@@ -1,6 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { SSLoaderProp, ssLoaderProps, SSLoaderProps } from './ss-loader.models';
 
 @customElement('ss-loader')
 export class SSLoader extends LitElement {
@@ -50,7 +51,9 @@ export class SSLoader extends LitElement {
     }
   `;
 
-  @property({ type: Boolean }) padded: boolean = false;
+  @property({ type: Boolean })
+  [SSLoaderProp.PADDED]: SSLoaderProps[SSLoaderProp.PADDED] =
+    ssLoaderProps[SSLoaderProp.PADDED].default;
 
   @state()
   get classes() {

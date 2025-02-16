@@ -5,18 +5,19 @@ import { repeat } from 'lit/directives/repeat.js';
 import { SelectChangedEvent } from '../../events/select-changed';
 
 import { theme } from '../../styles/theme';
-
-export interface SelectOption {
-  value: string;
-  label: string;
-}
+import { SSSelectProp, ssSelectProps, SSSelectProps } from './ss-select.models';
 
 @customElement('ss-select')
 export class SSSelect extends LitElement {
   static styles = [theme];
 
-  @property({ type: Array }) options: SelectOption[] = [];
-  @property() selected: string = '';
+  @property({ type: Array })
+  [SSSelectProp.OPTIONS]: SSSelectProps[SSSelectProp.OPTIONS] =
+    ssSelectProps[SSSelectProp.OPTIONS].default;
+
+  @property() [SSSelectProp.SELECTED]: SSSelectProps[SSSelectProp.SELECTED] =
+    ssSelectProps[SSSelectProp.SELECTED].default;
+
   @query('select') selectNode!: HTMLSelectElement;
 
   get value(): string {

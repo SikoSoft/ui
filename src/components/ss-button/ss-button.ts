@@ -5,6 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import '../ss-loader/ss-loader';
 
 import { theme } from '../../styles/theme';
+import { SSButtonProp, SSButtonProps } from './ss-button.models';
 
 @customElement('ss-button')
 export class SSButton extends LitElement {
@@ -13,6 +14,10 @@ export class SSButton extends LitElement {
     css`
       button {
         border-radius: 0.5rem;
+
+        &.loading {
+          min-width: 100px;
+        }
 
         &.positive {
           background-color: var(--positive-background-color);
@@ -33,16 +38,26 @@ export class SSButton extends LitElement {
     `,
   ];
 
-  @property() text: string = '';
-  @property({ type: Boolean }) disabled: boolean = false;
-  @property({ type: Boolean }) loading: boolean = false;
-  @property({ type: Boolean }) positive: boolean = false;
-  @property({ type: Boolean }) negative: boolean = false;
-  @property() class: string = '';
+  @property() [SSButtonProp.TEXT]: SSButtonProps[SSButtonProp.TEXT] = '';
+
+  @property({ type: Boolean })
+  [SSButtonProp.DISABLED]: SSButtonProps[SSButtonProp.DISABLED] = false;
+
+  @property({ type: Boolean })
+  [SSButtonProp.LOADING]: SSButtonProps[SSButtonProp.LOADING] = false;
+
+  @property({ type: Boolean })
+  [SSButtonProp.POSITIVE]: SSButtonProps[SSButtonProp.POSITIVE] = false;
+
+  @property({ type: Boolean })
+  [SSButtonProp.NEGATIVE]: SSButtonProps[SSButtonProp.NEGATIVE] = false;
+
+  @property() [SSButtonProp.CLASS]: SSButtonProps[SSButtonProp.CLASS] = '';
 
   @state()
   get classes() {
     const classes: Record<string, boolean> = {
+      loading: this.loading,
       disabled: this.disabled,
       positive: this.positive,
       negative: this.negative,
