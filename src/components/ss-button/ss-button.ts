@@ -5,24 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import '../ss-loader/ss-loader';
 
 import { theme } from '../../styles/theme';
-
-export enum SSButtonProp {
-  TEXT = 'text',
-  DISABLED = 'disabled',
-  LOADING = 'loading',
-  POSITIVE = 'positive',
-  NEGATIVE = 'negative',
-  CLASS = 'class',
-}
-
-export interface SSButtonProps {
-  [SSButtonProp.TEXT]: string;
-  [SSButtonProp.DISABLED]: boolean;
-  [SSButtonProp.LOADING]: boolean;
-  [SSButtonProp.POSITIVE]: boolean;
-  [SSButtonProp.NEGATIVE]: boolean;
-  [SSButtonProp.CLASS]: string;
-}
+import { SSButtonProp, SSButtonProps } from './ss-button.models';
 
 @customElement('ss-button')
 export class SSButton extends LitElement {

@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 
-import { SSButtonProp, SSButtonProps } from './ss-button';
+import { StoryBook } from '../../lib/StoryBook';
+
 import './ss-button';
+import { SSButtonProps, ssButtonProps } from './ss-button.models';
+
+const argTypes = StoryBook.buildArgTypes(ssButtonProps);
 
 const meta = {
   title: 'components/ss-button',
@@ -14,28 +18,7 @@ const meta = {
     text: 'Click me',
     disabled: false,
   },
-  argTypes: {
-    [SSButtonProp.TEXT]: {
-      description: 'Human readable content to be displayed',
-      control: 'text',
-    },
-    [SSButtonProp.DISABLED]: {
-      description: 'Whether the field is locked from use',
-      control: 'boolean',
-    },
-    [SSButtonProp.LOADING]: {
-      description: 'Whether the button shows loader and is disabled',
-      control: 'boolean',
-    },
-    [SSButtonProp.POSITIVE]: {
-      description: 'Whether to style the button in a positive manner',
-      control: 'boolean',
-    },
-    [SSButtonProp.NEGATIVE]: {
-      description: 'Whether to style the button in a negative manner',
-      control: 'boolean',
-    },
-  },
+  argTypes,
   render: args => html`
     <ss-button
       text=${args.text}

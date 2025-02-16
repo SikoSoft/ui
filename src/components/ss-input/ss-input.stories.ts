@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 
+import { StoryBook } from '../../lib/StoryBook';
+
 import './ss-input';
 import { InputType } from '../../models/Input';
 import { SSInputProps, ssInputProps } from './ss-input.models';
-import { StoryBook } from '../../lib/StoryBook';
 
 const argTypes = StoryBook.buildArgTypes(ssInputProps);
 
