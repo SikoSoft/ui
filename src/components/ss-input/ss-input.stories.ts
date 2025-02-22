@@ -20,7 +20,15 @@ const meta = {
   },
   argTypes,
   render: args => html`
-    <ss-input type=${args.type} ?autoComplete=${args.autoComplete}></ss-input>
+    <ss-input
+      type=${args.type}
+      value=${args.value}
+      ?autoComplete=${args.autoComplete}
+      placeholder=${args.placeholder}
+      min=${args.min}
+      max=${args.max}
+      step=${args.step}
+    ></ss-input>
   `,
 } satisfies Meta<SSInputProps>;
 
@@ -30,5 +38,14 @@ type Story = StoryObj<SSInputProps>;
 export const Text: Story = {
   args: {
     type: InputType.TEXT,
+  },
+};
+
+export const Number: Story = {
+  args: {
+    type: InputType.NUMBER,
+    min: 0,
+    max: 100,
+    step: 1,
   },
 };

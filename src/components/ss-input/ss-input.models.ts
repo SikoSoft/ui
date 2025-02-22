@@ -7,6 +7,9 @@ export enum SSInputProp {
   AUTO_COMPLETE = 'autoComplete',
   PLACEHOLDER = 'placeholder',
   SUGGESTIONS = 'suggestions',
+  MIN = 'min',
+  MAX = 'max',
+  STEP = 'step',
 }
 
 export interface SSInputProps extends PropTypes {
@@ -15,6 +18,9 @@ export interface SSInputProps extends PropTypes {
   [SSInputProp.AUTO_COMPLETE]: boolean;
   [SSInputProp.PLACEHOLDER]: string;
   [SSInputProp.SUGGESTIONS]: string[];
+  [SSInputProp.MIN]: number;
+  [SSInputProp.MAX]: number;
+  [SSInputProp.STEP]: number;
 }
 
 export const ssInputProps: PropConfigMap<SSInputProps> = {
@@ -42,5 +48,20 @@ export const ssInputProps: PropConfigMap<SSInputProps> = {
     default: [],
     description: 'An array of suggestions used for auto-completion',
     control: 'text',
+  },
+  [SSInputProp.MIN]: {
+    default: 0,
+    description: 'The minimum value for a number input',
+    control: 'number',
+  },
+  [SSInputProp.MAX]: {
+    default: 100,
+    description: 'The maximum value for a number input',
+    control: 'number',
+  },
+  [SSInputProp.STEP]: {
+    default: 1,
+    description: 'The step value for a number input',
+    control: 'number',
   },
 };

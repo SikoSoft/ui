@@ -3,4 +3,5 @@ export enum InputType {
   DATE = 'date',
   DATETIME_LOCAL = 'datetime-local',
   PASSWORD = 'password',
+  NUMBER = 'number',
 }

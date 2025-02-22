@@ -1,5 +1,6 @@
 import { LitElement, html, PropertyValueMap, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { InputType } from '../../models/Input';
 
@@ -32,17 +33,29 @@ export class SSInput extends LitElement {
     ssInputProps[SSInputProp.TYPE].default;
 
   @property()
-  [SSInputProp.VALUE]: SSInputProps[SSInputProp.VALUE] = '';
+  [SSInputProp.VALUE]: SSInputProps[SSInputProp.VALUE] =
+    ssInputProps[SSInputProp.VALUE].default;
 
   @property({ type: Boolean })
-  [SSInputProp.AUTO_COMPLETE]: SSInputProps[SSInputProp.AUTO_COMPLETE] = false;
+  [SSInputProp.AUTO_COMPLETE]: SSInputProps[SSInputProp.AUTO_COMPLETE] =
+    ssInputProps[SSInputProp.AUTO_COMPLETE].default;
 
   @property()
-  [SSInputProp.PLACEHOLDER]: SSInputProps[SSInputProp.PLACEHOLDER] = '';
+  [SSInputProp.PLACEHOLDER]: SSInputProps[SSInputProp.PLACEHOLDER] =
+    ssInputProps[SSInputProp.PLACEHOLDER].default;
 
   @property({ type: Array })
   [SSInputProp.SUGGESTIONS]: SSInputProps[SSInputProp.SUGGESTIONS] =
     ssInputProps[SSInputProp.SUGGESTIONS].default;
+
+  @property({ type: Number, reflect: true })
+  [SSInputProp.MIN]?: SSInputProps[SSInputProp.MIN];
+
+  @property({ type: Number, reflect: true })
+  [SSInputProp.MAX]?: SSInputProps[SSInputProp.MAX];
+
+  @property({ type: Number, reflect: true })
+  [SSInputProp.STEP]?: SSInputProps[SSInputProp.STEP];
 
   @state() _value: string = this.value;
   @query('#input-field') inputField!: HTMLInputElement;
@@ -64,6 +77,18 @@ export class SSInput extends LitElement {
       if (!withinBoundaries) {
         this.autoDismissed = true;
       }
+
+      if (this.type === InputType.NUMBER) {
+        this.min = ssInputProps[SSInputProp.MIN].default;
+        this.max = ssInputProps[SSInputProp.MAX].default;
+        this.step = ssInputProps[SSInputProp.STEP].default;
+      }
+
+      console.log('connected', {
+        min: this.min,
+        max: this.max,
+        step: this.step,
+      });
     };
 
     window.addEventListener('mousedown', this.clickFocusHandler);
@@ -206,6 +231,9 @@ export class SSInput extends LitElement {
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
           placeholder=${this.placeholder}
+          min=${ifDefined(this.min)}
+          max=${ifDefined(this.max)}
+          step=${ifDefined(this.step)}
           autocomplete="off"
           autocapitalize="off"
         />
