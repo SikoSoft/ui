@@ -4,9 +4,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 import { LitElement, html, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { InputType } from '../../models/Input';
 import { InputSubmittedEvent } from '../../events/input-submitted';
 import { InputChangedEvent } from '../../events/input-changed';
 import '../ss-input-auto/ss-input-auto';
@@ -17,9 +19,9 @@ let SSInput = class SSInput extends LitElement {
         super(...arguments);
         this.clickFocusHandler = (event) => { };
         this[_a] = ssInputProps[SSInputProp.TYPE].default;
-        this[_b] = '';
-        this[_c] = false;
-        this[_d] = '';
+        this[_b] = ssInputProps[SSInputProp.VALUE].default;
+        this[_c] = ssInputProps[SSInputProp.AUTO_COMPLETE].default;
+        this[_d] = ssInputProps[SSInputProp.PLACEHOLDER].default;
         this[_e] = ssInputProps[SSInputProp.SUGGESTIONS].default;
         this._value = this.value;
         this.hasFocus = false;
@@ -90,7 +92,7 @@ let SSInput = class SSInput extends LitElement {
             this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail.value }));
         };
     }
-    static { _a = SSInputProp.TYPE, _b = SSInputProp.VALUE, _c = SSInputProp.AUTO_COMPLETE, _d = SSInputProp.PLACEHOLDER, _e = SSInputProp.SUGGESTIONS; }
+    static { _a = SSInputProp.TYPE, _b = SSInputProp.VALUE, _c = SSInputProp.AUTO_COMPLETE, _d = SSInputProp.PLACEHOLDER, _e = SSInputProp.SUGGESTIONS, _f = SSInputProp.MIN, _g = SSInputProp.MAX, _h = SSInputProp.STEP; }
     static { this.styles = [
         theme,
         css `
@@ -109,6 +111,16 @@ let SSInput = class SSInput extends LitElement {
             if (!withinBoundaries) {
                 this.autoDismissed = true;
             }
+            if (this.type === InputType.NUMBER) {
+                this.min = ssInputProps[SSInputProp.MIN].default;
+                this.max = ssInputProps[SSInputProp.MAX].default;
+                this.step = ssInputProps[SSInputProp.STEP].default;
+            }
+            console.log('connected', {
+                min: this.min,
+                max: this.max,
+                step: this.step,
+            });
         };
         window.addEventListener('mousedown', this.clickFocusHandler);
     }
@@ -159,6 +171,9 @@ let SSInput = class SSInput extends LitElement {
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
           placeholder=${this.placeholder}
+          min=${ifDefined(this.min)}
+          max=${ifDefined(this.max)}
+          step=${ifDefined(this.step)}
           autocomplete="off"
           autocapitalize="off"
         />
@@ -191,6 +206,15 @@ __decorate([
 __decorate([
     property({ type: Array })
 ], SSInput.prototype, _e, void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], SSInput.prototype, _f, void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], SSInput.prototype, _g, void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], SSInput.prototype, _h, void 0);
 __decorate([
     state()
 ], SSInput.prototype, "_value", void 0);

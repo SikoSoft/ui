@@ -6,6 +6,9 @@ export var SSInputProp;
     SSInputProp["AUTO_COMPLETE"] = "autoComplete";
     SSInputProp["PLACEHOLDER"] = "placeholder";
     SSInputProp["SUGGESTIONS"] = "suggestions";
+    SSInputProp["MIN"] = "min";
+    SSInputProp["MAX"] = "max";
+    SSInputProp["STEP"] = "step";
 })(SSInputProp || (SSInputProp = {}));
 export const ssInputProps = {
     [SSInputProp.TYPE]: {
@@ -32,6 +35,21 @@ export const ssInputProps = {
         default: [],
         description: 'An array of suggestions used for auto-completion',
         control: 'text',
+    },
+    [SSInputProp.MIN]: {
+        default: 0,
+        description: 'The minimum value for a number input',
+        control: 'number',
+    },
+    [SSInputProp.MAX]: {
+        default: 100,
+        description: 'The maximum value for a number input',
+        control: 'number',
+    },
+    [SSInputProp.STEP]: {
+        default: 1,
+        description: 'The step value for a number input',
+        control: 'number',
     },
 };
 //# sourceMappingURL=ss-input.models.js.map

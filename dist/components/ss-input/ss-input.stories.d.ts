@@ -17,3 +17,4 @@ declare const meta: {
 export default meta;
 type Story = StoryObj<SSInputProps>;
 export declare const Text: Story;
+export declare const Number: Story;

@@ -11,6 +11,7 @@ export const theme = css `
   input[type='date'],
   input[type='datetime-local'],
   input[type='password'],
+  input[type='number'],
   select,
   button {
     font-family: Poppins;

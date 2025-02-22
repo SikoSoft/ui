@@ -9,6 +9,9 @@ export declare class SSInput extends LitElement {
     [SSInputProp.AUTO_COMPLETE]: SSInputProps[SSInputProp.AUTO_COMPLETE];
     [SSInputProp.PLACEHOLDER]: SSInputProps[SSInputProp.PLACEHOLDER];
     [SSInputProp.SUGGESTIONS]: SSInputProps[SSInputProp.SUGGESTIONS];
+    [SSInputProp.MIN]?: SSInputProps[SSInputProp.MIN];
+    [SSInputProp.MAX]?: SSInputProps[SSInputProp.MAX];
+    [SSInputProp.STEP]?: SSInputProps[SSInputProp.STEP];
     _value: string;
     inputField: HTMLInputElement;
     autoCompleteNode: HTMLElement;
