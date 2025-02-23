@@ -10,6 +10,10 @@ declare const meta: {
     args: {
         text: string;
         disabled: false;
+        loading: false;
+        positive: false;
+        negative: false;
+        class: string;
     };
     argTypes: Partial<import("@storybook/csf").ArgTypes<SSButtonProps>> | undefined;
     render: (args: SSButtonProps) => import("lit-html").TemplateResult<1>;
