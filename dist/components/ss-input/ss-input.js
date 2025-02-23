@@ -116,11 +116,6 @@ let SSInput = class SSInput extends LitElement {
                 this.max = ssInputProps[SSInputProp.MAX].default;
                 this.step = ssInputProps[SSInputProp.STEP].default;
             }
-            console.log('connected', {
-                min: this.min,
-                max: this.max,
-                step: this.step,
-            });
         };
         window.addEventListener('mousedown', this.clickFocusHandler);
     }
