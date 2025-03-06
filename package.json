@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -116,6 +116,10 @@
     "./events/toggle-changed": {
       "types": "./dist/events/toggle-changed.d.ts",
       "default": "./dist/events/toggle-changed.js"
+    },
+    "./models": {
+      "types": "./dist/models/index.d.ts",
+      "default": "./dist/models/index.js"
     }
   }
 }
