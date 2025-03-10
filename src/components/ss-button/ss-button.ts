@@ -84,7 +84,11 @@ export class SSButton extends LitElement {
         @click=${this._handleClick}
         ?disabled=${this.disabled}
       >
-        ${this.loading ? html` <ss-loader></ss-loader> ` : this.text}
+        ${this.loading
+          ? html` <ss-loader></ss-loader> `
+          : this.text
+            ? this.text
+            : html`<slot></slot>`}
       </button>
     `;
   }
