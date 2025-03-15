@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var _a, _b, _c, _d;
 import { css, html, LitElement, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { theme } from '../../styles/theme';
 import { PopUpProp, popUpProps } from './pop-up.models';
 import { classMap } from 'lit/directives/class-map.js';
@@ -23,8 +23,7 @@ let PopUp = class PopUp extends LitElement {
             if (!this.newlyOpened &&
                 this[PopUpProp.CLOSE_ON_OUTSIDE_CLICK] &&
                 this[PopUpProp.OPEN] &&
-                this.shadowRoot &&
-                !this.shadowRoot.contains(e.target)) {
+                !e.composedPath().includes(this.container)) {
                 this.dispatchEvent(new PopUpClosedEvent({}));
             }
         };
@@ -141,6 +140,9 @@ __decorate([
 __decorate([
     state()
 ], PopUp.prototype, "newlyOpened", void 0);
+__decorate([
+    query('.pop-up')
+], PopUp.prototype, "container", void 0);
 __decorate([
     state()
 ], PopUp.prototype, "classes", null);
