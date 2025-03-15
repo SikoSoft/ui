@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var _a, _b, _c, _d;
 import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { theme } from '@/styles/theme';
+import { theme } from '../../styles/theme';
 import { PopUpProp, popUpProps } from './pop-up.models';
 import { classMap } from 'lit/directives/class-map.js';
 import { PopUpClosedEvent } from './pop-up.events';
