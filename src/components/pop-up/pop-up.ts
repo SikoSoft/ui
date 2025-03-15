@@ -1,5 +1,5 @@
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 
 import { theme } from '../../styles/theme';
 import { PopUpProp, PopUpProps, popUpProps } from './pop-up.models';
@@ -67,6 +67,9 @@ export class PopUp extends LitElement {
   @state()
   newlyOpened = false;
 
+  @query('.pop-up')
+  private container!: HTMLDivElement;
+
   @state()
   get classes() {
     return {
@@ -106,8 +109,7 @@ export class PopUp extends LitElement {
       !this.newlyOpened &&
       this[PopUpProp.CLOSE_ON_OUTSIDE_CLICK] &&
       this[PopUpProp.OPEN] &&
-      this.shadowRoot &&
-      !this.shadowRoot.contains(e.target as Node)
+      !e.composedPath().includes(this.container)
     ) {
       this.dispatchEvent(new PopUpClosedEvent({}));
     }
