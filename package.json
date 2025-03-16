@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.12.3",
+  "version": "1.13.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -84,6 +84,14 @@
     "./components/ss-collapsable": {
       "types": "./dist/components/ss-collapsable/ss-collapsable.d.ts",
       "default": "./dist/components/ss-collapsable/ss-collapsable.js"
+    },
+    "./components/ss-icon": {
+      "types": "./dist/components/ss-input/ss-icon.d.ts",
+      "default": "./dist/components/ss-input/ss-icon.js"
+    },
+    "./components/ss-icon.models": {
+      "types": "./dist/components/ss-input/ss-icon.models.d.ts",
+      "default": "./dist/components/ss-input/ss-icon.models.js"
     },
     "./components/ss-input-auto": {
       "types": "./dist/components/ss-input-auto/ss-input-auto.d.ts",
