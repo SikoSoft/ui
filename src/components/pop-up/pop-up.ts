@@ -11,6 +11,10 @@ export class PopUp extends LitElement {
   static styles = [
     theme,
     css`
+      :host {
+        display: block;
+      }
+
       .pop-up {
         display: none;
         position: fixed;
@@ -123,7 +127,7 @@ export class PopUp extends LitElement {
 
   render() {
     return html`
-      <div class=${classMap(this.classes)}>
+      <div class=${classMap(this.classes)} part="container">
         <div class="inner">
           ${this[PopUpProp.CLOSE_BUTTON]
             ? html`
