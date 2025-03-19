@@ -15,7 +15,7 @@ declare const meta: {
         negative: false;
         class: string;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSButtonProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSButtonProps>> | undefined;
     render: (args: SSButtonProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

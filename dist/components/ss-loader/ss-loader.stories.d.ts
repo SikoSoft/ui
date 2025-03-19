@@ -10,7 +10,7 @@ declare const meta: {
     args: {
         padded: false;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSLoaderProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSLoaderProps>> | undefined;
     render: (args: SSLoaderProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

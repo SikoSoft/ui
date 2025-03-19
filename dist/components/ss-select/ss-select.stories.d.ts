@@ -13,7 +13,7 @@ declare const meta: {
             value: string;
         }[];
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSSelectProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSSelectProps>> | undefined;
     render: (args: SSSelectProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

@@ -11,7 +11,7 @@ declare const meta: {
         closeButton: true;
         open: true;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<PopUpProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<PopUpProps>> | undefined;
     render: (args: PopUpProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

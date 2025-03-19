@@ -11,7 +11,7 @@ declare const meta: {
     args: {
         type: InputType.TEXT;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSInputProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSInputProps>> | undefined;
     render: (args: SSInputProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

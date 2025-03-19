@@ -10,7 +10,7 @@ declare const meta: {
     args: {
         on: true;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSToggleProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSToggleProps>> | undefined;
     render: (args: SSToggleProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

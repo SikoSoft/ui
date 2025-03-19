@@ -12,7 +12,7 @@ declare const meta: {
         size: number;
         color: string;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSIconProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSIconProps>> | undefined;
     render: (args: SSIconProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;

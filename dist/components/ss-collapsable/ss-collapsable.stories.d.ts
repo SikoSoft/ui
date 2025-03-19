@@ -11,7 +11,7 @@ declare const meta: {
         title: string;
         open: true;
     };
-    argTypes: Partial<import("@storybook/csf").ArgTypes<SSCollapsableProps>> | undefined;
+    argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSCollapsableProps>> | undefined;
     render: (args: SSCollapsableProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;
