@@ -22,6 +22,7 @@ const meta = {
   args: {
     message: notificationMessageProps.message.default,
     startTime: notificationMessageProps.startTime.default,
+    messageLife: notificationMessageProps.messageLife.default,
     type: notificationMessageProps.type.default,
   },
   argTypes,
@@ -29,6 +30,7 @@ const meta = {
     <notification-message
       message=${args.message}
       startTime=${args.startTime}
+      messageLife=${args.messageLife}
       type=${args.type}
     ></notification-message>
   `,

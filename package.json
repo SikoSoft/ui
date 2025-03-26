@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.13.3",
+  "version": "1.14.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -64,6 +64,14 @@
     "./components": {
       "types": "./dist/components/index.d.ts",
       "default": "./dist/components/index.js"
+    },
+    "./components/notification-provider": {
+      "types": "./dist/components/notification-provider/notification-provider.d.ts",
+      "default": "./dist/components/notification-provider/notification-provider.js"
+    },
+    "./components/notification-provider.models": {
+      "types": "./dist/components/notification-provider/notification-provider.models.d.ts",
+      "default": "./dist/components/notification-provider/notification-provider.models.js"
     },
     "./components/pop-up": {
       "types": "./dist/components/pop-up/pop-up.d.ts",

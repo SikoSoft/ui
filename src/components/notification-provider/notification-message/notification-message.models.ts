@@ -5,12 +5,14 @@ export enum NotificationMessageProp {
   MESSAGE = 'message',
   TYPE = 'type',
   START_TIME = 'startTime',
+  MESSAGE_LIFE = 'messageLife',
 }
 
 export interface NotificationMessageProps extends PropTypes {
   [NotificationMessageProp.MESSAGE]: string;
   [NotificationMessageProp.TYPE]: NotificationType;
   [NotificationMessageProp.START_TIME]: number;
+  [NotificationMessageProp.MESSAGE_LIFE]: number;
 }
 
 export const notificationMessageProps: PropConfigMap<NotificationMessageProps> =
@@ -29,5 +31,10 @@ export const notificationMessageProps: PropConfigMap<NotificationMessageProps> =
       default: new Date().getTime(),
       control: 'number',
       description: 'The time the message was created',
+    },
+    [NotificationMessageProp.MESSAGE_LIFE]: {
+      default: 5000,
+      control: 'number',
+      description: 'The time in milliseconds that a message will be displayed',
     },
   };
