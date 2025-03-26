@@ -6,7 +6,7 @@ export declare class NotificationProvider extends LitElement {
     notifications: Notification[];
     static styles: import("lit").CSSResult[];
     [NotificationProviderProp.MESSAGE_LIFE]: NotificationProviderProps[NotificationProviderProp.MESSAGE_LIFE];
-    connectedCallback(): Promise<void>;
-    addNotification(message: string, type: NotificationType, permanent?: boolean): void;
+    addNotification(message: string, type: NotificationType): number;
+    removeNotification(id: number): void;
     render(): import("lit-html").TemplateResult<1>;
 }

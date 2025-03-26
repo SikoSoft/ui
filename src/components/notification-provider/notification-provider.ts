@@ -1,7 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 import { theme } from '../../styles/theme';
 import {
@@ -38,7 +37,7 @@ export class NotificationProvider extends LitElement {
   [NotificationProviderProp.MESSAGE_LIFE]: NotificationProviderProps[NotificationProviderProp.MESSAGE_LIFE] =
     notificationProviderProps[NotificationProviderProp.MESSAGE_LIFE].default;
 
-  addNotification(message: string, type: NotificationType, permanent = false) {
+  addNotification(message: string, type: NotificationType): number {
     const id = this.notificationId++;
     const notification: Notification = {
       id,
@@ -49,13 +48,15 @@ export class NotificationProvider extends LitElement {
 
     this.notifications = [...this.notifications, notification];
 
-    if (!permanent) {
-      setTimeout(() => {
-        this.notifications = this.notifications.filter(
-          n => n.id !== notification.id,
-        );
-      }, this[NotificationProviderProp.MESSAGE_LIFE]);
-    }
+    setTimeout(() => {
+      this.removeNotification(id);
+    }, this[NotificationProviderProp.MESSAGE_LIFE]);
+
+    return id;
+  }
+
+  removeNotification(id: number): void {
+    this.notifications = this.notifications.filter(n => n.id !== id);
   }
 
   render() {

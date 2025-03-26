@@ -31,11 +31,7 @@ let NotificationProvider = class NotificationProvider extends LitElement {
       }
     `,
     ]; }
-    async connectedCallback() {
-        super.connectedCallback();
-    }
-    addNotification(message, type, permanent = false) {
-        console.log('addNotification', message, type);
+    addNotification(message, type) {
         const id = this.notificationId++;
         const notification = {
             id,
@@ -44,14 +40,13 @@ let NotificationProvider = class NotificationProvider extends LitElement {
             startTime: new Date(),
         };
         this.notifications = [...this.notifications, notification];
-        console.log('notifications on add', this.notifications);
-        if (!permanent) {
-            setTimeout(() => {
-                console.log('run notification delete timeout');
-                this.notifications = this.notifications.filter(n => n.id !== notification.id);
-                console.log('notifications on delete', this.notifications);
-            }, this[NotificationProviderProp.MESSAGE_LIFE]);
-        }
+        setTimeout(() => {
+            this.removeNotification(id);
+        }, this[NotificationProviderProp.MESSAGE_LIFE]);
+        return id;
+    }
+    removeNotification(id) {
+        this.notifications = this.notifications.filter(n => n.id !== id);
     }
     render() {
         return html `
