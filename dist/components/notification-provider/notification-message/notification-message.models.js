@@ -1,12 +1,18 @@
 import { NotificationType } from '../notification-provider.models';
 export var NotificationMessageProp;
 (function (NotificationMessageProp) {
+    NotificationMessageProp["NOTIFICATION_ID"] = "notificationId";
     NotificationMessageProp["MESSAGE"] = "message";
     NotificationMessageProp["TYPE"] = "type";
     NotificationMessageProp["START_TIME"] = "startTime";
     NotificationMessageProp["MESSAGE_LIFE"] = "messageLife";
 })(NotificationMessageProp || (NotificationMessageProp = {}));
 export const notificationMessageProps = {
+    [NotificationMessageProp.NOTIFICATION_ID]: {
+        default: 0,
+        control: 'number',
+        description: 'The id of the notification',
+    },
     [NotificationMessageProp.MESSAGE]: {
         default: '',
         control: 'text',

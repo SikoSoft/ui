@@ -29,4 +29,5 @@ export interface Notification {
   type: NotificationType;
   message: string;
   startTime: Date;
+  messageLife: number;
 }

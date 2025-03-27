@@ -2,6 +2,7 @@ import { PropConfigMap, PropTypes } from '@/models/Prop';
 import { NotificationType } from '../notification-provider.models';
 
 export enum NotificationMessageProp {
+  NOTIFICATION_ID = 'notificationId',
   MESSAGE = 'message',
   TYPE = 'type',
   START_TIME = 'startTime',
@@ -9,6 +10,7 @@ export enum NotificationMessageProp {
 }
 
 export interface NotificationMessageProps extends PropTypes {
+  [NotificationMessageProp.NOTIFICATION_ID]: number;
   [NotificationMessageProp.MESSAGE]: string;
   [NotificationMessageProp.TYPE]: NotificationType;
   [NotificationMessageProp.START_TIME]: number;
@@ -17,6 +19,11 @@ export interface NotificationMessageProps extends PropTypes {
 
 export const notificationMessageProps: PropConfigMap<NotificationMessageProps> =
   {
+    [NotificationMessageProp.NOTIFICATION_ID]: {
+      default: 0,
+      control: 'number',
+      description: 'The id of the notification',
+    },
     [NotificationMessageProp.MESSAGE]: {
       default: '',
       control: 'text',

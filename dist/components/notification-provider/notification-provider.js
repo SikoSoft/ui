@@ -38,6 +38,7 @@ let NotificationProvider = class NotificationProvider extends LitElement {
             message,
             type,
             startTime: new Date(),
+            messageLife: this[NotificationProviderProp.MESSAGE_LIFE],
         };
         this.notifications = [...this.notifications, notification];
         setTimeout(() => {
@@ -53,9 +54,11 @@ let NotificationProvider = class NotificationProvider extends LitElement {
       <div class="notification-provider">
         ${repeat(this.notifications, n => n.id, n => {
             return html ` <notification-message
+              @notification-clicked=${() => this.removeNotification(n.id)}
               message=${n.message}
               type=${n.type}
               startTime=${n.startTime.getTime()}
+              messageLife=${n.messageLife}
             ></notification-message>`;
         })}
       </div>

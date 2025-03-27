@@ -44,6 +44,7 @@ export class NotificationProvider extends LitElement {
       message,
       type,
       startTime: new Date(),
+      messageLife: this[NotificationProviderProp.MESSAGE_LIFE],
     };
 
     this.notifications = [...this.notifications, notification];
@@ -67,9 +68,11 @@ export class NotificationProvider extends LitElement {
           n => n.id,
           n => {
             return html` <notification-message
+              @notification-clicked=${() => this.removeNotification(n.id)}
               message=${n.message}
               type=${n.type}
               startTime=${n.startTime.getTime()}
+              messageLife=${n.messageLife}
             ></notification-message>`;
           },
         )}

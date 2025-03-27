@@ -8,6 +8,7 @@ import {
   NotificationMessageProps,
   notificationMessageProps,
 } from './notification-message.models';
+import { NotificationClickedEvent } from './notification-message.events';
 
 @customElement('notification-message')
 export class NotificationMessage extends LitElement {
@@ -20,6 +21,10 @@ export class NotificationMessage extends LitElement {
         color: #333;
         text-align: center;
         padding: 0.25rem;
+        animation: fade-out var(--message-life, 1000ms) linear forwards;
+        margin: 0.5rem 0;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
 
         &.success {
           background-color: var(--color-success, #4caf50);
@@ -47,7 +52,7 @@ export class NotificationMessage extends LitElement {
             rgba(255, 255, 255, 0.125),
             rgba(255, 255, 255, 0.25)
           );
-          animation: time-elapsed var(--message-life, 1000ms) forwards;
+          animation: time-elapsed var(--message-life, 1000ms) linear forwards;
         }
 
         .content {
@@ -66,8 +71,25 @@ export class NotificationMessage extends LitElement {
           width: 100%;
         }
       }
+
+      @keyframes fade-out {
+        0% {
+          opacity: 1;
+        }
+        75% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
     `,
   ];
+
+  @property({ type: Number })
+  [NotificationMessageProp.NOTIFICATION_ID]: NotificationMessageProps[NotificationMessageProp.NOTIFICATION_ID] =
+    notificationMessageProps[NotificationMessageProp.NOTIFICATION_ID].default;
+
   @property()
   [NotificationMessageProp.MESSAGE]: NotificationMessageProps[NotificationMessageProp.MESSAGE] =
     notificationMessageProps[NotificationMessageProp.MESSAGE].default;
@@ -80,7 +102,7 @@ export class NotificationMessage extends LitElement {
   [NotificationMessageProp.START_TIME]: NotificationMessageProps[NotificationMessageProp.START_TIME] =
     notificationMessageProps[NotificationMessageProp.START_TIME].default;
 
-  @property({ type: Number })
+  @property({ type: Number, reflect: true })
   [NotificationMessageProp.MESSAGE_LIFE]: NotificationMessageProps[NotificationMessageProp.MESSAGE_LIFE] =
     notificationMessageProps[NotificationMessageProp.MESSAGE_LIFE].default;
 
@@ -94,6 +116,10 @@ export class NotificationMessage extends LitElement {
   render() {
     return html`
       <div
+        @click=${() =>
+          this.dispatchEvent(
+            new NotificationClickedEvent({ id: this.notificationId }),
+          )}
         class=${classMap(this.classes)}
         style=${`--message-life: ${this[NotificationMessageProp.MESSAGE_LIFE]}ms`}
       >
