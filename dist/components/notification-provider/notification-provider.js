@@ -8,10 +8,10 @@ var _a, _b, _c;
 import { LitElement, html, css } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { theme } from '../../styles/theme';
 import { NotificationProviderProp, notificationProviderProps, NotificationSide, } from './notification-provider.models';
 import './notification-message/notification-message';
-import { classMap } from 'lit/directives/class-map';
 let NotificationProvider = class NotificationProvider extends LitElement {
     constructor() {
         super(...arguments);

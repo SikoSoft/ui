@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 import { theme } from '../../styles/theme';
 import {
@@ -13,7 +14,6 @@ import {
 } from './notification-provider.models';
 
 import './notification-message/notification-message';
-import { classMap } from 'lit/directives/class-map';
 
 @customElement('notification-provider')
 export class NotificationProvider extends LitElement {
