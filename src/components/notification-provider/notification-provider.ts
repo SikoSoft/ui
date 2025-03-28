@@ -9,9 +9,11 @@ import {
   Notification,
   notificationProviderProps,
   NotificationType,
+  NotificationSide,
 } from './notification-provider.models';
 
 import './notification-message/notification-message';
+import { classMap } from 'lit/directives/class-map';
 
 @customElement('notification-provider')
 export class NotificationProvider extends LitElement {
@@ -25,10 +27,17 @@ export class NotificationProvider extends LitElement {
     css`
       .notification-provider {
         position: fixed;
-        top: 0;
         left: 10vw;
         width: 80vw;
         z-index: 1000;
+
+        &.top {
+          top: 0;
+        }
+
+        &.bottom {
+          bottom: 0;
+        }
       }
     `,
   ];
@@ -36,6 +45,32 @@ export class NotificationProvider extends LitElement {
   @property({ type: Number, reflect: true })
   [NotificationProviderProp.MESSAGE_LIFE]: NotificationProviderProps[NotificationProviderProp.MESSAGE_LIFE] =
     notificationProviderProps[NotificationProviderProp.MESSAGE_LIFE].default;
+
+  @property({ type: Boolean })
+  [NotificationProviderProp.TOP]: NotificationProviderProps[NotificationProviderProp.TOP] =
+    notificationProviderProps[NotificationProviderProp.TOP].default;
+
+  @property({ type: Boolean })
+  [NotificationProviderProp.BOTTOM]: NotificationProviderProps[NotificationProviderProp.BOTTOM] =
+    notificationProviderProps[NotificationProviderProp.BOTTOM].default;
+
+  @state()
+  get classes(): Record<string, boolean> {
+    return {
+      'notification-provider': true,
+      top: this.side === NotificationSide.TOP,
+      bottom: this.side === NotificationSide.BOTTOM,
+    };
+  }
+
+  @state()
+  get side(): NotificationSide {
+    if (this[NotificationProviderProp.TOP]) {
+      return NotificationSide.TOP;
+    }
+
+    return NotificationSide.BOTTOM;
+  }
 
   addNotification(message: string, type: NotificationType): number {
     const id = this.notificationId++;
@@ -62,7 +97,7 @@ export class NotificationProvider extends LitElement {
 
   render() {
     return html`
-      <div class="notification-provider">
+      <div class=${classMap(this.classes)}>
         ${repeat(
           this.notifications,
           n => n.id,
