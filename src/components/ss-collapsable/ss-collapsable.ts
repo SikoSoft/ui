@@ -3,6 +3,11 @@ import { property, customElement, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
 import { theme } from '../../styles/theme';
+import {
+  SSCollapsableProp,
+  ssCollapsableProps,
+  SSCollapsableProps,
+} from './ss-collapsable.models';
 
 @customElement('ss-collapsable')
 export class SSCollapsable extends LitElement {
@@ -44,8 +49,13 @@ export class SSCollapsable extends LitElement {
     `,
   ];
 
-  @property() title: string = '';
-  @property({ type: Boolean }) open: boolean = false;
+  @property()
+  [SSCollapsableProp.TITLE]: SSCollapsableProps[SSCollapsableProp.TITLE] =
+    ssCollapsableProps[SSCollapsableProp.TITLE].default;
+
+  @property({ type: Boolean })
+  [SSCollapsableProp.OPEN]: SSCollapsableProps[SSCollapsableProp.OPEN] =
+    ssCollapsableProps[SSCollapsableProp.OPEN].default;
 
   @state()
   get classes() {
