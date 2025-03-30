@@ -6,6 +6,11 @@ import { SuggestiontSubmittedEvent } from '../../events/suggestion-submitted';
 import { SuggestionChangedEvent } from '../../events/suggestion-changed';
 
 import { theme } from '../../styles/theme';
+import {
+  SSInputAutoProp,
+  SSInputAutoProps,
+  ssInputAutoProps,
+} from './ss-input-auto.models';
 
 @customElement('ss-input-auto')
 export class SSInputAuto extends LitElement {
@@ -49,10 +54,22 @@ export class SSInputAuto extends LitElement {
     `,
   ];
 
-  @property() input: string = '';
-  @property({ type: Number }) maxMatches: number = 5;
-  @property({ type: Number }) minInput: number = 1;
-  @property({ type: Array }) suggestions: string[] = [];
+  @property()
+  [SSInputAutoProp.INPUT]: SSInputAutoProps[SSInputAutoProp.INPUT] =
+    ssInputAutoProps[SSInputAutoProp.INPUT].default;
+
+  @property({ type: Number })
+  [SSInputAutoProp.MIN_INPUT]: SSInputAutoProps[SSInputAutoProp.MIN_INPUT] =
+    ssInputAutoProps[SSInputAutoProp.MIN_INPUT].default;
+
+  @property({ type: Number })
+  [SSInputAutoProp.MAX_MATCHES]: SSInputAutoProps[SSInputAutoProp.MAX_MATCHES] =
+    ssInputAutoProps[SSInputAutoProp.MAX_MATCHES].default;
+
+  @property({ type: Array })
+  [SSInputAutoProp.SUGGESTIONS]: SSInputAutoProps[SSInputAutoProp.SUGGESTIONS] =
+    ssInputAutoProps[SSInputAutoProp.SUGGESTIONS].default;
+
   @state() selectedIndex: number = -1;
 
   @state()
