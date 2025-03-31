@@ -133,24 +133,10 @@ export class SSCarousel extends LitElement {
     super.firstUpdated(_changedProperties);
     await this.updateComplete;
 
-    //console.log('firstUpdated', this.innerHTML, this.querySelector('slot'));
-
-    console.log('childnodes', this.children);
-
     if (this.children.length > 0) {
       [...this.children].forEach((child, index) => {
         child.classList.add('frame');
         child.setAttribute('data-index', index.toString());
-      });
-    }
-
-    const slotNode = this.querySelector('slot');
-    if (slotNode) {
-      console.log('slotNode', slotNode);
-      console.log(slotNode);
-
-      slotNode.childNodes.forEach(node => {
-        console.log('node', node);
       });
     }
   }
@@ -176,7 +162,6 @@ export class SSCarousel extends LitElement {
         .carousel {
           transform: translateZ(-${this.frameTransition}px);
         }
-
         ${[...Array(this.totalFrames)].map(
           (_, i) => css`
             ::slotted(.frame:nth-child(${i + 1})) {
