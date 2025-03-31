@@ -15,12 +15,11 @@ const meta = {
     layout: 'centered',
   },
   args: {
-    title: 'Heading',
-    open: true,
+    showButtons: true,
   },
   argTypes,
   render: args => html`
-    <ss-carousel>
+    <ss-carousel ?showButtons=${args.showButtons}>
       <div class="frame">1</div>
       <div class="frame">2</div>
       <div class="frame">3</div>
@@ -29,34 +28,21 @@ const meta = {
       <div class="frame">6</div>
       <div class="frame">7</div>
       <div class="frame">8</div>
-      <div class="frame">9</div>
-      <div class="frame">10</div>
-      <div class="frame">11</div>
     </ss-carousel>
   `,
 } satisfies Meta<SSCarouselProps>;
 
-/*
-      <div>scene 1</div>
-      <div>scene 2</div>
-      <div>scene 3</div>
-      <div>scene 4</div>
-      <div>scene 5</div>
-      */
-
 export default meta;
 type Story = StoryObj<SSCarouselProps>;
 
-export const Open: Story = {
+export const ShowButtons: Story = {
   args: {
-    title: 'Collapsable',
-    open: true,
+    showButtons: true,
   },
 };
 
-export const Closed: Story = {
+export const NoButtons: Story = {
   args: {
-    title: 'Collapsable',
-    open: false,
+    showButtons: false,
   },
 };

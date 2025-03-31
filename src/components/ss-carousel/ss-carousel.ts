@@ -1,4 +1,4 @@
-import { LitElement, html, css, PropertyValues } from 'lit';
+import { LitElement, html, css, PropertyValues, nothing } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -19,20 +19,19 @@ export class SSCarousel extends LitElement {
         height: 140px;
         position: relative;
         perspective: 200px;
-        border: 1px solid #ccc;
       }
 
       .back {
         position: absolute;
         top: 50%;
-        left: 0;
+        right: 100%;
         transform: translateY(-50%);
       }
 
       .forward {
         position: absolute;
         top: 50%;
-        right: 0;
+        left: 100%;
         transform: translateY(-50%);
       }
 
@@ -51,6 +50,7 @@ export class SSCarousel extends LitElement {
         left: 10px;
         top: 10px;
         border: 1px solid #ccc;
+        background-color: #efefef;
       }
     `,
   ];
@@ -62,6 +62,10 @@ export class SSCarousel extends LitElement {
   @property({ type: Number, reflect: true })
   [SSCarouselProp.ACTIVE_INDEX]: SSCarouselProps[SSCarouselProp.ACTIVE_INDEX] =
     ssCarouselProps[SSCarouselProp.ACTIVE_INDEX].default;
+
+  @property({ type: Boolean })
+  [SSCarouselProp.SHOW_BUTTONS]: SSCarouselProps[SSCarouselProp.SHOW_BUTTONS] =
+    ssCarouselProps[SSCarouselProp.SHOW_BUTTONS].default;
 
   @query('.carousel')
   carousel!: HTMLDivElement;
@@ -80,6 +84,11 @@ export class SSCarousel extends LitElement {
   @state()
   get frameTransition(): number {
     return Math.round(210 / 2 / Math.tan(Math.PI / this.totalFrames));
+  }
+
+  @state()
+  get useButtons() {
+    return this.showButtons && this.totalFrames > 1;
   }
 
   @state()
@@ -112,13 +121,11 @@ export class SSCarousel extends LitElement {
   }
 
   _back() {
-    console.log('back');
     this.activeIndex--;
     this.rotateCarousel();
   }
 
   _forward() {
-    console.log('forward');
     this.activeIndex++;
     this.rotateCarousel();
   }
@@ -149,10 +156,16 @@ export class SSCarousel extends LitElement {
           <div class="carousel">
             <slot></slot>
           </div>
-          <div class="back"><button @click=${this._back}>&#x21e6;</button></div>
-          <div class="forward">
-            <button @click=${this._forward}>&#x21e8;</button>
-          </div>
+          ${this.useButtons
+            ? html`
+                <div class="back">
+                  <button @click=${this._back}>&#x21e6;</button>
+                </div>
+                <div class="forward">
+                  <button @click=${this._forward}>&#x21e8;</button>
+                </div>
+              `
+            : nothing}
         </div>
       </div>
     `;

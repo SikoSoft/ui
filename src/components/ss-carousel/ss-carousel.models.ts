@@ -24,7 +24,7 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     description: 'The index of the active slide',
   },
   [SSCarouselProp.SHOW_BUTTONS]: {
-    default: true,
+    default: false,
     control: 'boolean',
     description: 'Whether to show the navigation buttons',
   },
