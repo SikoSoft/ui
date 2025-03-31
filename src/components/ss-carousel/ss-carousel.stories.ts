@@ -20,11 +20,29 @@ const meta = {
   },
   argTypes,
   render: args => html`
-    <ss-carousel
-      >This is some content that can be toggled into view.</ss-carousel
-    >
+    <ss-carousel>
+      <div class="frame">1</div>
+      <div class="frame">2</div>
+      <div class="frame">3</div>
+      <div class="frame">4</div>
+      <div class="frame">5</div>
+      <div class="frame">6</div>
+      <div class="frame">7</div>
+      <div class="frame">8</div>
+      <div class="frame">9</div>
+      <div class="frame">10</div>
+      <div class="frame">11</div>
+    </ss-carousel>
   `,
 } satisfies Meta<SSCarouselProps>;
+
+/*
+      <div>scene 1</div>
+      <div>scene 2</div>
+      <div>scene 3</div>
+      <div>scene 4</div>
+      <div>scene 5</div>
+      */
 
 export default meta;
 type Story = StoryObj<SSCarouselProps>;
