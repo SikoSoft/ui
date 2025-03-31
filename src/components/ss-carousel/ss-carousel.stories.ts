@@ -16,18 +16,19 @@ const meta = {
   },
   args: {
     showButtons: true,
+    infinite: true,
   },
   argTypes,
   render: args => html`
-    <ss-carousel ?showButtons=${args.showButtons}>
-      <div class="frame">1</div>
-      <div class="frame">2</div>
-      <div class="frame">3</div>
-      <div class="frame">4</div>
-      <div class="frame">5</div>
-      <div class="frame">6</div>
-      <div class="frame">7</div>
-      <div class="frame">8</div>
+    <ss-carousel ?showButtons=${args.showButtons} ?infinite=${args.infinite}>
+      <div class="something">1</div>
+      <div class="different">2</div>
+      <div>3</div>
+      <div>4</div>
+      <span>5</span>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
     </ss-carousel>
   `,
 } satisfies Meta<SSCarouselProps>;

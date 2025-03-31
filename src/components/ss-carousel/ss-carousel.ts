@@ -21,6 +21,21 @@ export class SSCarousel extends LitElement {
         perspective: 200px;
       }
 
+      .back,
+      .forward {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.2s;
+        opacity: 0.5;
+
+        &:hover {
+          transform: translateY(-50%) scale(1.5);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          opacity: 1;
+        }
+      }
+
       .back {
         position: absolute;
         top: 50%;
@@ -87,8 +102,21 @@ export class SSCarousel extends LitElement {
   }
 
   @state()
-  get useButtons() {
-    return this.showButtons && this.totalFrames > 1;
+  get showBackButton() {
+    return (
+      this.showButtons &&
+      this.totalFrames > 1 &&
+      (this.infinite || this.normalizedIndex > 0)
+    );
+  }
+
+  @state()
+  get showForwardButton() {
+    return (
+      this.showButtons &&
+      this.totalFrames > 1 &&
+      (this.infinite || this.normalizedIndex < this.totalFrames - 1)
+    );
   }
 
   @state()
@@ -105,9 +133,16 @@ export class SSCarousel extends LitElement {
     super.firstUpdated(_changedProperties);
     await this.updateComplete;
 
-    console.log('firstUpdated', this.innerHTML, this.querySelector('slot'));
+    //console.log('firstUpdated', this.innerHTML, this.querySelector('slot'));
 
     console.log('childnodes', this.children);
+
+    if (this.children.length > 0) {
+      [...this.children].forEach((child, index) => {
+        child.classList.add('frame');
+        child.setAttribute('data-index', index.toString());
+      });
+    }
 
     const slotNode = this.querySelector('slot');
     if (slotNode) {
@@ -156,11 +191,15 @@ export class SSCarousel extends LitElement {
           <div class="carousel">
             <slot></slot>
           </div>
-          ${this.useButtons
+          ${this.showBackButton
             ? html`
                 <div class="back">
                   <button @click=${this._back}>&#x21e6;</button>
                 </div>
+              `
+            : nothing}
+          ${this.showForwardButton
+            ? html`
                 <div class="forward">
                   <button @click=${this._forward}>&#x21e8;</button>
                 </div>
