@@ -10,6 +10,10 @@ declare const meta: {
     args: {
         showButtons: true;
         infinite: true;
+        width: number;
+        height: number;
+        gap: number;
+        perspective: number;
     };
     argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSCarouselProps>> | undefined;
     render: (args: SSCarouselProps) => import("lit-html").TemplateResult<1>;

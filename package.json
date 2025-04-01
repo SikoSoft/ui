@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.15.2",
+  "version": "1.16.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -88,6 +88,10 @@
     "./components/ss-button": {
       "types": "./dist/components/ss-button/ss-button.d.ts",
       "default": "./dist/components/ss-button/ss-button.js"
+    },
+    "./components/ss-carousel": {
+      "types": "./dist/components/ss-carousel/ss-carousel.d.ts",
+      "default": "./dist/components/ss-carousel/ss-carousel.js"
     },
     "./components/ss-collapsable": {
       "types": "./dist/components/ss-collapsable/ss-collapsable.d.ts",

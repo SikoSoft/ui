@@ -4,13 +4,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b, _c;
+var _a, _b, _c, _d, _e, _f, _g;
 import { LitElement, html, css, nothing } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { theme } from '../../styles/theme';
 import { SSCarouselProp, ssCarouselProps, } from './ss-carousel.models';
-//https://3dtransforms.desandro.com/carousel
+/**
+ * For reference, see this tutorial that helped provide some of the math involved:
+ * https://3dtransforms.desandro.com/carousel
+ */
 let SSCarousel = class SSCarousel extends LitElement {
     constructor() {
         super(...arguments);
@@ -39,26 +42,36 @@ let SSCarousel = class SSCarousel extends LitElement {
         this[_a] = ssCarouselProps[SSCarouselProp.INFINITE].default;
         this[_b] = ssCarouselProps[SSCarouselProp.ACTIVE_INDEX].default;
         this[_c] = ssCarouselProps[SSCarouselProp.SHOW_BUTTONS].default;
+        this[_d] = ssCarouselProps[SSCarouselProp.WIDTH].default;
+        this[_e] = ssCarouselProps[SSCarouselProp.HEIGHT].default;
+        this[_f] = ssCarouselProps[SSCarouselProp.GAP].default;
+        this[_g] = ssCarouselProps[SSCarouselProp.PERSPECTIVE].default;
         this.mouseOver = false;
         this.hasContact = false;
-        this.contactPoint = { x: 0, y: 0 };
+        this.startContactPoint = { x: 0, y: 0 };
+        this.latestContactPoint = { x: 0, y: 0 };
         this.dragDistance = 0;
     }
-    static { _a = SSCarouselProp.INFINITE, _b = SSCarouselProp.ACTIVE_INDEX, _c = SSCarouselProp.SHOW_BUTTONS; }
+    static { _a = SSCarouselProp.INFINITE, _b = SSCarouselProp.ACTIVE_INDEX, _c = SSCarouselProp.SHOW_BUTTONS, _d = SSCarouselProp.WIDTH, _e = SSCarouselProp.HEIGHT, _f = SSCarouselProp.GAP, _g = SSCarouselProp.PERSPECTIVE; }
     static { this.styles = [
         theme,
         css `
+      :host {
+        //--scene-width: 210px;
+        //--scene-height: 140px;
+      }
+
       @property --frame-scale {
-        syntax: '<number>'; /* <- defined as type number for the transition to work */
+        syntax: '<number>';
         initial-value: 0;
         inherits: false;
       }
 
       .scene {
-        width: 210px;
-        height: 140px;
+        width: var(--scene-width);
+        height: var(--scene-height);
         position: relative;
-        perspective: 200px;
+        perspective: var(--perspective);
       }
 
       .back,
@@ -106,11 +119,10 @@ let SSCarousel = class SSCarousel extends LitElement {
 
       ::slotted(.frame) {
         position: absolute;
-        width: 190px;
-        height: 120px;
-        left: 10px;
-        top: 10px;
-        border: 1px solid #ccc;
+        width: calc(var(--scene-width) - var(--gap) * 2);
+        height: calc(var(--scene-height) - var(--gap) * 2);
+        left: var(--gap);
+        top: var(--gap);
         background-color: #efefef;
         transition: all 0.2s;
         opacity: 0.5;
@@ -118,14 +130,11 @@ let SSCarousel = class SSCarousel extends LitElement {
 
       ::slotted(.frame.active) {
         opacity: 1;
-        // top: -10px;
-        //transition: all 0.2s;
         animation: become-active 200ms linear;
         animation-delay: 200ms;
       }
 
       ::slotted(.frame.active:hover) {
-        //top: -10px;
         --frame-scale: 1.1;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
@@ -139,8 +148,8 @@ let SSCarousel = class SSCarousel extends LitElement {
       ::slotted(.frame.next)::after {
         content: '';
         position: absolute;
-        width: 190px;
-        height: 120px;
+        width: calc(var(--scene-width) - var(--gap) * 2);
+        height: calc(var(--scene-height) - var(--gap) * 2);
         left: 0px;
         top: 0px;
       }
@@ -156,7 +165,7 @@ let SSCarousel = class SSCarousel extends LitElement {
       .has-contact {
         ::slotted(.frame.active) {
           --frame-scale: calc(
-            1 - calc(max(calc(var(--drag-distance) / 10), 1) * 0.2)
+            1 - calc(min(calc(var(--drag-distance) / 10), 1) * 0.2)
           );
         }
       }
@@ -170,7 +179,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         return 360 / this.totalFrames;
     }
     get frameTransition() {
-        return Math.round(210 / 2 / Math.tan(Math.PI / this.totalFrames));
+        return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalFrames));
     }
     get showBackButton() {
         return (this.showButtons &&
@@ -204,35 +213,34 @@ let SSCarousel = class SSCarousel extends LitElement {
     async firstUpdated(_changedProperties) {
         super.firstUpdated(_changedProperties);
         await this.updateComplete;
-        const slotNode = this.shadowRoot?.querySelector('slot');
-        if (slotNode) {
-            //console.log('slotNode', slotNode);
-            slotNode.addEventListener('slotchange', () => {
-                //console.log('slotchange');
-            });
-        }
         if (this.frames.length > 0) {
             this.frames.forEach((frame, index) => {
                 frame.classList.add('frame');
                 frame.setAttribute('data-index', index.toString());
-                frame.addEventListener('mousedown', e => {
+                frame.addEventListener('touchstart', e => {
                     if (index === this.normalizedIndex) {
                         this.hasContact = true;
-                        this.contactPoint = { x: e.clientX, y: e.clientY };
+                        this.startContactPoint = {
+                            x: e.touches[0].clientX,
+                            y: e.touches[0].clientY,
+                        };
                     }
                 });
             });
         }
-        document.addEventListener('mousemove', e => {
+        document.addEventListener('touchmove', e => {
             if (this.hasContact) {
-                const xDiff = Math.abs(e.clientX - this.contactPoint.x);
-                console.log('xDiff', xDiff);
+                this.latestContactPoint = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY,
+                };
+                const xDiff = Math.abs(this.latestContactPoint.x - this.startContactPoint.x);
                 this.dragDistance = xDiff;
             }
         });
-        document.addEventListener('mouseup', e => {
+        document.addEventListener('touchend', e => {
             this.dragDistance = 0;
-            const xDiff = e.clientX - this.contactPoint.x;
+            const xDiff = this.latestContactPoint.x - this.startContactPoint.x;
             if (this.hasContact) {
                 if (xDiff >= this.minDragDistance) {
                     this._back();
@@ -254,7 +262,6 @@ let SSCarousel = class SSCarousel extends LitElement {
         });
         document.addEventListener('scroll', e => {
             if (this.mouseOver) {
-                //console.log('scroll');
                 e.preventDefault();
                 e.stopPropagation();
                 return false;
@@ -268,7 +275,6 @@ let SSCarousel = class SSCarousel extends LitElement {
         }
     }
     _updateFrames() {
-        //console.log('updateFrames', this.activeIndex, this.normalizedIndex);
         this.frames.forEach((c, index) => {
             const child = c;
             if (child.classList.contains('active')) {
@@ -327,7 +333,13 @@ let SSCarousel = class SSCarousel extends LitElement {
       </style>
       <div
         class=${classMap(this.classes)}
-        style=${`--drag-distance: ${this.dragDistance}`}
+        style=${`
+          --drag-distance: ${this.dragDistance};
+          --scene-width: ${this.width}px;
+          --scene-height: ${this.height}px;
+          --gap: ${this.gap}px;
+          --perspective: ${this.perspective}px;
+        `}
       >
         <div class="scene">
           <div class="carousel">
@@ -360,6 +372,18 @@ __decorate([
     property({ type: Boolean })
 ], SSCarousel.prototype, _c, void 0);
 __decorate([
+    property({ type: Number, reflect: true })
+], SSCarousel.prototype, _d, void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], SSCarousel.prototype, _e, void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], SSCarousel.prototype, _f, void 0);
+__decorate([
+    property({ type: Number, reflect: true })
+], SSCarousel.prototype, _g, void 0);
+__decorate([
     query('.carousel')
 ], SSCarousel.prototype, "carousel", void 0);
 __decorate([
@@ -391,7 +415,10 @@ __decorate([
 ], SSCarousel.prototype, "hasContact", void 0);
 __decorate([
     state()
-], SSCarousel.prototype, "contactPoint", void 0);
+], SSCarousel.prototype, "startContactPoint", void 0);
+__decorate([
+    state()
+], SSCarousel.prototype, "latestContactPoint", void 0);
 __decorate([
     state()
 ], SSCarousel.prototype, "dragDistance", void 0);
