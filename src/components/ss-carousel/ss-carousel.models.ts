@@ -8,6 +8,7 @@ export enum SSCarouselProp {
   WIDTH = 'width',
   HEIGHT = 'height',
   GAP = 'gap',
+  PERSPECTIVE = 'perspective',
 }
 
 export interface SSCarouselProps extends PropTypes {
@@ -18,6 +19,7 @@ export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.WIDTH]: number;
   [SSCarouselProp.HEIGHT]: number;
   [SSCarouselProp.GAP]: number;
+  [SSCarouselProp.PERSPECTIVE]: number;
 }
 
 export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
@@ -55,6 +57,11 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     default: 10,
     control: 'number',
     description: 'The gap between frames',
+  },
+  [SSCarouselProp.PERSPECTIVE]: {
+    default: 500,
+    control: 'number',
+    description: 'The perspective of the carousel',
   },
 };
 

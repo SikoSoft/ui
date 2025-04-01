@@ -20,6 +20,7 @@ const meta = {
     width: ssCarouselProps.width.default,
     height: ssCarouselProps.height.default,
     gap: ssCarouselProps.gap.default,
+    perspective: ssCarouselProps.perspective.default,
   },
   argTypes,
   render: args => html`
@@ -29,6 +30,7 @@ const meta = {
       width=${args.width}
       height=${args.height}
       gap=${args.gap}
+      perspective=${args.perspective}
     >
       <div class="something">1</div>
       <div class="different">2</div>

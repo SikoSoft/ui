@@ -35,7 +35,7 @@ export class SSCarousel extends LitElement {
         width: var(--scene-width);
         height: var(--scene-height);
         position: relative;
-        perspective: 200px;
+        perspective: var(--perspective);
       }
 
       .back,
@@ -87,7 +87,6 @@ export class SSCarousel extends LitElement {
         height: calc(var(--scene-height) - var(--gap) * 2);
         left: var(--gap);
         top: var(--gap);
-        border: 1px solid #ccc;
         background-color: #efefef;
         transition: all 0.2s;
         opacity: 0.5;
@@ -113,8 +112,8 @@ export class SSCarousel extends LitElement {
       ::slotted(.frame.next)::after {
         content: '';
         position: absolute;
-        width: 190px;
-        height: 120px;
+        width: calc(var(--scene-width) - var(--gap) * 2);
+        height: calc(var(--scene-height) - var(--gap) * 2);
         left: 0px;
         top: 0px;
       }
@@ -184,6 +183,10 @@ export class SSCarousel extends LitElement {
   [SSCarouselProp.GAP]: SSCarouselProps[SSCarouselProp.GAP] =
     ssCarouselProps[SSCarouselProp.GAP].default;
 
+  @property({ type: Number, reflect: true })
+  [SSCarouselProp.PERSPECTIVE]: SSCarouselProps[SSCarouselProp.PERSPECTIVE] =
+    ssCarouselProps[SSCarouselProp.PERSPECTIVE].default;
+
   @query('.carousel')
   carousel!: HTMLDivElement;
 
@@ -200,7 +203,7 @@ export class SSCarousel extends LitElement {
 
   @state()
   get frameTransition(): number {
-    return Math.round(210 / 2 / Math.tan(Math.PI / this.totalFrames));
+    return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalFrames));
   }
 
   @state()
@@ -410,6 +413,7 @@ export class SSCarousel extends LitElement {
           --scene-width: ${this.width}px;
           --scene-height: ${this.height}px;
           --gap: ${this.gap}px;
+          --perspective: ${this.perspective}px;
         `}
       >
         <div class="scene">
