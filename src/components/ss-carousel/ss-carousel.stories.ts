@@ -17,10 +17,19 @@ const meta = {
   args: {
     showButtons: true,
     infinite: true,
+    width: ssCarouselProps.width.default,
+    height: ssCarouselProps.height.default,
+    gap: ssCarouselProps.gap.default,
   },
   argTypes,
   render: args => html`
-    <ss-carousel ?showButtons=${args.showButtons} ?infinite=${args.infinite}>
+    <ss-carousel
+      ?showButtons=${args.showButtons}
+      ?infinite=${args.infinite}
+      width=${args.width}
+      height=${args.height}
+      gap=${args.gap}
+    >
       <div class="something">1</div>
       <div class="different">2</div>
       <div>3</div>
