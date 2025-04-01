@@ -224,7 +224,8 @@ export class SSCarousel extends LitElement {
 
   @state() mouseOver = false;
   @state() hasContact = false;
-  @state() contactPoint: ContactPoint = { x: 0, y: 0 };
+  @state() startContactPoint: ContactPoint = { x: 0, y: 0 };
+  @state() latestContactPoint: ContactPoint = { x: 0, y: 0 };
   @state() dragDistance = 0;
 
   get frames(): HTMLElement[] {
@@ -245,25 +246,34 @@ export class SSCarousel extends LitElement {
       this.frames.forEach((frame, index) => {
         frame.classList.add('frame');
         frame.setAttribute('data-index', index.toString());
-        frame.addEventListener('mousedown', e => {
+        frame.addEventListener('touchstart', e => {
           if (index === this.normalizedIndex) {
             this.hasContact = true;
-            this.contactPoint = { x: e.clientX, y: e.clientY };
+            this.startContactPoint = {
+              x: e.touches[0].clientX,
+              y: e.touches[0].clientY,
+            };
           }
         });
       });
     }
 
-    document.addEventListener('mousemove', e => {
+    document.addEventListener('touchmove', e => {
       if (this.hasContact) {
-        const xDiff = Math.abs(e.clientX - this.contactPoint.x);
+        this.latestContactPoint = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+        };
+        const xDiff = Math.abs(
+          this.latestContactPoint.x - this.startContactPoint.x,
+        );
         this.dragDistance = xDiff;
       }
     });
 
-    document.addEventListener('mouseup', e => {
+    document.addEventListener('touchend', e => {
       this.dragDistance = 0;
-      const xDiff = e.clientX - this.contactPoint.x;
+      const xDiff = this.latestContactPoint.x - this.startContactPoint.x;
       if (this.hasContact) {
         if (xDiff >= this.minDragDistance) {
           this._back();
