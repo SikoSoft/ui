@@ -10,7 +10,10 @@ import {
   SSCarouselProps,
 } from './ss-carousel.models';
 
-//https://3dtransforms.desandro.com/carousel
+/**
+ * For reference, see this tutorial that helped provide some of the math involved:
+ * https://3dtransforms.desandro.com/carousel
+ */
 
 @customElement('ss-carousel')
 export class SSCarousel extends LitElement {
@@ -18,7 +21,7 @@ export class SSCarousel extends LitElement {
     theme,
     css`
       @property --frame-scale {
-        syntax: '<number>'; /* <- defined as type number for the transition to work */
+        syntax: '<number>';
         initial-value: 0;
         inherits: false;
       }
@@ -87,14 +90,11 @@ export class SSCarousel extends LitElement {
 
       ::slotted(.frame.active) {
         opacity: 1;
-        // top: -10px;
-        //transition: all 0.2s;
         animation: become-active 200ms linear;
         animation-delay: 200ms;
       }
 
       ::slotted(.frame.active:hover) {
-        //top: -10px;
         --frame-scale: 1.1;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
@@ -125,7 +125,7 @@ export class SSCarousel extends LitElement {
       .has-contact {
         ::slotted(.frame.active) {
           --frame-scale: calc(
-            1 - calc(max(calc(var(--drag-distance) / 10), 1) * 0.2)
+            1 - calc(min(calc(var(--drag-distance) / 10), 1) * 0.2)
           );
         }
       }
@@ -241,15 +241,6 @@ export class SSCarousel extends LitElement {
     super.firstUpdated(_changedProperties);
     await this.updateComplete;
 
-    const slotNode = this.shadowRoot?.querySelector('slot');
-    if (slotNode) {
-      //console.log('slotNode', slotNode);
-
-      slotNode.addEventListener('slotchange', () => {
-        //console.log('slotchange');
-      });
-    }
-
     if (this.frames.length > 0) {
       this.frames.forEach((frame, index) => {
         frame.classList.add('frame');
@@ -266,7 +257,6 @@ export class SSCarousel extends LitElement {
     document.addEventListener('mousemove', e => {
       if (this.hasContact) {
         const xDiff = Math.abs(e.clientX - this.contactPoint.x);
-        console.log('xDiff', xDiff);
         this.dragDistance = xDiff;
       }
     });
@@ -299,7 +289,6 @@ export class SSCarousel extends LitElement {
 
     document.addEventListener('scroll', e => {
       if (this.mouseOver) {
-        //console.log('scroll');
         e.preventDefault();
         e.stopPropagation();
         return false;
@@ -315,7 +304,6 @@ export class SSCarousel extends LitElement {
   }
 
   _updateFrames() {
-    //console.log('updateFrames', this.activeIndex, this.normalizedIndex);
     this.frames.forEach((c, index) => {
       const child = c as HTMLElement;
       if (child.classList.contains('active')) {
