@@ -4,12 +4,14 @@ export enum SSCarouselProp {
   INFINITE = 'infinite',
   ACTIVE_INDEX = 'activeIndex',
   SHOW_BUTTONS = 'showButtons',
+  MOUSE_SCROLL = 'mouseScroll',
 }
 
 export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.INFINITE]: boolean;
   [SSCarouselProp.ACTIVE_INDEX]: number;
   [SSCarouselProp.SHOW_BUTTONS]: boolean;
+  [SSCarouselProp.MOUSE_SCROLL]: boolean;
 }
 
 export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
@@ -28,4 +30,14 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     control: 'boolean',
     description: 'Whether to show the navigation buttons',
   },
+  [SSCarouselProp.MOUSE_SCROLL]: {
+    default: false,
+    control: 'boolean',
+    description: 'Whether to allow mouse scrolling',
+  },
 };
+
+export interface ContactPoint {
+  x: number;
+  y: number;
+}

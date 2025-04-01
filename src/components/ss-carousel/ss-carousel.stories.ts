@@ -36,9 +36,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<SSCarouselProps>;
 
-export const ShowButtons: Story = {
+export const ShowButtonsInfinite: Story = {
   args: {
     showButtons: true,
+    infinite: true,
+  },
+};
+
+export const ShowButtonsFinite: Story = {
+  args: {
+    showButtons: true,
+    infinite: false,
   },
 };
 

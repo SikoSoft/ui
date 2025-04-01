@@ -1,0 +1,48 @@
+import { html } from 'lit';
+import { StoryBook } from '../../lib/StoryBook';
+import './ss-carousel';
+import { ssCarouselProps } from './ss-carousel.models';
+const argTypes = StoryBook.buildArgTypes(ssCarouselProps);
+const meta = {
+    title: 'components/ss-carousel',
+    tags: ['autodocs'],
+    parameters: {
+        layout: 'centered',
+    },
+    args: {
+        showButtons: true,
+        infinite: true,
+    },
+    argTypes,
+    render: args => html `
+    <ss-carousel ?showButtons=${args.showButtons} ?infinite=${args.infinite}>
+      <div class="something">1</div>
+      <div class="different">2</div>
+      <div>3</div>
+      <div>4</div>
+      <span>5</span>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+    </ss-carousel>
+  `,
+};
+export default meta;
+export const ShowButtonsInfinite = {
+    args: {
+        showButtons: true,
+        infinite: true,
+    },
+};
+export const ShowButtonsFinite = {
+    args: {
+        showButtons: true,
+        infinite: false,
+    },
+};
+export const NoButtons = {
+    args: {
+        showButtons: false,
+    },
+};
+//# sourceMappingURL=ss-carousel.stories.js.map

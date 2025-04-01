@@ -1,8 +1,9 @@
 import { LitElement } from 'lit';
+import { SSCollapsableProp, SSCollapsableProps } from './ss-collapsable.models';
 export declare class SSCollapsable extends LitElement {
     static styles: import("lit").CSSResult[];
-    title: string;
-    open: boolean;
+    [SSCollapsableProp.TITLE]: SSCollapsableProps[SSCollapsableProp.TITLE];
+    [SSCollapsableProp.OPEN]: SSCollapsableProps[SSCollapsableProp.OPEN];
     get classes(): {
         box: boolean;
         collapsable: boolean;

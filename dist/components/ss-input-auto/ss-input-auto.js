@@ -4,21 +4,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var _a, _b, _c, _d;
 import { html, css, nothing, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { SuggestiontSubmittedEvent } from '../../events/suggestion-submitted';
 import { SuggestionChangedEvent } from '../../events/suggestion-changed';
 import { theme } from '../../styles/theme';
+import { SSInputAutoProp, ssInputAutoProps, } from './ss-input-auto.models';
 let SSInputAuto = class SSInputAuto extends LitElement {
     constructor() {
         super(...arguments);
-        this.input = '';
-        this.maxMatches = 5;
-        this.minInput = 1;
-        this.suggestions = [];
+        this[_a] = ssInputAutoProps[SSInputAutoProp.INPUT].default;
+        this[_b] = ssInputAutoProps[SSInputAutoProp.MIN_INPUT].default;
+        this[_c] = ssInputAutoProps[SSInputAutoProp.MAX_MATCHES].default;
+        this[_d] = ssInputAutoProps[SSInputAutoProp.SUGGESTIONS].default;
         this.selectedIndex = -1;
     }
+    static { _a = SSInputAutoProp.INPUT, _b = SSInputAutoProp.MIN_INPUT, _c = SSInputAutoProp.MAX_MATCHES, _d = SSInputAutoProp.SUGGESTIONS; }
     static { this.styles = [
         theme,
         css `
@@ -119,16 +122,16 @@ let SSInputAuto = class SSInputAuto extends LitElement {
 };
 __decorate([
     property()
-], SSInputAuto.prototype, "input", void 0);
+], SSInputAuto.prototype, _a, void 0);
 __decorate([
     property({ type: Number })
-], SSInputAuto.prototype, "maxMatches", void 0);
+], SSInputAuto.prototype, _b, void 0);
 __decorate([
     property({ type: Number })
-], SSInputAuto.prototype, "minInput", void 0);
+], SSInputAuto.prototype, _c, void 0);
 __decorate([
     property({ type: Array })
-], SSInputAuto.prototype, "suggestions", void 0);
+], SSInputAuto.prototype, _d, void 0);
 __decorate([
     state()
 ], SSInputAuto.prototype, "selectedIndex", void 0);

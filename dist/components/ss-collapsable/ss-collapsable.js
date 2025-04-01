@@ -4,16 +4,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var _a, _b;
 import { LitElement, html, css } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { theme } from '../../styles/theme';
+import { SSCollapsableProp, ssCollapsableProps, } from './ss-collapsable.models';
 let SSCollapsable = class SSCollapsable extends LitElement {
     constructor() {
         super(...arguments);
-        this.title = '';
-        this.open = false;
+        this[_a] = ssCollapsableProps[SSCollapsableProp.TITLE].default;
+        this[_b] = ssCollapsableProps[SSCollapsableProp.OPEN].default;
     }
+    static { _a = SSCollapsableProp.TITLE, _b = SSCollapsableProp.OPEN; }
     static { this.styles = [
         theme,
         css `
@@ -84,10 +87,10 @@ let SSCollapsable = class SSCollapsable extends LitElement {
 };
 __decorate([
     property()
-], SSCollapsable.prototype, "title", void 0);
+], SSCollapsable.prototype, _a, void 0);
 __decorate([
     property({ type: Boolean })
-], SSCollapsable.prototype, "open", void 0);
+], SSCollapsable.prototype, _b, void 0);
 __decorate([
     state()
 ], SSCollapsable.prototype, "classes", null);
