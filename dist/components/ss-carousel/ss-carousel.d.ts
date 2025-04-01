@@ -14,12 +14,14 @@ export declare class SSCarousel extends LitElement {
     get showForwardButton(): boolean;
     get classes(): {
         wrapper: boolean;
+        'has-contact': boolean;
     };
     get minDragDistance(): number;
     get normalizedIndex(): number;
     mouseOver: boolean;
     hasContact: boolean;
     contactPoint: ContactPoint;
+    dragDistance: number;
     get frames(): HTMLElement[];
     connectedCallback(): void;
     firstUpdated(_changedProperties: PropertyValues): Promise<void>;

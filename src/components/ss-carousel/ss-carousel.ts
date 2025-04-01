@@ -35,8 +35,14 @@ export class SSCarousel extends LitElement {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        //transition: transform 0.2s;
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        vertical-align: middle;
+        transition: transform 0.2s;
         opacity: 0.5;
+        line-height: 0rem;
 
         &:hover {
           transform: translateY(-50%) scale(1.5);
@@ -84,6 +90,7 @@ export class SSCarousel extends LitElement {
         // top: -10px;
         //transition: all 0.2s;
         animation: become-active 200ms linear;
+        animation-delay: 200ms;
       }
 
       ::slotted(.frame.active:hover) {
@@ -114,6 +121,14 @@ export class SSCarousel extends LitElement {
       ::slotted(.frame.next)::after {
         background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
       }
+
+      .has-contact {
+        ::slotted(.frame.active) {
+          --frame-scale: calc(
+            1 - calc(max(calc(var(--drag-distance) / 10), 1) * 0.2)
+          );
+        }
+      }
     `,
   ];
 
@@ -127,15 +142,15 @@ export class SSCarousel extends LitElement {
       @keyframes become-active {
         0% {
         --frame-scale: 1;
-          top: -20px;
+   
         }
         50% {
-        --frame-scale: 1.4;
-          top: 10px;
+        --frame-scale: 1.2;
+
         }
         100% {
         --frame-scale: 1;
-          top: 0px;
+
         }
       }
     `;
@@ -191,7 +206,7 @@ export class SSCarousel extends LitElement {
 
   @state()
   get classes() {
-    return { wrapper: true };
+    return { wrapper: true, 'has-contact': this.hasContact };
   }
 
   get minDragDistance(): number {
@@ -210,6 +225,7 @@ export class SSCarousel extends LitElement {
   @state() mouseOver = false;
   @state() hasContact = false;
   @state() contactPoint: ContactPoint = { x: 0, y: 0 };
+  @state() dragDistance = 0;
 
   get frames(): HTMLElement[] {
     return [...this.children].filter(
@@ -247,7 +263,16 @@ export class SSCarousel extends LitElement {
       });
     }
 
+    document.addEventListener('mousemove', e => {
+      if (this.hasContact) {
+        const xDiff = Math.abs(e.clientX - this.contactPoint.x);
+        console.log('xDiff', xDiff);
+        this.dragDistance = xDiff;
+      }
+    });
+
     document.addEventListener('mouseup', e => {
+      this.dragDistance = 0;
       const xDiff = e.clientX - this.contactPoint.x;
       if (this.hasContact) {
         if (xDiff >= this.minDragDistance) {
@@ -363,23 +388,24 @@ export class SSCarousel extends LitElement {
           `,
         )}
       </style>
-      <div class=${classMap(this.classes)}>
+      <div
+        class=${classMap(this.classes)}
+        style=${`--drag-distance: ${this.dragDistance}`}
+      >
         <div class="scene">
           <div class="carousel">
             <slot></slot>
           </div>
           ${this.showBackButton
             ? html`
-                <div class="back">
-                  <button @click=${this._back}>&#x21e6;</button>
-                </div>
+                <button class="back" @click=${this._back}>&#x21e6;</button>
               `
             : nothing}
           ${this.showForwardButton
             ? html`
-                <div class="forward">
-                  <button @click=${this._forward}>&#x21e8;</button>
-                </div>
+                <button class="forward" @click=${this._forward}>
+                  &#x21e8;
+                </button>
               `
             : nothing}
         </div>
