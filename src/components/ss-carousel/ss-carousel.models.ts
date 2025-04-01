@@ -5,6 +5,9 @@ export enum SSCarouselProp {
   ACTIVE_INDEX = 'activeIndex',
   SHOW_BUTTONS = 'showButtons',
   MOUSE_SCROLL = 'mouseScroll',
+  WIDTH = 'width',
+  HEIGHT = 'height',
+  GAP = 'gap',
 }
 
 export interface SSCarouselProps extends PropTypes {
@@ -12,6 +15,9 @@ export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.ACTIVE_INDEX]: number;
   [SSCarouselProp.SHOW_BUTTONS]: boolean;
   [SSCarouselProp.MOUSE_SCROLL]: boolean;
+  [SSCarouselProp.WIDTH]: number;
+  [SSCarouselProp.HEIGHT]: number;
+  [SSCarouselProp.GAP]: number;
 }
 
 export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
@@ -34,6 +40,21 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     default: false,
     control: 'boolean',
     description: 'Whether to allow mouse scrolling',
+  },
+  [SSCarouselProp.WIDTH]: {
+    default: 210,
+    control: 'number',
+    description: 'The width of the carousel',
+  },
+  [SSCarouselProp.HEIGHT]: {
+    default: 140,
+    control: 'number',
+    description: 'The height of the carousel',
+  },
+  [SSCarouselProp.GAP]: {
+    default: 10,
+    control: 'number',
+    description: 'The gap between frames',
   },
 };
 

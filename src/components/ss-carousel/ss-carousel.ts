@@ -20,6 +20,11 @@ export class SSCarousel extends LitElement {
   static styles = [
     theme,
     css`
+      :host {
+        //--scene-width: 210px;
+        //--scene-height: 140px;
+      }
+
       @property --frame-scale {
         syntax: '<number>';
         initial-value: 0;
@@ -27,8 +32,8 @@ export class SSCarousel extends LitElement {
       }
 
       .scene {
-        width: 210px;
-        height: 140px;
+        width: var(--scene-width);
+        height: var(--scene-height);
         position: relative;
         perspective: 200px;
       }
@@ -78,10 +83,10 @@ export class SSCarousel extends LitElement {
 
       ::slotted(.frame) {
         position: absolute;
-        width: 190px;
-        height: 120px;
-        left: 10px;
-        top: 10px;
+        width: calc(var(--scene-width) - var(--gap) * 2);
+        height: calc(var(--scene-height) - var(--gap) * 2);
+        left: var(--gap);
+        top: var(--gap);
         border: 1px solid #ccc;
         background-color: #efefef;
         transition: all 0.2s;
@@ -166,6 +171,18 @@ export class SSCarousel extends LitElement {
   @property({ type: Boolean })
   [SSCarouselProp.SHOW_BUTTONS]: SSCarouselProps[SSCarouselProp.SHOW_BUTTONS] =
     ssCarouselProps[SSCarouselProp.SHOW_BUTTONS].default;
+
+  @property({ type: Number, reflect: true })
+  [SSCarouselProp.WIDTH]: SSCarouselProps[SSCarouselProp.WIDTH] =
+    ssCarouselProps[SSCarouselProp.WIDTH].default;
+
+  @property({ type: Number, reflect: true })
+  [SSCarouselProp.HEIGHT]: SSCarouselProps[SSCarouselProp.HEIGHT] =
+    ssCarouselProps[SSCarouselProp.HEIGHT].default;
+
+  @property({ type: Number, reflect: true })
+  [SSCarouselProp.GAP]: SSCarouselProps[SSCarouselProp.GAP] =
+    ssCarouselProps[SSCarouselProp.GAP].default;
 
   @query('.carousel')
   carousel!: HTMLDivElement;
@@ -388,7 +405,12 @@ export class SSCarousel extends LitElement {
       </style>
       <div
         class=${classMap(this.classes)}
-        style=${`--drag-distance: ${this.dragDistance}`}
+        style=${`
+          --drag-distance: ${this.dragDistance};
+          --scene-width: ${this.width}px;
+          --scene-height: ${this.height}px;
+          --gap: ${this.gap}px;
+        `}
       >
         <div class="scene">
           <div class="carousel">
