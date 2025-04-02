@@ -10,6 +10,7 @@ import { property, customElement, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { theme } from '../../styles/theme';
 import { SSCarouselProp, ssCarouselProps, } from './ss-carousel.models';
+import { CarouselSlideChangedEvent } from './ss-carousel.events';
 /**
  * For reference, see this tutorial that helped provide some of the math involved:
  * https://3dtransforms.desandro.com/carousel
@@ -17,30 +18,30 @@ import { SSCarouselProp, ssCarouselProps, } from './ss-carousel.models';
 let SSCarousel = class SSCarousel extends LitElement {
     constructor() {
         super(...arguments);
-        this.keyframes = `
-        @property --frame-scale {
+        this.keyslides = `
+        @property --slide-scale {
         syntax: '<number>'; /* <- defined as type number for the transition to work */
         initial-value: 1;
         inherits: false;
       }
 
-      @keyframes become-active {
+      @keyslides become-active {
         0% {
-        --frame-scale: 1;
+        --slide-scale: 1;
    
         }
         50% {
-        --frame-scale: 1.2;
+        --slide-scale: 1.2;
 
         }
         100% {
-        --frame-scale: 1;
+        --slide-scale: 1;
 
         }
       }
     `;
         this[_a] = ssCarouselProps[SSCarouselProp.INFINITE].default;
-        this[_b] = ssCarouselProps[SSCarouselProp.ACTIVE_INDEX].default;
+        this[_b] = ssCarouselProps[SSCarouselProp.NAVIGATION_INDEX].default;
         this[_c] = ssCarouselProps[SSCarouselProp.SHOW_BUTTONS].default;
         this[_d] = ssCarouselProps[SSCarouselProp.WIDTH].default;
         this[_e] = ssCarouselProps[SSCarouselProp.HEIGHT].default;
@@ -52,16 +53,11 @@ let SSCarousel = class SSCarousel extends LitElement {
         this.latestContactPoint = { x: 0, y: 0 };
         this.dragDistance = 0;
     }
-    static { _a = SSCarouselProp.INFINITE, _b = SSCarouselProp.ACTIVE_INDEX, _c = SSCarouselProp.SHOW_BUTTONS, _d = SSCarouselProp.WIDTH, _e = SSCarouselProp.HEIGHT, _f = SSCarouselProp.GAP, _g = SSCarouselProp.PERSPECTIVE; }
+    static { _a = SSCarouselProp.INFINITE, _b = SSCarouselProp.NAVIGATION_INDEX, _c = SSCarouselProp.SHOW_BUTTONS, _d = SSCarouselProp.WIDTH, _e = SSCarouselProp.HEIGHT, _f = SSCarouselProp.GAP, _g = SSCarouselProp.PERSPECTIVE; }
     static { this.styles = [
         theme,
         css `
-      :host {
-        //--scene-width: 210px;
-        //--scene-height: 140px;
-      }
-
-      @property --frame-scale {
+      @property --slide-scale {
         syntax: '<number>';
         initial-value: 0;
         inherits: false;
@@ -85,7 +81,6 @@ let SSCarousel = class SSCarousel extends LitElement {
         border-radius: 50%;
         vertical-align: middle;
         transition: transform 0.2s;
-        opacity: 0.5;
         line-height: 0rem;
 
         &:hover {
@@ -117,7 +112,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         transition: transform 0.5s;
       }
 
-      ::slotted(.frame) {
+      ::slotted(.slide) {
         position: absolute;
         width: calc(var(--scene-width) - var(--gap) * 2);
         height: calc(var(--scene-height) - var(--gap) * 2);
@@ -128,24 +123,24 @@ let SSCarousel = class SSCarousel extends LitElement {
         opacity: 0.5;
       }
 
-      ::slotted(.frame.active) {
+      ::slotted(.slide.active) {
         opacity: 1;
         animation: become-active 200ms linear;
         animation-delay: 200ms;
       }
 
-      ::slotted(.frame.active:hover) {
-        --frame-scale: 1.1;
+      ::slotted(.slide.active:hover) {
+        --slide-scale: 1.1;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
 
-      ::slotted(.frame.previous),
-      ::slotted(.frame.next) {
+      ::slotted(.slide.previous),
+      ::slotted(.slide.next) {
         opacity: 0.75;
       }
 
-      ::slotted(.frame.previous)::after,
-      ::slotted(.frame.next)::after {
+      ::slotted(.slide.previous)::after,
+      ::slotted(.slide.next)::after {
         content: '';
         position: absolute;
         width: calc(var(--scene-width) - var(--gap) * 2);
@@ -154,42 +149,42 @@ let SSCarousel = class SSCarousel extends LitElement {
         top: 0px;
       }
 
-      ::slotted(.frame.previous)::after {
+      ::slotted(.slide.previous)::after {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
       }
 
-      ::slotted(.frame.next)::after {
+      ::slotted(.slide.next)::after {
         background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
       }
 
       .has-contact {
-        ::slotted(.frame.active) {
-          --frame-scale: calc(
+        ::slotted(.slide.active) {
+          --slide-scale: calc(
             1 - calc(min(calc(var(--drag-distance) / 10), 1) * 0.2)
           );
         }
       }
     `,
     ]; }
-    get totalFrames() {
-        const total = this.frames.length;
+    get totalslides() {
+        const total = this.slides.length;
         return total;
     }
-    get frameDegrees() {
-        return 360 / this.totalFrames;
+    get slideDegrees() {
+        return 360 / this.totalslides;
     }
-    get frameTransition() {
-        return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalFrames));
+    get slideTransition() {
+        return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalslides));
     }
     get showBackButton() {
         return (this.showButtons &&
-            this.totalFrames > 1 &&
-            (this.infinite || this.normalizedIndex > 0));
+            this.totalslides > 1 &&
+            (this.infinite || this.slideIndex > 0));
     }
     get showForwardButton() {
         return (this.showButtons &&
-            this.totalFrames > 1 &&
-            (this.infinite || this.normalizedIndex < this.totalFrames - 1));
+            this.totalslides > 1 &&
+            (this.infinite || this.slideIndex < this.totalslides - 1));
     }
     get classes() {
         return { wrapper: true, 'has-contact': this.hasContact };
@@ -197,14 +192,14 @@ let SSCarousel = class SSCarousel extends LitElement {
     get minDragDistance() {
         return 10;
     }
-    get normalizedIndex() {
-        let index = this.activeIndex % this.totalFrames;
+    get slideIndex() {
+        let index = this.navigationIndex % this.totalslides;
         if (index < 0) {
-            index = this.totalFrames + index;
+            index = this.totalslides + index;
         }
         return index;
     }
-    get frames() {
+    get slides() {
         return [...this.children].filter(child => child.nodeName !== 'STYLE');
     }
     connectedCallback() {
@@ -213,12 +208,12 @@ let SSCarousel = class SSCarousel extends LitElement {
     async firstUpdated(_changedProperties) {
         super.firstUpdated(_changedProperties);
         await this.updateComplete;
-        if (this.frames.length > 0) {
-            this.frames.forEach((frame, index) => {
-                frame.classList.add('frame');
-                frame.setAttribute('data-index', index.toString());
-                frame.addEventListener('touchstart', e => {
-                    if (index === this.normalizedIndex) {
+        if (this.slides.length > 0) {
+            this.slides.forEach((slide, index) => {
+                slide.classList.add('slide');
+                slide.setAttribute('data-index', index.toString());
+                slide.addEventListener('touchstart', e => {
+                    if (index === this.slideIndex) {
                         this.hasContact = true;
                         this.startContactPoint = {
                             x: e.touches[0].clientX,
@@ -252,7 +247,7 @@ let SSCarousel = class SSCarousel extends LitElement {
             this.hasContact = false;
         });
         const style = document.createElement('style');
-        style.textContent = this.keyframes;
+        style.textContent = this.keyslides;
         this.appendChild(style);
         this.carousel.addEventListener('mouseenter', () => {
             this.mouseOver = true;
@@ -270,12 +265,12 @@ let SSCarousel = class SSCarousel extends LitElement {
     }
     updated(_changedProperties) {
         super.updated(_changedProperties);
-        if (_changedProperties.has(SSCarouselProp.ACTIVE_INDEX)) {
-            this._updateFrames();
+        if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
+            this._updateslides();
         }
     }
-    _updateFrames() {
-        this.frames.forEach((c, index) => {
+    _updateslides() {
+        this.slides.forEach((c, index) => {
             const child = c;
             if (child.classList.contains('active')) {
                 child.classList.remove('active');
@@ -286,48 +281,55 @@ let SSCarousel = class SSCarousel extends LitElement {
             if (child.classList.contains('next')) {
                 child.classList.remove('next');
             }
-            if (index === this.normalizedIndex - 1 ||
-                (this.normalizedIndex === 0 && index === this.totalFrames - 1)) {
+            if (index === this.slideIndex - 1 ||
+                (this.slideIndex === 0 && index === this.totalslides - 1)) {
                 child.classList.add('previous');
             }
-            if (index === this.normalizedIndex) {
+            if (index === this.slideIndex) {
                 child.classList.add('active');
             }
-            if (index === this.normalizedIndex + 1 ||
-                (this.normalizedIndex === this.totalFrames - 1 && index === 0)) {
+            if (index === this.slideIndex + 1 ||
+                (this.slideIndex === this.totalslides - 1 && index === 0)) {
                 child.classList.add('next');
             }
         });
     }
     _back() {
-        if (!this.infinite && this.normalizedIndex === 0) {
+        if (!this.infinite && this.slideIndex === 0) {
             return;
         }
-        this.activeIndex--;
+        this.setActiveIndex(this.navigationIndex - 1);
         this.rotateCarousel();
     }
     _forward() {
-        if (!this.infinite && this.normalizedIndex === this.totalFrames - 1) {
+        if (!this.infinite && this.slideIndex === this.totalslides - 1) {
             return;
         }
-        this.activeIndex++;
+        this.setActiveIndex(this.navigationIndex + 1);
         this.rotateCarousel();
     }
+    setActiveIndex(index) {
+        this.navigationIndex = index;
+        this.dispatchEvent(new CarouselSlideChangedEvent({
+            navigationIndex: this.navigationIndex,
+            slideIndex: this.slideIndex,
+        }));
+    }
     rotateCarousel() {
-        const angle = (this.activeIndex / this.totalFrames) * -360;
-        this.carousel.style.transform = `translateZ(-${this.frameTransition}px) rotateY(${angle}deg)`;
+        const angle = (this.navigationIndex / this.totalslides) * -360;
+        this.carousel.style.transform = `translateZ(-${this.slideTransition}px) rotateY(${angle}deg)`;
     }
     render() {
         return html `
       <style>
         .carousel {
-          transform: translateZ(-${this.frameTransition}px);
+          transform: translateZ(-${this.slideTransition}px);
         }
-        ${[...Array(this.totalFrames)].map((_, i) => css `
-            ::slotted(.frame:nth-child(${i + 1})) {
-              transform: rotateY(${i * this.frameDegrees}deg)
-                translateZ(${this.frameTransition}px)
-                scale(var(--frame-scale, 1));
+        ${[...Array(this.totalslides)].map((_, i) => css `
+            ::slotted(.slide:nth-child(${i + 1})) {
+              transform: rotateY(${i * this.slideDegrees}deg)
+                translateZ(${this.slideTransition}px)
+                scale(var(--slide-scale, 1));
             }
           `)}
       </style>
@@ -388,13 +390,13 @@ __decorate([
 ], SSCarousel.prototype, "carousel", void 0);
 __decorate([
     state()
-], SSCarousel.prototype, "totalFrames", null);
+], SSCarousel.prototype, "totalslides", null);
 __decorate([
     state()
-], SSCarousel.prototype, "frameDegrees", null);
+], SSCarousel.prototype, "slideDegrees", null);
 __decorate([
     state()
-], SSCarousel.prototype, "frameTransition", null);
+], SSCarousel.prototype, "slideTransition", null);
 __decorate([
     state()
 ], SSCarousel.prototype, "showBackButton", null);
@@ -406,7 +408,7 @@ __decorate([
 ], SSCarousel.prototype, "classes", null);
 __decorate([
     state()
-], SSCarousel.prototype, "normalizedIndex", null);
+], SSCarousel.prototype, "slideIndex", null);
 __decorate([
     state()
 ], SSCarousel.prototype, "mouseOver", void 0);

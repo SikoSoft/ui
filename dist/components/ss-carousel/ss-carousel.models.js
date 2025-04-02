@@ -1,7 +1,7 @@
 export var SSCarouselProp;
 (function (SSCarouselProp) {
     SSCarouselProp["INFINITE"] = "infinite";
-    SSCarouselProp["ACTIVE_INDEX"] = "activeIndex";
+    SSCarouselProp["NAVIGATION_INDEX"] = "navigationIndex";
     SSCarouselProp["SHOW_BUTTONS"] = "showButtons";
     SSCarouselProp["MOUSE_SCROLL"] = "mouseScroll";
     SSCarouselProp["WIDTH"] = "width";
@@ -15,7 +15,7 @@ export const ssCarouselProps = {
         control: 'boolean',
         description: 'Whether the carousel should loop infinitely',
     },
-    [SSCarouselProp.ACTIVE_INDEX]: {
+    [SSCarouselProp.NAVIGATION_INDEX]: {
         default: 0,
         control: 'number',
         description: 'The index of the active slide',
