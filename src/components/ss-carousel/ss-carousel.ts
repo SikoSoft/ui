@@ -20,12 +20,7 @@ export class SSCarousel extends LitElement {
   static styles = [
     theme,
     css`
-      :host {
-        //--scene-width: 210px;
-        //--scene-height: 140px;
-      }
-
-      @property --frame-scale {
+      @property --slide-scale {
         syntax: '<number>';
         initial-value: 0;
         inherits: false;
@@ -49,7 +44,6 @@ export class SSCarousel extends LitElement {
         border-radius: 50%;
         vertical-align: middle;
         transition: transform 0.2s;
-        opacity: 0.5;
         line-height: 0rem;
 
         &:hover {
@@ -81,7 +75,7 @@ export class SSCarousel extends LitElement {
         transition: transform 0.5s;
       }
 
-      ::slotted(.frame) {
+      ::slotted(.slide) {
         position: absolute;
         width: calc(var(--scene-width) - var(--gap) * 2);
         height: calc(var(--scene-height) - var(--gap) * 2);
@@ -92,24 +86,24 @@ export class SSCarousel extends LitElement {
         opacity: 0.5;
       }
 
-      ::slotted(.frame.active) {
+      ::slotted(.slide.active) {
         opacity: 1;
         animation: become-active 200ms linear;
         animation-delay: 200ms;
       }
 
-      ::slotted(.frame.active:hover) {
-        --frame-scale: 1.1;
+      ::slotted(.slide.active:hover) {
+        --slide-scale: 1.1;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
 
-      ::slotted(.frame.previous),
-      ::slotted(.frame.next) {
+      ::slotted(.slide.previous),
+      ::slotted(.slide.next) {
         opacity: 0.75;
       }
 
-      ::slotted(.frame.previous)::after,
-      ::slotted(.frame.next)::after {
+      ::slotted(.slide.previous)::after,
+      ::slotted(.slide.next)::after {
         content: '';
         position: absolute;
         width: calc(var(--scene-width) - var(--gap) * 2);
@@ -118,17 +112,17 @@ export class SSCarousel extends LitElement {
         top: 0px;
       }
 
-      ::slotted(.frame.previous)::after {
+      ::slotted(.slide.previous)::after {
         background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
       }
 
-      ::slotted(.frame.next)::after {
+      ::slotted(.slide.next)::after {
         background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
       }
 
       .has-contact {
-        ::slotted(.frame.active) {
-          --frame-scale: calc(
+        ::slotted(.slide.active) {
+          --slide-scale: calc(
             1 - calc(min(calc(var(--drag-distance) / 10), 1) * 0.2)
           );
         }
@@ -136,24 +130,24 @@ export class SSCarousel extends LitElement {
     `,
   ];
 
-  keyframes = `
-        @property --frame-scale {
+  keyslides = `
+        @property --slide-scale {
         syntax: '<number>'; /* <- defined as type number for the transition to work */
         initial-value: 1;
         inherits: false;
       }
 
-      @keyframes become-active {
+      @keyslides become-active {
         0% {
-        --frame-scale: 1;
+        --slide-scale: 1;
    
         }
         50% {
-        --frame-scale: 1.2;
+        --slide-scale: 1.2;
 
         }
         100% {
-        --frame-scale: 1;
+        --slide-scale: 1;
 
         }
       }
@@ -191,26 +185,26 @@ export class SSCarousel extends LitElement {
   carousel!: HTMLDivElement;
 
   @state()
-  get totalFrames(): number {
-    const total = this.frames.length;
+  get totalslides(): number {
+    const total = this.slides.length;
     return total;
   }
 
   @state()
-  get frameDegrees(): number {
-    return 360 / this.totalFrames;
+  get slideDegrees(): number {
+    return 360 / this.totalslides;
   }
 
   @state()
-  get frameTransition(): number {
-    return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalFrames));
+  get slideTransition(): number {
+    return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalslides));
   }
 
   @state()
   get showBackButton() {
     return (
       this.showButtons &&
-      this.totalFrames > 1 &&
+      this.totalslides > 1 &&
       (this.infinite || this.normalizedIndex > 0)
     );
   }
@@ -219,8 +213,8 @@ export class SSCarousel extends LitElement {
   get showForwardButton() {
     return (
       this.showButtons &&
-      this.totalFrames > 1 &&
-      (this.infinite || this.normalizedIndex < this.totalFrames - 1)
+      this.totalslides > 1 &&
+      (this.infinite || this.normalizedIndex < this.totalslides - 1)
     );
   }
 
@@ -235,9 +229,9 @@ export class SSCarousel extends LitElement {
 
   @state()
   get normalizedIndex(): number {
-    let index = this.activeIndex % this.totalFrames;
+    let index = this.activeIndex % this.totalslides;
     if (index < 0) {
-      index = this.totalFrames + index;
+      index = this.totalslides + index;
     }
     return index;
   }
@@ -248,7 +242,7 @@ export class SSCarousel extends LitElement {
   @state() latestContactPoint: ContactPoint = { x: 0, y: 0 };
   @state() dragDistance = 0;
 
-  get frames(): HTMLElement[] {
+  get slides(): HTMLElement[] {
     return [...this.children].filter(
       child => child.nodeName !== 'STYLE',
     ) as HTMLElement[];
@@ -262,11 +256,11 @@ export class SSCarousel extends LitElement {
     super.firstUpdated(_changedProperties);
     await this.updateComplete;
 
-    if (this.frames.length > 0) {
-      this.frames.forEach((frame, index) => {
-        frame.classList.add('frame');
-        frame.setAttribute('data-index', index.toString());
-        frame.addEventListener('touchstart', e => {
+    if (this.slides.length > 0) {
+      this.slides.forEach((slide, index) => {
+        slide.classList.add('slide');
+        slide.setAttribute('data-index', index.toString());
+        slide.addEventListener('touchstart', e => {
           if (index === this.normalizedIndex) {
             this.hasContact = true;
             this.startContactPoint = {
@@ -306,7 +300,7 @@ export class SSCarousel extends LitElement {
     });
 
     const style = document.createElement('style');
-    style.textContent = this.keyframes;
+    style.textContent = this.keyslides;
     this.appendChild(style);
 
     this.carousel.addEventListener('mouseenter', () => {
@@ -329,12 +323,12 @@ export class SSCarousel extends LitElement {
   updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
     if (_changedProperties.has(SSCarouselProp.ACTIVE_INDEX)) {
-      this._updateFrames();
+      this._updateslides();
     }
   }
 
-  _updateFrames() {
-    this.frames.forEach((c, index) => {
+  _updateslides() {
+    this.slides.forEach((c, index) => {
       const child = c as HTMLElement;
       if (child.classList.contains('active')) {
         child.classList.remove('active');
@@ -350,7 +344,7 @@ export class SSCarousel extends LitElement {
 
       if (
         index === this.normalizedIndex - 1 ||
-        (this.normalizedIndex === 0 && index === this.totalFrames - 1)
+        (this.normalizedIndex === 0 && index === this.totalslides - 1)
       ) {
         child.classList.add('previous');
       }
@@ -361,7 +355,7 @@ export class SSCarousel extends LitElement {
 
       if (
         index === this.normalizedIndex + 1 ||
-        (this.normalizedIndex === this.totalFrames - 1 && index === 0)
+        (this.normalizedIndex === this.totalslides - 1 && index === 0)
       ) {
         child.classList.add('next');
       }
@@ -378,7 +372,7 @@ export class SSCarousel extends LitElement {
   }
 
   _forward(): void {
-    if (!this.infinite && this.normalizedIndex === this.totalFrames - 1) {
+    if (!this.infinite && this.normalizedIndex === this.totalslides - 1) {
       return;
     }
     this.activeIndex++;
@@ -386,22 +380,22 @@ export class SSCarousel extends LitElement {
   }
 
   rotateCarousel() {
-    const angle = (this.activeIndex / this.totalFrames) * -360;
-    this.carousel.style.transform = `translateZ(-${this.frameTransition}px) rotateY(${angle}deg)`;
+    const angle = (this.activeIndex / this.totalslides) * -360;
+    this.carousel.style.transform = `translateZ(-${this.slideTransition}px) rotateY(${angle}deg)`;
   }
 
   render() {
     return html`
       <style>
         .carousel {
-          transform: translateZ(-${this.frameTransition}px);
+          transform: translateZ(-${this.slideTransition}px);
         }
-        ${[...Array(this.totalFrames)].map(
+        ${[...Array(this.totalslides)].map(
           (_, i) => css`
-            ::slotted(.frame:nth-child(${i + 1})) {
-              transform: rotateY(${i * this.frameDegrees}deg)
-                translateZ(${this.frameTransition}px)
-                scale(var(--frame-scale, 1));
+            ::slotted(.slide:nth-child(${i + 1})) {
+              transform: rotateY(${i * this.slideDegrees}deg)
+                translateZ(${this.slideTransition}px)
+                scale(var(--slide-scale, 1));
             }
           `,
         )}
