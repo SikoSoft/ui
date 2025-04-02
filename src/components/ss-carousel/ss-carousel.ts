@@ -9,6 +9,7 @@ import {
   ssCarouselProps,
   SSCarouselProps,
 } from './ss-carousel.models';
+import { CarouselSlideChangedEvent } from './ss-carousel.events';
 
 /**
  * For reference, see this tutorial that helped provide some of the math involved:
@@ -381,6 +382,12 @@ export class SSCarousel extends LitElement {
 
   setActiveIndex(index: number): void {
     this.navigationIndex = index;
+    this.dispatchEvent(
+      new CarouselSlideChangedEvent({
+        navigationIndex: this.navigationIndex,
+        slideIndex: this.slideIndex,
+      }),
+    );
   }
 
   rotateCarousel() {
