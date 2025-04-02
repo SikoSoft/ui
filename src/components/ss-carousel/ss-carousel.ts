@@ -158,8 +158,8 @@ export class SSCarousel extends LitElement {
     ssCarouselProps[SSCarouselProp.INFINITE].default;
 
   @property({ type: Number, reflect: true })
-  [SSCarouselProp.ACTIVE_INDEX]: SSCarouselProps[SSCarouselProp.ACTIVE_INDEX] =
-    ssCarouselProps[SSCarouselProp.ACTIVE_INDEX].default;
+  [SSCarouselProp.NAVIGATION_INDEX]: SSCarouselProps[SSCarouselProp.NAVIGATION_INDEX] =
+    ssCarouselProps[SSCarouselProp.NAVIGATION_INDEX].default;
 
   @property({ type: Boolean })
   [SSCarouselProp.SHOW_BUTTONS]: SSCarouselProps[SSCarouselProp.SHOW_BUTTONS] =
@@ -205,7 +205,7 @@ export class SSCarousel extends LitElement {
     return (
       this.showButtons &&
       this.totalslides > 1 &&
-      (this.infinite || this.normalizedIndex > 0)
+      (this.infinite || this.slideIndex > 0)
     );
   }
 
@@ -214,7 +214,7 @@ export class SSCarousel extends LitElement {
     return (
       this.showButtons &&
       this.totalslides > 1 &&
-      (this.infinite || this.normalizedIndex < this.totalslides - 1)
+      (this.infinite || this.slideIndex < this.totalslides - 1)
     );
   }
 
@@ -228,8 +228,8 @@ export class SSCarousel extends LitElement {
   }
 
   @state()
-  get normalizedIndex(): number {
-    let index = this.activeIndex % this.totalslides;
+  get slideIndex(): number {
+    let index = this.navigationIndex % this.totalslides;
     if (index < 0) {
       index = this.totalslides + index;
     }
@@ -261,7 +261,7 @@ export class SSCarousel extends LitElement {
         slide.classList.add('slide');
         slide.setAttribute('data-index', index.toString());
         slide.addEventListener('touchstart', e => {
-          if (index === this.normalizedIndex) {
+          if (index === this.slideIndex) {
             this.hasContact = true;
             this.startContactPoint = {
               x: e.touches[0].clientX,
@@ -322,7 +322,7 @@ export class SSCarousel extends LitElement {
 
   updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
-    if (_changedProperties.has(SSCarouselProp.ACTIVE_INDEX)) {
+    if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
       this._updateslides();
     }
   }
@@ -343,19 +343,19 @@ export class SSCarousel extends LitElement {
       }
 
       if (
-        index === this.normalizedIndex - 1 ||
-        (this.normalizedIndex === 0 && index === this.totalslides - 1)
+        index === this.slideIndex - 1 ||
+        (this.slideIndex === 0 && index === this.totalslides - 1)
       ) {
         child.classList.add('previous');
       }
 
-      if (index === this.normalizedIndex) {
+      if (index === this.slideIndex) {
         child.classList.add('active');
       }
 
       if (
-        index === this.normalizedIndex + 1 ||
-        (this.normalizedIndex === this.totalslides - 1 && index === 0)
+        index === this.slideIndex + 1 ||
+        (this.slideIndex === this.totalslides - 1 && index === 0)
       ) {
         child.classList.add('next');
       }
@@ -363,24 +363,28 @@ export class SSCarousel extends LitElement {
   }
 
   _back(): void {
-    if (!this.infinite && this.normalizedIndex === 0) {
+    if (!this.infinite && this.slideIndex === 0) {
       return;
     }
 
-    this.activeIndex--;
+    this.setActiveIndex(this.navigationIndex - 1);
     this.rotateCarousel();
   }
 
   _forward(): void {
-    if (!this.infinite && this.normalizedIndex === this.totalslides - 1) {
+    if (!this.infinite && this.slideIndex === this.totalslides - 1) {
       return;
     }
-    this.activeIndex++;
+    this.setActiveIndex(this.navigationIndex + 1);
     this.rotateCarousel();
   }
 
+  setActiveIndex(index: number): void {
+    this.navigationIndex = index;
+  }
+
   rotateCarousel() {
-    const angle = (this.activeIndex / this.totalslides) * -360;
+    const angle = (this.navigationIndex / this.totalslides) * -360;
     this.carousel.style.transform = `translateZ(-${this.slideTransition}px) rotateY(${angle}deg)`;
   }
 

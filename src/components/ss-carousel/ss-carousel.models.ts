@@ -2,7 +2,7 @@ import { PropConfigMap, PropTypes } from '../../models/Prop';
 
 export enum SSCarouselProp {
   INFINITE = 'infinite',
-  ACTIVE_INDEX = 'activeIndex',
+  NAVIGATION_INDEX = 'navigationIndex',
   SHOW_BUTTONS = 'showButtons',
   MOUSE_SCROLL = 'mouseScroll',
   WIDTH = 'width',
@@ -13,7 +13,7 @@ export enum SSCarouselProp {
 
 export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.INFINITE]: boolean;
-  [SSCarouselProp.ACTIVE_INDEX]: number;
+  [SSCarouselProp.NAVIGATION_INDEX]: number;
   [SSCarouselProp.SHOW_BUTTONS]: boolean;
   [SSCarouselProp.MOUSE_SCROLL]: boolean;
   [SSCarouselProp.WIDTH]: number;
@@ -28,7 +28,7 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     control: 'boolean',
     description: 'Whether the carousel should loop infinitely',
   },
-  [SSCarouselProp.ACTIVE_INDEX]: {
+  [SSCarouselProp.NAVIGATION_INDEX]: {
     default: 0,
     control: 'number',
     description: 'The index of the active slide',
