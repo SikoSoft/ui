@@ -21,6 +21,11 @@ export class SSCarousel extends LitElement {
   static styles = [
     theme,
     css`
+      :host {
+        display: block;
+        width: 100%;
+      }
+
       @property --slide-scale {
         syntax: '<number>';
         initial-value: 0;
@@ -82,20 +87,19 @@ export class SSCarousel extends LitElement {
         height: calc(var(--scene-height) - var(--gap) * 2);
         left: var(--gap);
         top: var(--gap);
-        background-color: #efefef;
         transition: all 0.2s;
-        opacity: 0.5;
+        opacity: 0.25;
       }
 
       ::slotted(.slide.active) {
         opacity: 1;
         animation: become-active 200ms linear;
-        animation-delay: 200ms;
+        animation-delay: 100ms;
       }
 
       ::slotted(.slide.active:hover) {
-        --slide-scale: 1.1;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        //--slide-scale: 1.1;
+        //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
 
       ::slotted(.slide.previous),
@@ -131,14 +135,14 @@ export class SSCarousel extends LitElement {
     `,
   ];
 
-  keyslides = `
+  keyframes = `
         @property --slide-scale {
         syntax: '<number>'; /* <- defined as type number for the transition to work */
         initial-value: 1;
         inherits: false;
       }
 
-      @keyslides become-active {
+      @keyframes become-active {
         0% {
         --slide-scale: 1;
    
@@ -166,7 +170,7 @@ export class SSCarousel extends LitElement {
   [SSCarouselProp.SHOW_BUTTONS]: SSCarouselProps[SSCarouselProp.SHOW_BUTTONS] =
     ssCarouselProps[SSCarouselProp.SHOW_BUTTONS].default;
 
-  @property({ type: Number, reflect: true })
+  @property({ reflect: true })
   [SSCarouselProp.WIDTH]: SSCarouselProps[SSCarouselProp.WIDTH] =
     ssCarouselProps[SSCarouselProp.WIDTH].default;
 
@@ -198,7 +202,9 @@ export class SSCarousel extends LitElement {
 
   @state()
   get slideTransition(): number {
-    return Math.round(this.width / 2 / Math.tan(Math.PI / this.totalslides));
+    return Math.round(
+      this.actualWidth / 2 / Math.tan(Math.PI / this.totalslides),
+    );
   }
 
   @state()
@@ -218,6 +224,9 @@ export class SSCarousel extends LitElement {
       (this.infinite || this.slideIndex < this.totalslides - 1)
     );
   }
+
+  @state()
+  actualWidth = 0;
 
   @state()
   get classes() {
@@ -257,6 +266,8 @@ export class SSCarousel extends LitElement {
     super.firstUpdated(_changedProperties);
     await this.updateComplete;
 
+    this.updateActualWidth();
+
     if (this.slides.length > 0) {
       this.slides.forEach((slide, index) => {
         slide.classList.add('slide');
@@ -268,12 +279,17 @@ export class SSCarousel extends LitElement {
               x: e.touches[0].clientX,
               y: e.touches[0].clientY,
             };
+            this.latestContactPoint = {
+              x: e.touches[0].clientX,
+              y: e.touches[0].clientY,
+            };
           }
         });
       });
     }
 
     document.addEventListener('touchmove', e => {
+      //console.log('touchmove');
       if (this.hasContact) {
         this.latestContactPoint = {
           x: e.touches[0].clientX,
@@ -293,6 +309,7 @@ export class SSCarousel extends LitElement {
         if (xDiff >= this.minDragDistance) {
           this._back();
         }
+        console.log('touchend', xDiff, -this.minDragDistance);
         if (xDiff <= -this.minDragDistance) {
           this._forward();
         }
@@ -301,7 +318,7 @@ export class SSCarousel extends LitElement {
     });
 
     const style = document.createElement('style');
-    style.textContent = this.keyslides;
+    style.textContent = this.keyframes;
     this.appendChild(style);
 
     this.carousel.addEventListener('mouseenter', () => {
@@ -326,6 +343,13 @@ export class SSCarousel extends LitElement {
     if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
       this._updateslides();
     }
+    this.updateActualWidth();
+  }
+
+  updateActualWidth() {
+    const width = this.getBoundingClientRect().width;
+    //console.log('width', width);
+    this.actualWidth = width;
   }
 
   _updateslides() {
@@ -369,7 +393,7 @@ export class SSCarousel extends LitElement {
     }
 
     this.setActiveIndex(this.navigationIndex - 1);
-    this.rotateCarousel();
+    this.updateCarousel();
   }
 
   _forward(): void {
@@ -377,7 +401,7 @@ export class SSCarousel extends LitElement {
       return;
     }
     this.setActiveIndex(this.navigationIndex + 1);
-    this.rotateCarousel();
+    this.updateCarousel();
   }
 
   setActiveIndex(index: number): void {
@@ -390,7 +414,7 @@ export class SSCarousel extends LitElement {
     );
   }
 
-  rotateCarousel() {
+  updateCarousel() {
     const angle = (this.navigationIndex / this.totalslides) * -360;
     this.carousel.style.transform = `translateZ(-${this.slideTransition}px) rotateY(${angle}deg)`;
   }
@@ -415,7 +439,7 @@ export class SSCarousel extends LitElement {
         class=${classMap(this.classes)}
         style=${`
           --drag-distance: ${this.dragDistance};
-          --scene-width: ${this.width}px;
+          --scene-width: ${this.width};
           --scene-height: ${this.height}px;
           --gap: ${this.gap}px;
           --perspective: ${this.perspective}px;

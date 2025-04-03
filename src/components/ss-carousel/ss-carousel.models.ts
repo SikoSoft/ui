@@ -16,7 +16,7 @@ export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.NAVIGATION_INDEX]: number;
   [SSCarouselProp.SHOW_BUTTONS]: boolean;
   [SSCarouselProp.MOUSE_SCROLL]: boolean;
-  [SSCarouselProp.WIDTH]: number;
+  [SSCarouselProp.WIDTH]: string;
   [SSCarouselProp.HEIGHT]: number;
   [SSCarouselProp.GAP]: number;
   [SSCarouselProp.PERSPECTIVE]: number;
@@ -44,8 +44,8 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     description: 'Whether to allow mouse scrolling',
   },
   [SSCarouselProp.WIDTH]: {
-    default: 210,
-    control: 'number',
+    default: `210px`,
+    control: 'text',
     description: 'The width of the carousel',
   },
   [SSCarouselProp.HEIGHT]: {
