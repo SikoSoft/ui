@@ -353,12 +353,21 @@ export class SSCarousel extends LitElement {
     style.textContent = this.keyframes;
     this.parentElement?.appendChild(style);
 
-    window.CSS.registerProperty({
-      name: '--slide-scale',
-      syntax: '<number>',
-      inherits: false,
-      initialValue: '1',
-    });
+    try {
+      window.CSS.registerProperty({
+        name: '--slide-scale',
+        syntax: '<number>',
+        inherits: false,
+        initialValue: '1',
+      });
+    } catch (e) {
+      /**
+       * CSS.registerProperty throws when trying to register a property already registered.
+       * Of course the spec does not provide a way to check if a property is already registered.
+       * So we must try/catch to surpress nasty errors if there are multiple instances of this
+       * component.
+       */
+    }
   }
 
   updated(_changedProperties: PropertyValues): void {
