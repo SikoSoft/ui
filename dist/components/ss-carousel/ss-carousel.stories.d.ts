@@ -10,10 +10,11 @@ declare const meta: {
     args: {
         showButtons: true;
         infinite: true;
-        width: number;
+        width: string;
         height: number;
         gap: number;
         perspective: number;
+        discrete: boolean;
     };
     argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSCarouselProps>> | undefined;
     render: (args: SSCarouselProps) => import("lit-html").TemplateResult<1>;
@@ -23,3 +24,5 @@ type Story = StoryObj<SSCarouselProps>;
 export declare const ShowButtonsInfinite: Story;
 export declare const ShowButtonsFinite: Story;
 export declare const NoButtons: Story;
+export declare const DiscreteWithButtons: Story;
+export declare const DiscreteWithoutButtons: Story;

@@ -16,6 +16,7 @@ const meta = {
         height: ssCarouselProps.height.default,
         gap: ssCarouselProps.gap.default,
         perspective: ssCarouselProps.perspective.default,
+        discrete: ssCarouselProps.discrete.default,
     },
     argTypes,
     render: args => html `
@@ -26,14 +27,15 @@ const meta = {
       height=${args.height}
       gap=${args.gap}
       perspective=${args.perspective}
+      ?discrete=${args.discrete}
     >
-      <div class="something">1</div>
-      <div class="different">2</div>
+      <div class="something">Test</div>
+      <div class="different">Text</div>
       <div>3</div>
       <div>4</div>
-      <span>5</span>
+      <span>Cat</span>
       <div>6</div>
-      <div>7</div>
+      <div>Dog</div>
       <div>8</div>
     </ss-carousel>
   `,
@@ -54,6 +56,18 @@ export const ShowButtonsFinite = {
 export const NoButtons = {
     args: {
         showButtons: false,
+    },
+};
+export const DiscreteWithButtons = {
+    args: {
+        discrete: true,
+        buttons: true,
+    },
+};
+export const DiscreteWithoutButtons = {
+    args: {
+        discrete: true,
+        buttons: false,
     },
 };
 //# sourceMappingURL=ss-carousel.stories.js.map

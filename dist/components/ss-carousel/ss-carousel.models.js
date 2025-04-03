@@ -8,6 +8,7 @@ export var SSCarouselProp;
     SSCarouselProp["HEIGHT"] = "height";
     SSCarouselProp["GAP"] = "gap";
     SSCarouselProp["PERSPECTIVE"] = "perspective";
+    SSCarouselProp["DISCRETE"] = "discrete";
 })(SSCarouselProp || (SSCarouselProp = {}));
 export const ssCarouselProps = {
     [SSCarouselProp.INFINITE]: {
@@ -31,8 +32,8 @@ export const ssCarouselProps = {
         description: 'Whether to allow mouse scrolling',
     },
     [SSCarouselProp.WIDTH]: {
-        default: 210,
-        control: 'number',
+        default: `210px`,
+        control: 'text',
         description: 'The width of the carousel',
     },
     [SSCarouselProp.HEIGHT]: {
@@ -49,6 +50,11 @@ export const ssCarouselProps = {
         default: 500,
         control: 'number',
         description: 'The perspective of the carousel',
+    },
+    [SSCarouselProp.DISCRETE]: {
+        default: false,
+        control: 'boolean',
+        description: 'Whether the carousel should show inactive frames when it does not have contact',
     },
 };
 //# sourceMappingURL=ss-carousel.models.js.map
