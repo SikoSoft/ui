@@ -11,32 +11,19 @@ import { classMap } from 'lit/directives/class-map.js';
 import { theme } from '../../styles/theme';
 import { SSCarouselProp, ssCarouselProps, } from './ss-carousel.models';
 import { CarouselSlideChangedEvent } from './ss-carousel.events';
-/**
- * For reference, see this tutorial that helped provide some of the math involved:
- * https://3dtransforms.desandro.com/carousel
- */
 let SSCarousel = class SSCarousel extends LitElement {
     constructor() {
         super(...arguments);
         this.keyframes = `
-        @property --slide-scale {
-        syntax: '<number>'; /* <- defined as type number for the transition to work */
-        initial-value: 1;
-        inherits: false;
-      }
-
       @keyframes become-active {
         0% {
         --slide-scale: 1;
-   
         }
         50% {
         --slide-scale: 1.2;
-
         }
         100% {
         --slide-scale: 1;
-
         }
       }
     `;
@@ -62,12 +49,6 @@ let SSCarousel = class SSCarousel extends LitElement {
       :host {
         display: block;
         width: 100%;
-      }
-
-      @property --slide-scale {
-        syntax: '<number>';
-        initial-value: 0;
-        inherits: false;
       }
 
       .scene {
@@ -131,13 +112,8 @@ let SSCarousel = class SSCarousel extends LitElement {
 
       ::slotted(.slide.active) {
         opacity: 1;
-        animation: become-active 300ms linear;
-        animation-delay: 100ms;
-      }
-
-      ::slotted(.slide.active:hover) {
-        //--slide-scale: 1.1;
-        //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        animation: become-active 200ms linear;
+        animation-delay: 50ms;
       }
 
       ::slotted(.slide.previous),
@@ -235,6 +211,11 @@ let SSCarousel = class SSCarousel extends LitElement {
         super.firstUpdated(_changedProperties);
         await this.updateComplete;
         this.updateActualWidth();
+        this.setupSlides();
+        this.setupEventListeners();
+        this.setupStyles();
+    }
+    setupSlides() {
         if (this.slides.length > 0) {
             this.slides.forEach((slide, index) => {
                 slide.classList.add('slide');
@@ -254,8 +235,9 @@ let SSCarousel = class SSCarousel extends LitElement {
                 });
             });
         }
+    }
+    setupEventListeners() {
         document.addEventListener('touchmove', e => {
-            //console.log('touchmove');
             if (this.hasContact) {
                 this.latestContactPoint = {
                     x: e.touches[0].clientX,
@@ -272,7 +254,6 @@ let SSCarousel = class SSCarousel extends LitElement {
                 if (xDiff >= this.minDragDistance) {
                     this._back();
                 }
-                console.log('touchend', xDiff, -this.minDragDistance);
                 if (xDiff <= -this.minDragDistance) {
                     this._forward();
                 }
@@ -284,9 +265,6 @@ let SSCarousel = class SSCarousel extends LitElement {
                 e.preventDefault();
             }
         });
-        const style = document.createElement('style');
-        style.textContent = this.keyframes;
-        this.appendChild(style);
         this.carousel.addEventListener('mouseenter', () => {
             this.mouseOver = true;
         });
@@ -301,6 +279,17 @@ let SSCarousel = class SSCarousel extends LitElement {
             }
         });
     }
+    setupStyles() {
+        const style = window.document.createElement('style');
+        style.textContent = this.keyframes;
+        this.parentElement?.appendChild(style);
+        window.CSS.registerProperty({
+            name: '--slide-scale',
+            syntax: '<number>',
+            inherits: false,
+            initialValue: '1',
+        });
+    }
     updated(_changedProperties) {
         super.updated(_changedProperties);
         if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
@@ -310,7 +299,6 @@ let SSCarousel = class SSCarousel extends LitElement {
     }
     updateActualWidth() {
         const width = this.getBoundingClientRect().width;
-        //console.log('width', width);
         this.actualWidth = width;
     }
     _updateslides() {

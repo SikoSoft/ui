@@ -1,9 +1,5 @@
 import { LitElement, PropertyValues } from 'lit';
 import { ContactPoint, SSCarouselProp, SSCarouselProps } from './ss-carousel.models';
-/**
- * For reference, see this tutorial that helped provide some of the math involved:
- * https://3dtransforms.desandro.com/carousel
- */
 export declare class SSCarousel extends LitElement {
     static styles: import("lit").CSSResult[];
     keyframes: string;
@@ -37,6 +33,9 @@ export declare class SSCarousel extends LitElement {
     get slides(): HTMLElement[];
     connectedCallback(): void;
     firstUpdated(_changedProperties: PropertyValues): Promise<void>;
+    setupSlides(): void;
+    setupEventListeners(): void;
+    setupStyles(): void;
     updated(_changedProperties: PropertyValues): void;
     updateActualWidth(): void;
     _updateslides(): void;

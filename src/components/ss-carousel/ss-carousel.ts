@@ -11,11 +11,6 @@ import {
 } from './ss-carousel.models';
 import { CarouselSlideChangedEvent } from './ss-carousel.events';
 
-/**
- * For reference, see this tutorial that helped provide some of the math involved:
- * https://3dtransforms.desandro.com/carousel
- */
-
 @customElement('ss-carousel')
 export class SSCarousel extends LitElement {
   static styles = [
@@ -91,11 +86,6 @@ export class SSCarousel extends LitElement {
         animation-delay: 50ms;
       }
 
-      ::slotted(.slide.active:hover) {
-        //--slide-scale: 1.1;
-        //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      }
-
       ::slotted(.slide.previous),
       ::slotted(.slide.next) {
         opacity: 0.75;
@@ -146,20 +136,15 @@ export class SSCarousel extends LitElement {
   ];
 
   keyframes = `
-
-
       @keyframes become-active {
         0% {
         --slide-scale: 1;
-   
         }
         50% {
         --slide-scale: 1.2;
-
         }
         100% {
         --slide-scale: 1;
-
         }
       }
     `;
@@ -278,10 +263,19 @@ export class SSCarousel extends LitElement {
 
   async firstUpdated(_changedProperties: PropertyValues): Promise<void> {
     super.firstUpdated(_changedProperties);
+
     await this.updateComplete;
 
     this.updateActualWidth();
 
+    this.setupSlides();
+
+    this.setupEventListeners();
+
+    this.setupStyles();
+  }
+
+  setupSlides() {
     if (this.slides.length > 0) {
       this.slides.forEach((slide, index) => {
         slide.classList.add('slide');
@@ -301,7 +295,9 @@ export class SSCarousel extends LitElement {
         });
       });
     }
+  }
 
+  setupEventListeners() {
     document.addEventListener('touchmove', e => {
       if (this.hasContact) {
         this.latestContactPoint = {
@@ -335,17 +331,6 @@ export class SSCarousel extends LitElement {
       }
     });
 
-    const style = window.document.createElement('style');
-    style.textContent = this.keyframes;
-    this.parentElement?.appendChild(style);
-
-    window.CSS.registerProperty({
-      name: '--slide-scale',
-      syntax: '<number>',
-      inherits: false,
-      initialValue: '1',
-    });
-
     this.carousel.addEventListener('mouseenter', () => {
       this.mouseOver = true;
     });
@@ -360,6 +345,19 @@ export class SSCarousel extends LitElement {
         e.stopPropagation();
         return false;
       }
+    });
+  }
+
+  setupStyles() {
+    const style = window.document.createElement('style');
+    style.textContent = this.keyframes;
+    this.parentElement?.appendChild(style);
+
+    window.CSS.registerProperty({
+      name: '--slide-scale',
+      syntax: '<number>',
+      inherits: false,
+      initialValue: '1',
     });
   }
 
