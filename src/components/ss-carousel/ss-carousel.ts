@@ -26,12 +26,6 @@ export class SSCarousel extends LitElement {
         width: 100%;
       }
 
-      @property --slide-scale {
-        syntax: '<number>';
-        initial-value: 0;
-        inherits: false;
-      }
-
       .scene {
         width: var(--scene-width);
         height: var(--scene-height);
@@ -93,8 +87,8 @@ export class SSCarousel extends LitElement {
 
       ::slotted(.slide.active) {
         opacity: 1;
-        animation: become-active 300ms linear;
-        animation-delay: 100ms;
+        animation: become-active 200ms linear;
+        animation-delay: 50ms;
       }
 
       ::slotted(.slide.active:hover) {
@@ -152,11 +146,7 @@ export class SSCarousel extends LitElement {
   ];
 
   keyframes = `
-        @property --slide-scale {
-        syntax: '<number>'; /* <- defined as type number for the transition to work */
-        initial-value: 1;
-        inherits: false;
-      }
+
 
       @keyframes become-active {
         0% {
@@ -313,7 +303,6 @@ export class SSCarousel extends LitElement {
     }
 
     document.addEventListener('touchmove', e => {
-      //console.log('touchmove');
       if (this.hasContact) {
         this.latestContactPoint = {
           x: e.touches[0].clientX,
@@ -333,7 +322,6 @@ export class SSCarousel extends LitElement {
         if (xDiff >= this.minDragDistance) {
           this._back();
         }
-        console.log('touchend', xDiff, -this.minDragDistance);
         if (xDiff <= -this.minDragDistance) {
           this._forward();
         }
@@ -347,9 +335,16 @@ export class SSCarousel extends LitElement {
       }
     });
 
-    const style = document.createElement('style');
+    const style = window.document.createElement('style');
     style.textContent = this.keyframes;
-    this.appendChild(style);
+    this.parentElement?.appendChild(style);
+
+    window.CSS.registerProperty({
+      name: '--slide-scale',
+      syntax: '<number>',
+      inherits: false,
+      initialValue: '1',
+    });
 
     this.carousel.addEventListener('mouseenter', () => {
       this.mouseOver = true;
@@ -378,7 +373,6 @@ export class SSCarousel extends LitElement {
 
   updateActualWidth() {
     const width = this.getBoundingClientRect().width;
-    //console.log('width', width);
     this.actualWidth = width;
   }
 
