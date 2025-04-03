@@ -93,7 +93,7 @@ export class SSCarousel extends LitElement {
 
       ::slotted(.slide.active) {
         opacity: 1;
-        animation: become-active 200ms linear;
+        animation: become-active 300ms linear;
         animation-delay: 100ms;
       }
 
@@ -126,10 +126,26 @@ export class SSCarousel extends LitElement {
       }
 
       .has-contact {
+        ::slotted(.slide) {
+          --slide-scale: calc(
+            1 - calc(min(calc(var(--drag-distance) / 50), 1) * 0.2)
+          );
+        }
+
         ::slotted(.slide.active) {
           --slide-scale: calc(
-            1 - calc(min(calc(var(--drag-distance) / 10), 1) * 0.2)
+            1 - calc(min(calc(var(--drag-distance) / 50), 1) * 0.4)
           );
+        }
+      }
+
+      .discrete:not(.has-contact) {
+        ::slotted(.slide) {
+          opacity: 0;
+        }
+
+        ::slotted(.slide.active) {
+          opacity: 1;
         }
       }
     `,
@@ -186,6 +202,10 @@ export class SSCarousel extends LitElement {
   [SSCarouselProp.PERSPECTIVE]: SSCarouselProps[SSCarouselProp.PERSPECTIVE] =
     ssCarouselProps[SSCarouselProp.PERSPECTIVE].default;
 
+  @property({ type: Boolean })
+  [SSCarouselProp.DISCRETE]: SSCarouselProps[SSCarouselProp.DISCRETE] =
+    ssCarouselProps[SSCarouselProp.DISCRETE].default;
+
   @query('.carousel')
   carousel!: HTMLDivElement;
 
@@ -230,7 +250,11 @@ export class SSCarousel extends LitElement {
 
   @state()
   get classes() {
-    return { wrapper: true, 'has-contact': this.hasContact };
+    return {
+      wrapper: true,
+      'has-contact': this.hasContact,
+      discrete: this.discrete,
+    };
   }
 
   get minDragDistance(): number {
@@ -315,6 +339,12 @@ export class SSCarousel extends LitElement {
         }
       }
       this.hasContact = false;
+    });
+
+    this.carousel.addEventListener('contextmenu', e => {
+      if (this.hasContact) {
+        e.preventDefault();
+      }
     });
 
     const style = document.createElement('style');

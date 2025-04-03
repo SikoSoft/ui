@@ -9,6 +9,7 @@ export enum SSCarouselProp {
   HEIGHT = 'height',
   GAP = 'gap',
   PERSPECTIVE = 'perspective',
+  DISCRETE = 'discrete',
 }
 
 export interface SSCarouselProps extends PropTypes {
@@ -20,6 +21,7 @@ export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.HEIGHT]: number;
   [SSCarouselProp.GAP]: number;
   [SSCarouselProp.PERSPECTIVE]: number;
+  [SSCarouselProp.DISCRETE]: boolean;
 }
 
 export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
@@ -62,6 +64,12 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     default: 500,
     control: 'number',
     description: 'The perspective of the carousel',
+  },
+  [SSCarouselProp.DISCRETE]: {
+    default: false,
+    control: 'boolean',
+    description:
+      'Whether the carousel should show inactive frames when it does not have contact',
   },
 };
 
