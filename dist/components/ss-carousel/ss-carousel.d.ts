@@ -33,12 +33,13 @@ export declare class SSCarousel extends LitElement {
     get slides(): HTMLElement[];
     connectedCallback(): void;
     firstUpdated(_changedProperties: PropertyValues): Promise<void>;
+    setupSlot(): void;
     setupSlides(): void;
     setupEventListeners(): void;
     setupStyles(): void;
     updated(_changedProperties: PropertyValues): void;
     updateActualWidth(): void;
-    _updateslides(): void;
+    updateSlides(): void;
     _back(): void;
     _forward(): void;
     setActiveIndex(index: number): void;

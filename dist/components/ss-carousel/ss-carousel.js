@@ -212,12 +212,25 @@ let SSCarousel = class SSCarousel extends LitElement {
         await this.updateComplete;
         this.updateActualWidth();
         this.setupSlides();
+        this.setupSlot();
         this.setupEventListeners();
         this.setupStyles();
+    }
+    setupSlot() {
+        const slotNode = this.shadowRoot?.querySelector('slot');
+        if (slotNode) {
+            slotNode.addEventListener('slotchange', () => {
+                this.setupSlides();
+                this.updateSlides();
+            });
+        }
     }
     setupSlides() {
         if (this.slides.length > 0) {
             this.slides.forEach((slide, index) => {
+                if (slide.classList.contains('slide')) {
+                    slide.classList.remove('slide');
+                }
                 slide.classList.add('slide');
                 slide.setAttribute('data-index', index.toString());
                 slide.addEventListener('touchstart', e => {
@@ -303,7 +316,7 @@ let SSCarousel = class SSCarousel extends LitElement {
     updated(_changedProperties) {
         super.updated(_changedProperties);
         if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
-            this._updateslides();
+            this.updateSlides();
         }
         this.updateActualWidth();
     }
@@ -311,7 +324,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         const width = this.getBoundingClientRect().width;
         this.actualWidth = width;
     }
-    _updateslides() {
+    updateSlides() {
         this.slides.forEach((c, index) => {
             const child = c;
             if (child.classList.contains('active')) {
