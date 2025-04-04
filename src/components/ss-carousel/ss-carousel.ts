@@ -270,14 +270,30 @@ export class SSCarousel extends LitElement {
 
     this.setupSlides();
 
+    this.setupSlot();
+
     this.setupEventListeners();
 
     this.setupStyles();
   }
 
+  setupSlot() {
+    const slotNode = this.shadowRoot?.querySelector('slot');
+    if (slotNode) {
+      slotNode.addEventListener('slotchange', () => {
+        this.setupSlides();
+        this.updateSlides();
+      });
+    }
+  }
+
   setupSlides() {
     if (this.slides.length > 0) {
       this.slides.forEach((slide, index) => {
+        if (slide.classList.contains('slide')) {
+          slide.classList.remove('slide');
+        }
+
         slide.classList.add('slide');
         slide.setAttribute('data-index', index.toString());
         slide.addEventListener('touchstart', e => {
@@ -373,7 +389,7 @@ export class SSCarousel extends LitElement {
   updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
     if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
-      this._updateslides();
+      this.updateSlides();
     }
     this.updateActualWidth();
   }
@@ -383,7 +399,7 @@ export class SSCarousel extends LitElement {
     this.actualWidth = width;
   }
 
-  _updateslides() {
+  updateSlides() {
     this.slides.forEach((c, index) => {
       const child = c as HTMLElement;
       if (child.classList.contains('active')) {
