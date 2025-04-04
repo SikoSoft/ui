@@ -40,8 +40,8 @@ export declare class SSCarousel extends LitElement {
     updated(_changedProperties: PropertyValues): void;
     updateActualWidth(): void;
     updateSlides(): void;
-    _back(): void;
-    _forward(): void;
+    back(): void;
+    forward(): void;
     setActiveIndex(index: number): void;
     updateCarousel(): void;
     render(): import("lit-html").TemplateResult<1>;

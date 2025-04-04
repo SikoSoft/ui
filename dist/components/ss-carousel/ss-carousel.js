@@ -265,10 +265,10 @@ let SSCarousel = class SSCarousel extends LitElement {
             const xDiff = this.latestContactPoint.x - this.startContactPoint.x;
             if (this.hasContact) {
                 if (xDiff >= this.minDragDistance) {
-                    this._back();
+                    this.back();
                 }
                 if (xDiff <= -this.minDragDistance) {
-                    this._forward();
+                    this.forward();
                 }
             }
             this.hasContact = false;
@@ -349,14 +349,14 @@ let SSCarousel = class SSCarousel extends LitElement {
             }
         });
     }
-    _back() {
+    back() {
         if (!this.infinite && this.slideIndex === 0) {
             return;
         }
         this.setActiveIndex(this.navigationIndex - 1);
         this.updateCarousel();
     }
-    _forward() {
+    forward() {
         if (!this.infinite && this.slideIndex === this.totalslides - 1) {
             return;
         }
@@ -404,12 +404,26 @@ let SSCarousel = class SSCarousel extends LitElement {
           </div>
           ${this.showBackButton
             ? html `
-                <button class="back" @click=${this._back}>&#x21e6;</button>
+                <button
+                  class="back"
+                  @click=${(e) => {
+                this.back();
+                e.stopPropagation();
+            }}
+                >
+                  &#x21e6;
+                </button>
               `
             : nothing}
           ${this.showForwardButton
             ? html `
-                <button class="forward" @click=${this._forward}>
+                <button
+                  class="forward"
+                  @click=${(e) => {
+                this.forward();
+                e.stopPropagation();
+            }}
+                >
                   &#x21e8;
                 </button>
               `
