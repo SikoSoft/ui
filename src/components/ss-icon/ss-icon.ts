@@ -1,5 +1,5 @@
-import { LitElement, html, PropertyValueMap, nothing, css } from 'lit';
-import { property, customElement, state, query } from 'lit/decorators.js';
+import { LitElement, html, css } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 
 import './svg/svg-profile';
 

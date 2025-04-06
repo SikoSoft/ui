@@ -64,13 +64,13 @@ export class SSToggle extends LitElement {
     return { toggle: true, on: this.on };
   }
 
-  private _handleClick() {
+  private handleClick() {
     this.dispatchEvent(new ToggleChangedEvent({ on: !this.on }));
   }
 
   render() {
     return html`
-      <span class=${classMap(this.classes)} @click=${this._handleClick}>
+      <span class=${classMap(this.classes)} @click=${this.handleClick}>
         <span class="ball"></span>
       </span>
     `;

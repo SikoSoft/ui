@@ -85,23 +85,23 @@ export class SSInputAuto extends LitElement {
     super.connectedCallback();
 
     this.addEventListener('select-up', () => {
-      this._adjustSelectedIndex(-1);
+      this.adjustSelectedIndex(-1);
     });
 
     this.addEventListener('select-down', () => {
-      this._adjustSelectedIndex(1);
+      this.adjustSelectedIndex(1);
     });
 
     this.addEventListener('select', () => {
       if (this.suggestions.length && this.selectedIndex !== -1) {
-        this._sendSelectedEvent(this.suggestions[this.selectedIndex]);
+        this.sendSelectedEvent(this.suggestions[this.selectedIndex]);
       } else {
-        this._sendSubmitEvent();
+        this.sendSubmitEvent();
       }
     });
   }
 
-  private _adjustSelectedIndex(adjustment: number): void {
+  private adjustSelectedIndex(adjustment: number): void {
     let newIndex = this.selectedIndex + adjustment;
     if (newIndex < -1) {
       newIndex = this.maxSelectedIndex;
@@ -112,11 +112,11 @@ export class SSInputAuto extends LitElement {
     this.selectedIndex = newIndex;
   }
 
-  private _sendSelectedEvent(suggestion: string) {
+  private sendSelectedEvent(suggestion: string) {
     this.dispatchEvent(new SuggestionChangedEvent({ value: suggestion }));
   }
 
-  private _sendSubmitEvent() {
+  private sendSubmitEvent() {
     this.dispatchEvent(
       new SuggestiontSubmittedEvent({ selectedIndex: this.selectedIndex }),
     );
@@ -134,7 +134,7 @@ export class SSInputAuto extends LitElement {
                   <li
                     class=${index === this.selectedIndex ? 'selected' : ''}
                     @mouseover=${() => (this.selectedIndex = index)}
-                    @click=${() => this._sendSelectedEvent(suggestion)}
+                    @click=${() => this.sendSelectedEvent(suggestion)}
                   >
                     ${suggestion}
                   </li>

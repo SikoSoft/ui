@@ -24,7 +24,7 @@ export class SSSelect extends LitElement {
     return this.selectNode.value;
   }
 
-  private _handleSelectChanged() {
+  private handleSelectChanged() {
     this.dispatchEvent(
       new SelectChangedEvent({ value: this.selectNode.value }),
     );
@@ -32,7 +32,7 @@ export class SSSelect extends LitElement {
 
   render() {
     return html`
-      <select @change=${this._handleSelectChanged}>
+      <select @change=${this.handleSelectChanged}>
         ${repeat(
           this.options,
           option => option.value,

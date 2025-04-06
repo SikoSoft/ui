@@ -116,7 +116,7 @@ export class SSInput extends LitElement {
     );
   }
 
-  private _handleChange = (e: Event): boolean => {
+  private handleChange = (e: Event): boolean => {
     let value = '';
     if (e.target instanceof HTMLInputElement) {
       value = e.target.value;
@@ -129,7 +129,7 @@ export class SSInput extends LitElement {
     return false;
   };
 
-  private _handleKeyDown = (e: KeyboardEvent): void => {
+  private handleKeyDown = (e: KeyboardEvent): void => {
     if (!(e.target instanceof HTMLInputElement)) {
       return;
     }
@@ -138,47 +138,47 @@ export class SSInput extends LitElement {
         this.autoDismissed = true;
         return;
       case 'ArrowUp':
-        this._sendSuggestionUpEvent();
+        this.sendSuggestionUpEvent();
         e.preventDefault();
         return;
       case 'ArrowDown':
-        this._sendSuggestionDownEvent();
+        this.sendSuggestionDownEvent();
         e.preventDefault();
         return;
       case 'Enter':
         if (this.showAutoComplete) {
-          this._sendSuggestionSelectEvent();
+          this.sendSuggestionSelectEvent();
         } else {
-          this._sendSubmittedEvent();
+          this.sendSubmittedEvent();
         }
         e.preventDefault();
         return;
     }
   };
 
-  private _sendSuggestionUpEvent() {
+  private sendSuggestionUpEvent() {
     this.autoCompleteNode.dispatchEvent(new CustomEvent('select-up'));
   }
 
-  private _sendSuggestionDownEvent() {
+  private sendSuggestionDownEvent() {
     this.autoCompleteNode.dispatchEvent(new CustomEvent('select-down'));
   }
 
-  private _sendSuggestionSelectEvent() {
+  private sendSuggestionSelectEvent() {
     this.autoCompleteNode.dispatchEvent(new CustomEvent('select'));
   }
 
-  private _sendSubmittedEvent() {
+  private sendSubmittedEvent() {
     this.inputField.dispatchEvent(
       new InputSubmittedEvent({ value: this._value }),
     );
   }
 
-  private _handleSubmit() {
-    this._sendSubmittedEvent();
+  private handleSubmit() {
+    this.sendSubmittedEvent();
   }
 
-  private _handleInput = (e: Event): boolean => {
+  private handleInput = (e: Event): boolean => {
     let value = '';
     if (e.target instanceof HTMLInputElement) {
       value = e.target.value;
@@ -193,18 +193,18 @@ export class SSInput extends LitElement {
     return true;
   };
 
-  private _handleFocus = (e: Event): void => {
+  private handleFocus = (e: Event): void => {
     this.hasFocus = true;
     this.autoDismissed = false;
   };
 
-  private _handleBlur = (e: Event): void => {
+  private handleBlur = (e: Event): void => {
     setTimeout(() => {
       this.hasFocus = false;
     }, 200);
   };
 
-  private _suggestionSelectHandler = (e: SuggestionChangedEvent): void => {
+  private suggestionSelectHandler = (e: SuggestionChangedEvent): void => {
     this.autoDismissed = true;
     this.inputField.value = e.detail.value;
     this.inputField.dispatchEvent(
@@ -219,11 +219,11 @@ export class SSInput extends LitElement {
           id="input-field"
           type=${this.type}
           value=${this.value}
-          @change=${this._handleChange}
-          @keydown=${this._handleKeyDown}
-          @input=${this._handleInput}
-          @focus=${this._handleFocus}
-          @blur=${this._handleBlur}
+          @change=${this.handleChange}
+          @keydown=${this.handleKeyDown}
+          @input=${this.handleInput}
+          @focus=${this.handleFocus}
+          @blur=${this.handleBlur}
           placeholder=${this.placeholder}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
@@ -236,8 +236,8 @@ export class SSInput extends LitElement {
               <ss-input-auto
                 input=${this._value}
                 .suggestions=${this.suggestions}
-                @suggestion-submitted=${this._handleSubmit}
-                @suggestion-changed=${this._suggestionSelectHandler}
+                @suggestion-submitted=${this.handleSubmit}
+                @suggestion-changed=${this.suggestionSelectHandler}
               ></ss-input-auto>
             `
           : nothing}

@@ -68,7 +68,7 @@ export class SSButton extends LitElement {
     return classes;
   }
 
-  private _handleClick = (e: CustomEvent): void => {
+  private handleClick = (e: CustomEvent): void => {
     this.dispatchEvent(
       new CustomEvent('ss-button-clicked', {
         bubbles: true,
@@ -81,7 +81,7 @@ export class SSButton extends LitElement {
     return html`
       <button
         class=${classMap(this.classes)}
-        @click=${this._handleClick}
+        @click=${this.handleClick}
         ?disabled=${this.disabled}
       >
         ${this.loading

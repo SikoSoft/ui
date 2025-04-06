@@ -84,14 +84,14 @@ export class PopUp extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    document.addEventListener('keydown', this._handleKeyDown);
-    document.addEventListener('click', this._handleClickOutside);
+    document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('click', this.handleClickOutside);
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    document.removeEventListener('keydown', this._handleKeyDown);
-    document.removeEventListener('click', this._handleClickOutside);
+    document.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('click', this.handleClickOutside);
   }
 
   protected updated(_changedProperties: PropertyValues): void {
@@ -108,7 +108,7 @@ export class PopUp extends LitElement {
     }
   }
 
-  private _handleClickOutside = (e: MouseEvent) => {
+  private handleClickOutside = (e: MouseEvent) => {
     if (
       !this.newlyOpened &&
       this[PopUpProp.CLOSE_ON_OUTSIDE_CLICK] &&
@@ -119,7 +119,7 @@ export class PopUp extends LitElement {
     }
   };
 
-  private _handleKeyDown = (e: KeyboardEvent) => {
+  private handleKeyDown = (e: KeyboardEvent) => {
     if (this[PopUpProp.CLOSE_ON_ESC] && e.key === 'Escape') {
       this.dispatchEvent(new PopUpClosedEvent({}));
     }
