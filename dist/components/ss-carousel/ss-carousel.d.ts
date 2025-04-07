@@ -1,4 +1,5 @@
 import { LitElement, PropertyValues } from 'lit';
+import '../ss-icon/ss-icon';
 import { ContactPoint, SSCarouselProp, SSCarouselProps } from './ss-carousel.models';
 export declare class SSCarousel extends LitElement {
     static styles: import("lit").CSSResult[];

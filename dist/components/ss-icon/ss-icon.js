@@ -23,6 +23,10 @@ let SSIcon = class SSIcon extends LitElement {
     static { this.styles = [
         theme,
         css `
+      :host {
+        display: inline-block;
+      }
+
       .icon {
         display: inline-block;
         width: var(--size, 24px);
