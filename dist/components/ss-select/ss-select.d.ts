@@ -6,6 +6,6 @@ export declare class SSSelect extends LitElement {
     [SSSelectProp.SELECTED]: SSSelectProps[SSSelectProp.SELECTED];
     selectNode: HTMLSelectElement;
     get value(): string;
-    private _handleSelectChanged;
+    private handleSelectChanged;
     render(): import("lit-html").TemplateResult<1>;
 }

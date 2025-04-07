@@ -15,7 +15,7 @@ export declare class PopUp extends LitElement {
     connectedCallback(): void;
     disconnectedCallback(): void;
     protected updated(_changedProperties: PropertyValues): void;
-    private _handleClickOutside;
-    private _handleKeyDown;
+    private handleClickOutside;
+    private handleKeyDown;
     render(): import("lit-html").TemplateResult<1>;
 }

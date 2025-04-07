@@ -57,10 +57,10 @@ let SSCollapsable = class SSCollapsable extends LitElement {
     get classes() {
         return { box: true, collapsable: true, open: this.open };
     }
-    _handleIconClick() {
-        this._toggle();
+    handleIconClick() {
+        this.toggle();
     }
-    _toggle() {
+    toggle() {
         this.dispatchEvent(new CustomEvent('toggled', {
             bubbles: true,
             composed: true,
@@ -73,7 +73,7 @@ let SSCollapsable = class SSCollapsable extends LitElement {
         <div class="head">
           <div class="title">${this.title}</div>
           <div class="icon">
-            <button @click=${() => this._handleIconClick()}>
+            <button @click=${() => this.handleIconClick()}>
               ${this.open ? '-' : '+'}
             </button>
           </div>

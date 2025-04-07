@@ -1,6 +1,8 @@
 import { PropConfigMap, PropTypes } from '../../models/Prop';
 export declare enum IconName {
-    PROFILE = "profile"
+    PROFILE = "profile",
+    ARROW_CIRCLE_LEFT = "arrowCircleLeft",
+    ARROW_CIRCLE_RIGHT = "arrowCircleRight"
 }
 export declare enum SSIconProp {
     NAME = "name",
@@ -13,5 +15,3 @@ export interface SSIconProps extends PropTypes {
     [SSIconProp.COLOR]: string;
 }
 export declare const ssIconProps: PropConfigMap<SSIconProps>;
-export type IconMap = Record<IconName, string>;
-export declare const iconMap: IconMap;

@@ -1,6 +1,8 @@
 export var IconName;
 (function (IconName) {
     IconName["PROFILE"] = "profile";
+    IconName["ARROW_CIRCLE_LEFT"] = "arrowCircleLeft";
+    IconName["ARROW_CIRCLE_RIGHT"] = "arrowCircleRight";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {
@@ -25,7 +27,11 @@ export const ssIconProps = {
         control: 'text',
     },
 };
-export const iconMap = {
-    [IconName.PROFILE]: 'M12 12C14.21 12 16 10.21 16 8S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4z',
+/*
+export type IconMap = Record<IconName, string>;
+export const iconMap: IconMap = {
+  [IconName.PROFILE]:
+    'M12 12C14.21 12 16 10.21 16 8S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4z',
 };
+*/
 //# sourceMappingURL=ss-icon.models.js.map

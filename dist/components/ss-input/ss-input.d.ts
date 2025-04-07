@@ -24,16 +24,16 @@ export declare class SSInput extends LitElement {
     updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void;
     focus(): void;
     clear(): void;
-    private _handleChange;
-    private _handleKeyDown;
-    private _sendSuggestionUpEvent;
-    private _sendSuggestionDownEvent;
-    private _sendSuggestionSelectEvent;
-    private _sendSubmittedEvent;
-    private _handleSubmit;
-    private _handleInput;
-    private _handleFocus;
-    private _handleBlur;
-    private _suggestionSelectHandler;
+    private handleChange;
+    private handleKeyDown;
+    private sendSuggestionUpEvent;
+    private sendSuggestionDownEvent;
+    private sendSuggestionSelectEvent;
+    private sendSubmittedEvent;
+    private handleSubmit;
+    private handleInput;
+    private handleFocus;
+    private handleBlur;
+    private suggestionSelectHandler;
     render(): import("lit-html").TemplateResult<1>;
 }

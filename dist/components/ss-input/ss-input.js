@@ -26,7 +26,7 @@ let SSInput = class SSInput extends LitElement {
         this._value = this.value;
         this.hasFocus = false;
         this.autoDismissed = false;
-        this._handleChange = (e) => {
+        this.handleChange = (e) => {
             let value = '';
             if (e.target instanceof HTMLInputElement) {
                 value = e.target.value;
@@ -38,7 +38,7 @@ let SSInput = class SSInput extends LitElement {
             e.preventDefault();
             return false;
         };
-        this._handleKeyDown = (e) => {
+        this.handleKeyDown = (e) => {
             if (!(e.target instanceof HTMLInputElement)) {
                 return;
             }
@@ -47,25 +47,25 @@ let SSInput = class SSInput extends LitElement {
                     this.autoDismissed = true;
                     return;
                 case 'ArrowUp':
-                    this._sendSuggestionUpEvent();
+                    this.sendSuggestionUpEvent();
                     e.preventDefault();
                     return;
                 case 'ArrowDown':
-                    this._sendSuggestionDownEvent();
+                    this.sendSuggestionDownEvent();
                     e.preventDefault();
                     return;
                 case 'Enter':
                     if (this.showAutoComplete) {
-                        this._sendSuggestionSelectEvent();
+                        this.sendSuggestionSelectEvent();
                     }
                     else {
-                        this._sendSubmittedEvent();
+                        this.sendSubmittedEvent();
                     }
                     e.preventDefault();
                     return;
             }
         };
-        this._handleInput = (e) => {
+        this.handleInput = (e) => {
             let value = '';
             if (e.target instanceof HTMLInputElement) {
                 value = e.target.value;
@@ -77,16 +77,16 @@ let SSInput = class SSInput extends LitElement {
             this.autoDismissed = false;
             return true;
         };
-        this._handleFocus = (e) => {
+        this.handleFocus = (e) => {
             this.hasFocus = true;
             this.autoDismissed = false;
         };
-        this._handleBlur = (e) => {
+        this.handleBlur = (e) => {
             setTimeout(() => {
                 this.hasFocus = false;
             }, 200);
         };
-        this._suggestionSelectHandler = (e) => {
+        this.suggestionSelectHandler = (e) => {
             this.autoDismissed = true;
             this.inputField.value = e.detail.value;
             this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail.value }));
@@ -138,20 +138,20 @@ let SSInput = class SSInput extends LitElement {
             value: '',
         }));
     }
-    _sendSuggestionUpEvent() {
+    sendSuggestionUpEvent() {
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select-up'));
     }
-    _sendSuggestionDownEvent() {
+    sendSuggestionDownEvent() {
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select-down'));
     }
-    _sendSuggestionSelectEvent() {
+    sendSuggestionSelectEvent() {
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select'));
     }
-    _sendSubmittedEvent() {
+    sendSubmittedEvent() {
         this.inputField.dispatchEvent(new InputSubmittedEvent({ value: this._value }));
     }
-    _handleSubmit() {
-        this._sendSubmittedEvent();
+    handleSubmit() {
+        this.sendSubmittedEvent();
     }
     render() {
         return html `
@@ -160,11 +160,11 @@ let SSInput = class SSInput extends LitElement {
           id="input-field"
           type=${this.type}
           value=${this.value}
-          @change=${this._handleChange}
-          @keydown=${this._handleKeyDown}
-          @input=${this._handleInput}
-          @focus=${this._handleFocus}
-          @blur=${this._handleBlur}
+          @change=${this.handleChange}
+          @keydown=${this.handleKeyDown}
+          @input=${this.handleInput}
+          @focus=${this.handleFocus}
+          @blur=${this.handleBlur}
           placeholder=${this.placeholder}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
@@ -177,8 +177,8 @@ let SSInput = class SSInput extends LitElement {
               <ss-input-auto
                 input=${this._value}
                 .suggestions=${this.suggestions}
-                @suggestion-submitted=${this._handleSubmit}
-                @suggestion-changed=${this._suggestionSelectHandler}
+                @suggestion-submitted=${this.handleSubmit}
+                @suggestion-changed=${this.suggestionSelectHandler}
               ></ss-input-auto>
             `
             : nothing}

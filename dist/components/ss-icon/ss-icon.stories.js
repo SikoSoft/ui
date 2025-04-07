@@ -20,9 +20,19 @@ const meta = {
   `,
 };
 export default meta;
-export const Text = {
+export const Profile = {
     args: {
         name: IconName.PROFILE,
+    },
+};
+export const ArrowCircleLeft = {
+    args: {
+        name: IconName.ARROW_CIRCLE_LEFT,
+    },
+};
+export const ArrowCircleRight = {
+    args: {
+        name: IconName.ARROW_CIRCLE_RIGHT,
     },
 };
 //# sourceMappingURL=ss-icon.stories.js.map

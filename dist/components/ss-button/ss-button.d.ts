@@ -10,6 +10,6 @@ export declare class SSButton extends LitElement {
     [SSButtonProp.NEGATIVE]: SSButtonProps[SSButtonProp.NEGATIVE];
     [SSButtonProp.CLASS]: SSButtonProps[SSButtonProp.CLASS];
     get classes(): Record<string, boolean>;
-    private _handleClick;
+    private handleClick;
     render(): import("lit-html").TemplateResult<1>;
 }

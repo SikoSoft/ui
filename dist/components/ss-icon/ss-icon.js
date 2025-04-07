@@ -5,11 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var _a, _b, _c;
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import './svg/svg-profile';
+import './svg/svg-arrow-circle-left';
+import './svg/svg-arrow-circle-right';
 import { theme } from '../../styles/theme';
-import { SSIconProp, ssIconProps } from './ss-icon.models';
+import { IconName, SSIconProp, ssIconProps, } from './ss-icon.models';
 let SSIcon = class SSIcon extends LitElement {
     constructor() {
         super(...arguments);
@@ -35,13 +37,25 @@ let SSIcon = class SSIcon extends LitElement {
       }
     `,
     ]; }
+    renderIcon() {
+        switch (this[SSIconProp.NAME]) {
+            case IconName.PROFILE:
+                return html `<svg-profile></svg-profile>`;
+            case IconName.ARROW_CIRCLE_LEFT:
+                return html `<svg-arrow-circle-left></svg-arrow-circle-left>`;
+            case IconName.ARROW_CIRCLE_RIGHT:
+                return html `<svg-arrow-circle-right></svg-arrow-circle-right>`;
+            default:
+                return nothing;
+        }
+    }
     render() {
         return html `
       <span
         class="icon"
         style="--color: ${this[SSIconProp.COLOR]}; --size: ${this[SSIconProp.SIZE]}px;"
       >
-        <svg-profile></svg-profile>
+        ${this.renderIcon()}
       </span>
     `;
     }

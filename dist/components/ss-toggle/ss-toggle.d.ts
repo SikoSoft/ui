@@ -7,6 +7,6 @@ export declare class SSToggle extends LitElement {
         toggle: boolean;
         on: boolean;
     };
-    private _handleClick;
+    private handleClick;
     render(): import("lit-html").TemplateResult<1>;
 }

@@ -19,7 +19,7 @@ let PopUp = class PopUp extends LitElement {
         this[_c] = popUpProps[PopUpProp.CLOSE_ON_OUTSIDE_CLICK].default;
         this[_d] = popUpProps[PopUpProp.CLOSE_ON_ESC].default;
         this.newlyOpened = false;
-        this._handleClickOutside = (e) => {
+        this.handleClickOutside = (e) => {
             if (!this.newlyOpened &&
                 this[PopUpProp.CLOSE_ON_OUTSIDE_CLICK] &&
                 this[PopUpProp.OPEN] &&
@@ -27,7 +27,7 @@ let PopUp = class PopUp extends LitElement {
                 this.dispatchEvent(new PopUpClosedEvent({}));
             }
         };
-        this._handleKeyDown = (e) => {
+        this.handleKeyDown = (e) => {
             if (this[PopUpProp.CLOSE_ON_ESC] && e.key === 'Escape') {
                 this.dispatchEvent(new PopUpClosedEvent({}));
             }
@@ -85,13 +85,13 @@ let PopUp = class PopUp extends LitElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        document.addEventListener('keydown', this._handleKeyDown);
-        document.addEventListener('click', this._handleClickOutside);
+        document.addEventListener('keydown', this.handleKeyDown);
+        document.addEventListener('click', this.handleClickOutside);
     }
     disconnectedCallback() {
         super.disconnectedCallback();
-        document.removeEventListener('keydown', this._handleKeyDown);
-        document.removeEventListener('click', this._handleClickOutside);
+        document.removeEventListener('keydown', this.handleKeyDown);
+        document.removeEventListener('click', this.handleClickOutside);
     }
     updated(_changedProperties) {
         super.updated(_changedProperties);

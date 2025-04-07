@@ -9,7 +9,7 @@ export declare class SSCollapsable extends LitElement {
         collapsable: boolean;
         open: boolean;
     };
-    private _handleIconClick;
-    private _toggle;
+    private handleIconClick;
+    private toggle;
     render(): import("lit-html").TemplateResult<1>;
 }

@@ -8,7 +8,7 @@ declare const meta: {
         layout: string;
     };
     args: {
-        name: IconName;
+        name: IconName.PROFILE;
         size: number;
         color: string;
     };
@@ -17,4 +17,6 @@ declare const meta: {
 };
 export default meta;
 type Story = StoryObj<SSIconProps>;
-export declare const Text: Story;
+export declare const Profile: Story;
+export declare const ArrowCircleLeft: Story;
+export declare const ArrowCircleRight: Story;

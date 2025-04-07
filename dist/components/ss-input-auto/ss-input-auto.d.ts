@@ -10,8 +10,8 @@ export declare class SSInputAuto extends LitElement {
     get show(): boolean;
     get maxSelectedIndex(): number;
     connectedCallback(): void;
-    private _adjustSelectedIndex;
-    private _sendSelectedEvent;
-    private _sendSubmitEvent;
+    private adjustSelectedIndex;
+    private sendSelectedEvent;
+    private sendSubmitEvent;
     render(): import("lit-html").TemplateResult<1>;
 }
