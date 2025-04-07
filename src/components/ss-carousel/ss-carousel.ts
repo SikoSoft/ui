@@ -2,6 +2,8 @@ import { LitElement, html, css, PropertyValues, nothing } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
+import '../ss-icon/ss-icon';
+
 import { theme } from '../../styles/theme';
 import {
   ContactPoint,
@@ -34,12 +36,13 @@ export class SSCarousel extends LitElement {
         top: 50%;
         transform: translateY(-50%);
         display: inline-block;
-        width: 2rem;
-        height: 2rem;
         border-radius: 50%;
-        vertical-align: middle;
         transition: transform 0.2s;
         line-height: 0rem;
+        padding: 0;
+        background: transparent;
+        border: none;
+        width: auto;
 
         &:active {
           transform: translateY(-50%) scale(1.5);
@@ -505,7 +508,11 @@ export class SSCarousel extends LitElement {
                     e.stopPropagation();
                   }}
                 >
-                  &#x21e6;
+                  <ss-icon
+                    name="arrowCircleLeft"
+                    color="#000"
+                    size="48"
+                  ></ss-icon>
                 </button>
               `
             : nothing}
@@ -518,7 +525,11 @@ export class SSCarousel extends LitElement {
                     e.stopPropagation();
                   }}
                 >
-                  &#x21e8;
+                  <ss-icon
+                    name="arrowCircleRight"
+                    color="#000"
+                    size="48"
+                  ></ss-icon>
                 </button>
               `
             : nothing}

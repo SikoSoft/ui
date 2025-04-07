@@ -17,7 +17,12 @@ import {
 export class SSIcon extends LitElement {
   static styles = [
     theme,
+
     css`
+      :host {
+        display: inline-block;
+      }
+
       .icon {
         display: inline-block;
         width: var(--size, 24px);
