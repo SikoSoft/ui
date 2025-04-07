@@ -28,8 +28,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<SSIconProps>;
 
-export const Text: Story = {
+export const Profile: Story = {
   args: {
     name: IconName.PROFILE,
+  },
+};
+
+export const ArrowCircleLeft: Story = {
+  args: {
+    name: IconName.ARROW_CIRCLE_LEFT,
+  },
+};
+
+export const ArrowCircleRight: Story = {
+  args: {
+    name: IconName.ARROW_CIRCLE_RIGHT,
   },
 };

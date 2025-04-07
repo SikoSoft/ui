@@ -3,6 +3,8 @@ import { InputType } from '../../models/Input';
 
 export enum IconName {
   PROFILE = 'profile',
+  ARROW_CIRCLE_LEFT = 'arrowCircleLeft',
+  ARROW_CIRCLE_RIGHT = 'arrowCircleRight',
 }
 
 export enum SSIconProp {
@@ -35,8 +37,10 @@ export const ssIconProps: PropConfigMap<SSIconProps> = {
   },
 };
 
+/*
 export type IconMap = Record<IconName, string>;
 export const iconMap: IconMap = {
   [IconName.PROFILE]:
     'M12 12C14.21 12 16 10.21 16 8S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4z',
 };
+*/

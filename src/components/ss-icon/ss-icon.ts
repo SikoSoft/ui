@@ -1,10 +1,17 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 
 import './svg/svg-profile';
+import './svg/svg-arrow-circle-left';
+import './svg/svg-arrow-circle-right';
 
 import { theme } from '../../styles/theme';
-import { SSIconProp, SSIconProps, ssIconProps } from './ss-icon.models';
+import {
+  IconName,
+  SSIconProp,
+  SSIconProps,
+  ssIconProps,
+} from './ss-icon.models';
 
 @customElement('ss-icon')
 export class SSIcon extends LitElement {
@@ -38,6 +45,19 @@ export class SSIcon extends LitElement {
   [SSIconProp.SIZE]: SSIconProps[SSIconProp.SIZE] =
     ssIconProps[SSIconProp.SIZE].default;
 
+  renderIcon() {
+    switch (this[SSIconProp.NAME]) {
+      case IconName.PROFILE:
+        return html`<svg-profile></svg-profile>`;
+      case IconName.ARROW_CIRCLE_LEFT:
+        return html`<svg-arrow-circle-left></svg-arrow-circle-left>`;
+      case IconName.ARROW_CIRCLE_RIGHT:
+        return html`<svg-arrow-circle-right></svg-arrow-circle-right>`;
+      default:
+        return nothing;
+    }
+  }
+
   render() {
     return html`
       <span
@@ -46,7 +66,7 @@ export class SSIcon extends LitElement {
           SSIconProp.SIZE
         ]}px;"
       >
-        <svg-profile></svg-profile>
+        ${this.renderIcon()}
       </span>
     `;
   }
