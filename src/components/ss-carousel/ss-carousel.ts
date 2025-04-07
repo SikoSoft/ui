@@ -41,9 +41,9 @@ export class SSCarousel extends LitElement {
         transition: transform 0.2s;
         line-height: 0rem;
 
-        &:hover {
+        &:active {
           transform: translateY(-50%) scale(1.5);
-          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
           opacity: 1;
         }
       }
