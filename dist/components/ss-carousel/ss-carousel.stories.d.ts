@@ -8,6 +8,7 @@ declare const meta: {
         layout: string;
     };
     args: {
+        navigationIndex: number;
         showButtons: true;
         infinite: true;
         width: string;
