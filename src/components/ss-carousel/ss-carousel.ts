@@ -391,10 +391,11 @@ export class SSCarousel extends LitElement {
 
   updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
+    this.updateActualWidth();
     if (_changedProperties.has(SSCarouselProp.NAVIGATION_INDEX)) {
       this.updateSlides();
+      this.updateCarousel();
     }
-    this.updateActualWidth();
   }
 
   updateActualWidth() {
