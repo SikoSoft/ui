@@ -15,6 +15,7 @@ const meta = {
     layout: 'centered',
   },
   args: {
+    navigationIndex: ssCarouselProps.navigationIndex.default,
     showButtons: true,
     infinite: true,
     width: ssCarouselProps.width.default,
@@ -33,6 +34,7 @@ const meta = {
       gap=${args.gap}
       perspective=${args.perspective}
       ?discrete=${args.discrete}
+      navigationIndex=${args.navigationIndex}
     >
       <div class="something">Test</div>
       <div class="different">Text</div>
