@@ -8,7 +8,7 @@ Lit is used for developing these native web-components, as Lit provides the best
 
 All components are written in Typescript and compiled to Javascript files stored in dist/ (which are included in this repository).
 
-Storybook is used to quickly expiriment with components. Just run `npm run storybook` to spin up a Storybook server.
+Storybook is used to quickly experiment with components. Just run `npm run storybook` to spin up a Storybook server.
 
 ## Naming & file conventions
 
@@ -21,7 +21,7 @@ Using the notification-provider component as an example, we see the following fi
 - src/components/notification-provider/notification-provider.models.ts
 - src/components/notification-provider/notification-provider.stories.ts
 
-The core component logic (internal component behavior) and styling takes place in the notification-provider.ts file. The notification-provider.events.ts file contains custom events emitted by the component, while notification-provider.models.ts contains interfaces and abstract data configurations related to the component. Inside notification-provider.stories.ts are Storybook configurations, or "stories", for expirimentation and demonstrating component behavior.
+The core component logic (internal component behavior) and styling takes place in the notification-provider.ts file. The notification-provider.events.ts file contains custom events emitted by the component, while notification-provider.models.ts contains interfaces and abstract data configurations related to the component. Inside notification-provider.stories.ts are Storybook configurations, or "stories", for experimentation and demonstrating component behavior.
 
 Not every component will contain every file. If stories have yet to be created, or it's difficult or meaningless to do so, there might not be a storybook file. Similarly, if a component does not emit custom events, there may not be an events file.
 In the case of this component, there's also a whole other component folder structure within. Here, we have the following component:
@@ -39,7 +39,7 @@ On a sidenote, some event related definitions remain in _src/events/_, which are
 
 This package is configured to be of type "module" in the context of NodeJS. The build process consists only of compiling the Typescript into Javascript (meaning no additional transpiling or bundling is performed on top of Typescript compilation). The compiled files are included in this repository in the _dist/_ folder.
 
-Additionaly, package.json maintains a wide list of export paths which provide for more convenient importing of components.
+Additionally, package.json maintains a wide list of export paths which provide for more convenient importing of components.
 
 ## Vite
 
