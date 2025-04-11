@@ -13,6 +13,7 @@ export declare class SSCarousel extends LitElement {
     [SSCarouselProp.PERSPECTIVE]: SSCarouselProps[SSCarouselProp.PERSPECTIVE];
     [SSCarouselProp.DISCRETE]: SSCarouselProps[SSCarouselProp.DISCRETE];
     carousel: HTMLDivElement;
+    initialized: boolean;
     get totalslides(): number;
     get slideDegrees(): number;
     get slideTransition(): number;
@@ -23,6 +24,7 @@ export declare class SSCarousel extends LitElement {
         wrapper: boolean;
         'has-contact': boolean;
         discrete: boolean;
+        initializing: boolean;
     };
     get minDragDistance(): number;
     get slideIndex(): number;

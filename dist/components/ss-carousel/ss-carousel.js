@@ -36,6 +36,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         this[_f] = ssCarouselProps[SSCarouselProp.GAP].default;
         this[_g] = ssCarouselProps[SSCarouselProp.PERSPECTIVE].default;
         this[_h] = ssCarouselProps[SSCarouselProp.DISCRETE].default;
+        this.initialized = false;
         this.actualWidth = 0;
         this.mouseOver = false;
         this.hasContact = false;
@@ -114,6 +115,10 @@ let SSCarousel = class SSCarousel extends LitElement {
 
       ::slotted(.slide.active) {
         opacity: 1;
+      }
+
+      ::slotted(.slide.active-initialized) {
+        opacity: 1;
         animation: become-active 200ms linear;
         animation-delay: 50ms;
       }
@@ -139,6 +144,18 @@ let SSCarousel = class SSCarousel extends LitElement {
 
       ::slotted(.slide.next)::after {
         background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
+      }
+
+      .initializing {
+        .carousel {
+          transition: none;
+        }
+        ::slotted(.slide) {
+          transition: none;
+        }
+        ::slotted(.slide.active) {
+          animation: none;
+        }
       }
 
       .has-contact {
@@ -191,6 +208,7 @@ let SSCarousel = class SSCarousel extends LitElement {
             wrapper: true,
             'has-contact': this.hasContact,
             discrete: this.discrete,
+            initializing: !this.initialized,
         };
     }
     get minDragDistance() {
@@ -217,6 +235,9 @@ let SSCarousel = class SSCarousel extends LitElement {
         this.setupSlot();
         this.setupEventListeners();
         this.setupStyles();
+        setTimeout(() => {
+            this.initialized = true;
+        }, 50);
     }
     setupSlot() {
         const slotNode = this.shadowRoot?.querySelector('slot');
@@ -330,6 +351,9 @@ let SSCarousel = class SSCarousel extends LitElement {
     updateSlides() {
         this.slides.forEach((c, index) => {
             const child = c;
+            if (child.classList.contains('active-initialized')) {
+                child.classList.remove('active-initialized');
+            }
             if (child.classList.contains('active')) {
                 child.classList.remove('active');
             }
@@ -345,6 +369,9 @@ let SSCarousel = class SSCarousel extends LitElement {
             }
             if (index === this.slideIndex) {
                 child.classList.add('active');
+                if (this.initialized) {
+                    child.classList.add('active-initialized');
+                }
             }
             if (index === this.slideIndex + 1 ||
                 (this.slideIndex === this.totalslides - 1 && index === 0)) {
@@ -471,6 +498,9 @@ __decorate([
 __decorate([
     query('.carousel')
 ], SSCarousel.prototype, "carousel", void 0);
+__decorate([
+    state()
+], SSCarousel.prototype, "initialized", void 0);
 __decorate([
     state()
 ], SSCarousel.prototype, "totalslides", null);
