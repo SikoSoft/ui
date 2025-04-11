@@ -183,25 +183,27 @@ let SSCarousel = class SSCarousel extends LitElement {
       }
     `,
     ]; }
-    get totalslides() {
+    get totalSlides() {
         const total = this.slides.length;
         return total;
     }
     get slideDegrees() {
-        return 360 / this.totalslides;
+        return 360 / this.totalSlides;
     }
     get slideTransition() {
-        return Math.round(this.actualWidth / 2 / Math.tan(Math.PI / this.totalslides));
+        return this.totalSlides > 1
+            ? Math.round(this.actualWidth / 2 / Math.tan(Math.PI / this.totalSlides))
+            : 0;
     }
     get showBackButton() {
         return (this.showButtons &&
-            this.totalslides > 1 &&
+            this.totalSlides > 1 &&
             (this.infinite || this.slideIndex > 0));
     }
     get showForwardButton() {
         return (this.showButtons &&
-            this.totalslides > 1 &&
-            (this.infinite || this.slideIndex < this.totalslides - 1));
+            this.totalSlides > 1 &&
+            (this.infinite || this.slideIndex < this.totalSlides - 1));
     }
     get classes() {
         return {
@@ -215,9 +217,9 @@ let SSCarousel = class SSCarousel extends LitElement {
         return 10;
     }
     get slideIndex() {
-        let index = this.navigationIndex % this.totalslides;
+        let index = this.navigationIndex % this.totalSlides;
         if (index < 0) {
-            index = this.totalslides + index;
+            index = this.totalSlides + index;
         }
         return index;
     }
@@ -364,7 +366,7 @@ let SSCarousel = class SSCarousel extends LitElement {
                 child.classList.remove('next');
             }
             if (index === this.slideIndex - 1 ||
-                (this.slideIndex === 0 && index === this.totalslides - 1)) {
+                (this.slideIndex === 0 && index === this.totalSlides - 1)) {
                 child.classList.add('previous');
             }
             if (index === this.slideIndex) {
@@ -374,7 +376,7 @@ let SSCarousel = class SSCarousel extends LitElement {
                 }
             }
             if (index === this.slideIndex + 1 ||
-                (this.slideIndex === this.totalslides - 1 && index === 0)) {
+                (this.slideIndex === this.totalSlides - 1 && index === 0)) {
                 child.classList.add('next');
             }
         });
@@ -387,7 +389,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         this.updateCarousel();
     }
     forward() {
-        if (!this.infinite && this.slideIndex === this.totalslides - 1) {
+        if (!this.infinite && this.slideIndex === this.totalSlides - 1) {
             return;
         }
         this.setActiveIndex(this.navigationIndex + 1);
@@ -401,7 +403,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         }));
     }
     updateCarousel() {
-        const angle = (this.navigationIndex / this.totalslides) * -360;
+        const angle = (this.navigationIndex / this.totalSlides) * -360;
         this.carousel.style.transform = `translateZ(-${this.slideTransition}px) rotateY(${angle}deg)`;
     }
     render() {
@@ -410,7 +412,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         .carousel {
           transform: translateZ(-${this.slideTransition}px);
         }
-        ${[...Array(this.totalslides)].map((_, i) => css `
+        ${[...Array(this.totalSlides)].map((_, i) => css `
             ::slotted(.slide:nth-child(${i + 1})) {
               transform: rotateY(${i * this.slideDegrees}deg)
                 translateZ(${this.slideTransition}px)
@@ -503,7 +505,7 @@ __decorate([
 ], SSCarousel.prototype, "initialized", void 0);
 __decorate([
     state()
-], SSCarousel.prototype, "totalslides", null);
+], SSCarousel.prototype, "totalSlides", null);
 __decorate([
     state()
 ], SSCarousel.prototype, "slideDegrees", null);

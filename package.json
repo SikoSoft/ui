@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.20.3",
+  "version": "1.20.4",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",

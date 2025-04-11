@@ -14,7 +14,7 @@ export declare class SSCarousel extends LitElement {
     [SSCarouselProp.DISCRETE]: SSCarouselProps[SSCarouselProp.DISCRETE];
     carousel: HTMLDivElement;
     initialized: boolean;
-    get totalslides(): number;
+    get totalSlides(): number;
     get slideDegrees(): number;
     get slideTransition(): number;
     get showBackButton(): boolean;
