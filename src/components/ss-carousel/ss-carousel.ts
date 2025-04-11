@@ -207,28 +207,28 @@ export class SSCarousel extends LitElement {
   initialized = false;
 
   @state()
-  get totalslides(): number {
+  get totalSlides(): number {
     const total = this.slides.length;
     return total;
   }
 
   @state()
   get slideDegrees(): number {
-    return 360 / this.totalslides;
+    return 360 / this.totalSlides;
   }
 
   @state()
   get slideTransition(): number {
-    return Math.round(
-      this.actualWidth / 2 / Math.tan(Math.PI / this.totalslides),
-    );
+    return this.totalSlides > 1
+      ? Math.round(this.actualWidth / 2 / Math.tan(Math.PI / this.totalSlides))
+      : 0;
   }
 
   @state()
   get showBackButton() {
     return (
       this.showButtons &&
-      this.totalslides > 1 &&
+      this.totalSlides > 1 &&
       (this.infinite || this.slideIndex > 0)
     );
   }
@@ -237,8 +237,8 @@ export class SSCarousel extends LitElement {
   get showForwardButton() {
     return (
       this.showButtons &&
-      this.totalslides > 1 &&
-      (this.infinite || this.slideIndex < this.totalslides - 1)
+      this.totalSlides > 1 &&
+      (this.infinite || this.slideIndex < this.totalSlides - 1)
     );
   }
 
@@ -261,9 +261,9 @@ export class SSCarousel extends LitElement {
 
   @state()
   get slideIndex(): number {
-    let index = this.navigationIndex % this.totalslides;
+    let index = this.navigationIndex % this.totalSlides;
     if (index < 0) {
-      index = this.totalslides + index;
+      index = this.totalSlides + index;
     }
     return index;
   }
@@ -448,7 +448,7 @@ export class SSCarousel extends LitElement {
 
       if (
         index === this.slideIndex - 1 ||
-        (this.slideIndex === 0 && index === this.totalslides - 1)
+        (this.slideIndex === 0 && index === this.totalSlides - 1)
       ) {
         child.classList.add('previous');
       }
@@ -462,7 +462,7 @@ export class SSCarousel extends LitElement {
 
       if (
         index === this.slideIndex + 1 ||
-        (this.slideIndex === this.totalslides - 1 && index === 0)
+        (this.slideIndex === this.totalSlides - 1 && index === 0)
       ) {
         child.classList.add('next');
       }
@@ -479,7 +479,7 @@ export class SSCarousel extends LitElement {
   }
 
   forward(): void {
-    if (!this.infinite && this.slideIndex === this.totalslides - 1) {
+    if (!this.infinite && this.slideIndex === this.totalSlides - 1) {
       return;
     }
     this.setActiveIndex(this.navigationIndex + 1);
@@ -497,7 +497,7 @@ export class SSCarousel extends LitElement {
   }
 
   updateCarousel() {
-    const angle = (this.navigationIndex / this.totalslides) * -360;
+    const angle = (this.navigationIndex / this.totalSlides) * -360;
     this.carousel.style.transform = `translateZ(-${this.slideTransition}px) rotateY(${angle}deg)`;
   }
 
@@ -507,7 +507,7 @@ export class SSCarousel extends LitElement {
         .carousel {
           transform: translateZ(-${this.slideTransition}px);
         }
-        ${[...Array(this.totalslides)].map(
+        ${[...Array(this.totalSlides)].map(
           (_, i) => css`
             ::slotted(.slide:nth-child(${i + 1})) {
               transform: rotateY(${i * this.slideDegrees}deg)
