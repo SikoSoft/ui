@@ -85,6 +85,10 @@ export class SSCarousel extends LitElement {
 
       ::slotted(.slide.active) {
         opacity: 1;
+      }
+
+      ::slotted(.slide.active-initialized) {
+        opacity: 1;
         animation: become-active 200ms linear;
         animation-delay: 50ms;
       }
@@ -110,6 +114,18 @@ export class SSCarousel extends LitElement {
 
       ::slotted(.slide.next)::after {
         background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
+      }
+
+      .initializing {
+        .carousel {
+          transition: none;
+        }
+        ::slotted(.slide) {
+          transition: none;
+        }
+        ::slotted(.slide.active) {
+          animation: none;
+        }
       }
 
       .has-contact {
@@ -188,6 +204,9 @@ export class SSCarousel extends LitElement {
   carousel!: HTMLDivElement;
 
   @state()
+  initialized = false;
+
+  @state()
   get totalslides(): number {
     const total = this.slides.length;
     return total;
@@ -232,6 +251,7 @@ export class SSCarousel extends LitElement {
       wrapper: true,
       'has-contact': this.hasContact,
       discrete: this.discrete,
+      initializing: !this.initialized,
     };
   }
 
@@ -278,6 +298,10 @@ export class SSCarousel extends LitElement {
     this.setupEventListeners();
 
     this.setupStyles();
+
+    setTimeout(() => {
+      this.initialized = true;
+    }, 50);
   }
 
   setupSlot() {
@@ -406,6 +430,10 @@ export class SSCarousel extends LitElement {
   updateSlides() {
     this.slides.forEach((c, index) => {
       const child = c as HTMLElement;
+      if (child.classList.contains('active-initialized')) {
+        child.classList.remove('active-initialized');
+      }
+
       if (child.classList.contains('active')) {
         child.classList.remove('active');
       }
@@ -427,6 +455,9 @@ export class SSCarousel extends LitElement {
 
       if (index === this.slideIndex) {
         child.classList.add('active');
+        if (this.initialized) {
+          child.classList.add('active-initialized');
+        }
       }
 
       if (
