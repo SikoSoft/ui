@@ -83,6 +83,7 @@ export class SSButton extends LitElement {
         class=${classMap(this.classes)}
         @click=${this.handleClick}
         ?disabled=${this.disabled}
+        part="button"
       >
         ${this.loading
           ? html` <ss-loader></ss-loader> `
