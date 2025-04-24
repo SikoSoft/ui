@@ -3,6 +3,8 @@ export var IconName;
     IconName["PROFILE"] = "profile";
     IconName["ARROW_CIRCLE_LEFT"] = "arrowCircleLeft";
     IconName["ARROW_CIRCLE_RIGHT"] = "arrowCircleRight";
+    IconName["VALID_CIRCLE"] = "validCircle";
+    IconName["INVALID_CIRCLE"] = "invalidCircle";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {

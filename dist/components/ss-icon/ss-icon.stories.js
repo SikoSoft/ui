@@ -35,4 +35,14 @@ export const ArrowCircleRight = {
         name: IconName.ARROW_CIRCLE_RIGHT,
     },
 };
+export const ValidCircle = {
+    args: {
+        name: IconName.VALID_CIRCLE,
+    },
+};
+export const InvalidCircle = {
+    args: {
+        name: IconName.INVALID_CIRCLE,
+    },
+};
 //# sourceMappingURL=ss-icon.stories.js.map

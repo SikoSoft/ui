@@ -20,3 +20,5 @@ type Story = StoryObj<SSIconProps>;
 export declare const Profile: Story;
 export declare const ArrowCircleLeft: Story;
 export declare const ArrowCircleRight: Story;
+export declare const ValidCircle: Story;
+export declare const InvalidCircle: Story;
