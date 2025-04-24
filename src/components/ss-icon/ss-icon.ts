@@ -4,6 +4,8 @@ import { property, customElement } from 'lit/decorators.js';
 import './svg/svg-profile';
 import './svg/svg-arrow-circle-left';
 import './svg/svg-arrow-circle-right';
+import './svg/svg-valid-circle';
+import './svg/svg-invalid-circle';
 
 import { theme } from '../../styles/theme';
 import {
@@ -21,6 +23,9 @@ export class SSIcon extends LitElement {
     css`
       :host {
         display: inline-block;
+        vertical-align: middle;
+        width: var(--size, 24px);
+        height: var(--size, 24px);
       }
 
       .icon {
@@ -50,6 +55,13 @@ export class SSIcon extends LitElement {
   [SSIconProp.SIZE]: SSIconProps[SSIconProp.SIZE] =
     ssIconProps[SSIconProp.SIZE].default;
 
+  updated(changedProperties: Map<string | number | symbol, unknown>) {
+    super.updated(changedProperties);
+    if (changedProperties.has(SSIconProp.SIZE)) {
+      this.style.setProperty('--size', `${this[SSIconProp.SIZE]}px`);
+    }
+  }
+
   renderIcon() {
     switch (this[SSIconProp.NAME]) {
       case IconName.PROFILE:
@@ -58,6 +70,10 @@ export class SSIcon extends LitElement {
         return html`<svg-arrow-circle-left></svg-arrow-circle-left>`;
       case IconName.ARROW_CIRCLE_RIGHT:
         return html`<svg-arrow-circle-right></svg-arrow-circle-right>`;
+      case IconName.VALID_CIRCLE:
+        return html`<svg-valid-circle></svg-valid-circle>`;
+      case IconName.INVALID_CIRCLE:
+        return html`<svg-invalid-circle></svg-invalid-circle>`;
       default:
         return nothing;
     }

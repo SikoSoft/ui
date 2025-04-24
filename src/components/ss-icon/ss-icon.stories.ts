@@ -45,3 +45,15 @@ export const ArrowCircleRight: Story = {
     name: IconName.ARROW_CIRCLE_RIGHT,
   },
 };
+
+export const ValidCircle: Story = {
+  args: {
+    name: IconName.VALID_CIRCLE,
+  },
+};
+
+export const InvalidCircle: Story = {
+  args: {
+    name: IconName.INVALID_CIRCLE,
+  },
+};
