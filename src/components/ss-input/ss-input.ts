@@ -214,8 +214,9 @@ export class SSInput extends LitElement {
 
   render() {
     return html`
-      <span>
+      <span part="container">
         <input
+          part="input"
           id="input-field"
           type=${this.type}
           value=${this.value}
