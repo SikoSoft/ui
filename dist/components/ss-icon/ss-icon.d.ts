@@ -4,6 +4,8 @@ import './svg/svg-arrow-circle-left';
 import './svg/svg-arrow-circle-right';
 import './svg/svg-valid-circle';
 import './svg/svg-invalid-circle';
+import './svg/svg-gear';
+import './svg/svg-delete';
 import { SSIconProp, SSIconProps } from './ss-icon.models';
 export declare class SSIcon extends LitElement {
     static styles: import("lit").CSSResult[];

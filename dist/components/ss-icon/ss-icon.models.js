@@ -5,6 +5,8 @@ export var IconName;
     IconName["ARROW_CIRCLE_RIGHT"] = "arrowCircleRight";
     IconName["VALID_CIRCLE"] = "validCircle";
     IconName["INVALID_CIRCLE"] = "invalidCircle";
+    IconName["GEAR"] = "gear";
+    IconName["DELETE"] = "delete";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {

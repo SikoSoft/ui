@@ -45,4 +45,14 @@ export const InvalidCircle = {
         name: IconName.INVALID_CIRCLE,
     },
 };
+export const Gear = {
+    args: {
+        name: IconName.GEAR,
+    },
+};
+export const Delete = {
+    args: {
+        name: IconName.DELETE,
+    },
+};
 //# sourceMappingURL=ss-icon.stories.js.map

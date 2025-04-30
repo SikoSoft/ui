@@ -12,6 +12,8 @@ import './svg/svg-arrow-circle-left';
 import './svg/svg-arrow-circle-right';
 import './svg/svg-valid-circle';
 import './svg/svg-invalid-circle';
+import './svg/svg-gear';
+import './svg/svg-delete';
 import { theme } from '../../styles/theme';
 import { IconName, SSIconProp, ssIconProps, } from './ss-icon.models';
 let SSIcon = class SSIcon extends LitElement {
@@ -64,6 +66,10 @@ let SSIcon = class SSIcon extends LitElement {
                 return html `<svg-valid-circle></svg-valid-circle>`;
             case IconName.INVALID_CIRCLE:
                 return html `<svg-invalid-circle></svg-invalid-circle>`;
+            case IconName.GEAR:
+                return html `<svg-gear></svg-gear>`;
+            case IconName.DELETE:
+                return html `<svg-delete></svg-delete>`;
             default:
                 return nothing;
         }

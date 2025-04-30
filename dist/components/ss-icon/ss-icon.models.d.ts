@@ -4,7 +4,9 @@ export declare enum IconName {
     ARROW_CIRCLE_LEFT = "arrowCircleLeft",
     ARROW_CIRCLE_RIGHT = "arrowCircleRight",
     VALID_CIRCLE = "validCircle",
-    INVALID_CIRCLE = "invalidCircle"
+    INVALID_CIRCLE = "invalidCircle",
+    GEAR = "gear",
+    DELETE = "delete"
 }
 export declare enum SSIconProp {
     NAME = "name",
