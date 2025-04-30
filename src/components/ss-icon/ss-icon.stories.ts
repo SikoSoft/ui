@@ -57,3 +57,15 @@ export const InvalidCircle: Story = {
     name: IconName.INVALID_CIRCLE,
   },
 };
+
+export const Gear: Story = {
+  args: {
+    name: IconName.GEAR,
+  },
+};
+
+export const Delete: Story = {
+  args: {
+    name: IconName.DELETE,
+  },
+};

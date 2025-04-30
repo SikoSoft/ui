@@ -6,6 +6,8 @@ export enum IconName {
   ARROW_CIRCLE_RIGHT = 'arrowCircleRight',
   VALID_CIRCLE = 'validCircle',
   INVALID_CIRCLE = 'invalidCircle',
+  GEAR = 'gear',
+  DELETE = 'delete',
 }
 
 export enum SSIconProp {
