@@ -13,7 +13,7 @@ export class SSToggle extends LitElement {
       height: 3rem;
       width: 6rem;
       border-radius: 1.5rem;
-      background: linear-gradient(#ccc, #aaa);
+      background: linear-gradient(#333, #555);
       position: relative;
       opacity: 0.7;
       transition: all 0.3s;
@@ -27,7 +27,8 @@ export class SSToggle extends LitElement {
       width: 5.4rem;
       top: 0.3rem;
       left: 0.3rem;
-      background: linear-gradient(#333, #555);
+
+      background: linear-gradient(#ccc, #aaa);
       border-radius: 1.2rem;
       opacity: 0.4;
     }
@@ -55,7 +56,7 @@ export class SSToggle extends LitElement {
     }
   `;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   [SSToggleProp.ON]: SSToggleProps[SSToggleProp.ON] =
     ssToggleProps[SSToggleProp.ON].default;
 
@@ -65,7 +66,9 @@ export class SSToggle extends LitElement {
   }
 
   private handleClick() {
-    this.dispatchEvent(new ToggleChangedEvent({ on: !this.on }));
+    const on = !this.on;
+    this.on = on;
+    this.dispatchEvent(new ToggleChangedEvent({ on }));
   }
 
   render() {
