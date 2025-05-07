@@ -73,8 +73,12 @@ export class SSToggle extends LitElement {
 
   render() {
     return html`
-      <span class=${classMap(this.classes)} @click=${this.handleClick}>
-        <span class="ball"></span>
+      <span
+        part="container"
+        class=${classMap(this.classes)}
+        @click=${this.handleClick}
+      >
+        <span part="indicator" class="ball"></span>
       </span>
     `;
   }
