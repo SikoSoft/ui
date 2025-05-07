@@ -158,7 +158,6 @@ let SSInput = class SSInput extends LitElement {
       <span part="container">
         <input
           part="input"
-          id="input-field"
           type=${this.type}
           value=${this.value}
           @change=${this.handleChange}
@@ -215,7 +214,7 @@ __decorate([
     state()
 ], SSInput.prototype, "_value", void 0);
 __decorate([
-    query('#input-field')
+    query('input')
 ], SSInput.prototype, "inputField", void 0);
 __decorate([
     query('ss-input-auto')

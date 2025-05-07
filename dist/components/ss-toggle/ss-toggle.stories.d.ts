@@ -8,7 +8,8 @@ declare const meta: {
         layout: string;
     };
     args: {
-        on: true;
+        on: boolean;
+        highlightTime: number;
     };
     argTypes: Partial<import("@storybook/core/csf").ArgTypes<SSToggleProps>> | undefined;
     render: (args: SSToggleProps) => import("lit-html").TemplateResult<1>;

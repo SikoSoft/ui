@@ -10,10 +10,13 @@ const meta = {
         layout: 'centered',
     },
     args: {
-        on: true,
+        on: ssToggleProps.on.default,
+        highlightTime: ssToggleProps.highlightTime.default,
     },
     argTypes,
-    render: args => html ` <ss-toggle ?on=${args.on}></ss-toggle> `,
+    render: args => html `
+    <ss-toggle ?on=${args.on} highlightTime=${args.highlightTime}></ss-toggle>
+  `,
 };
 export default meta;
 export const Off = {
