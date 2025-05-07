@@ -58,7 +58,7 @@ export class SSInput extends LitElement {
   [SSInputProp.STEP]?: SSInputProps[SSInputProp.STEP];
 
   @state() _value: string = this.value;
-  @query('#input-field') inputField!: HTMLInputElement;
+  @query('input') inputField!: HTMLInputElement;
   @query('ss-input-auto') autoCompleteNode!: HTMLElement;
   @query('span') container!: HTMLSpanElement;
 
@@ -217,7 +217,6 @@ export class SSInput extends LitElement {
       <span part="container">
         <input
           part="input"
-          id="input-field"
           type=${this.type}
           value=${this.value}
           @change=${this.handleChange}
