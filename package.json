@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.23.1",
+  "version": "1.24.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -132,6 +132,18 @@
     "./components/ss-toggle": {
       "types": "./dist/components/ss-toggle/ss-toggle.d.ts",
       "default": "./dist/components/ss-toggle/ss-toggle.js"
+    },
+    "./components/tag-input.events": {
+      "types": "./dist/components/tag-input/tag-input.events.d.ts",
+      "default": "./dist/components/tag-input/tag-input.events.js"
+    },
+    "./components/tag-manager": {
+      "types": "./dist/components/tag-manager/tag-manager.d.ts",
+      "default": "./dist/components/tag-manager/tag-manager.js"
+    },
+    "./components/tag-manager.events": {
+      "types": "./dist/components/tag-manager/tag-manager.events.d.ts",
+      "default": "./dist/components/tag-manager/tag-manager.events.js"
     },
     "./events/input-changed": {
       "types": "./dist/events/input-changed.d.ts",
