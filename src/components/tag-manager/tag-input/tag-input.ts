@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+import '../../ss-input/ss-input';
 import '../tag-input/tag-input';
 
 import { theme } from '../../../styles/theme';
