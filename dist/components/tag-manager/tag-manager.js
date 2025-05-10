@@ -118,7 +118,7 @@ let TagManager = class TagManager extends LitElement {
         this.sendUpdatedEvent();
     }
     handleDeleted(e) {
-        this.tags = this.tags.filter(tag => tag !== e.detail.value);
+        this.tags = this.tags.filter(tag => tag !== e.detail.tag);
         this.sendUpdatedEvent();
     }
     handleInputUpdated(e) {
@@ -148,12 +148,14 @@ let TagManager = class TagManager extends LitElement {
         ${this.tags.length
             ? html ` <tag-list
               .tags=${this.tags}
-              @deleted=${(e) => {
+              @tag-deleted=${(e) => {
                 this.handleDeleted(e);
             }}
             ></tag-list>`
             : html `<div class="no-tags">${msg('No tags are set')}</div>`}
+
         <slot name="tags"></slot>
+
         <slot name="suggestions"></slot>
       </fieldset>
     `;

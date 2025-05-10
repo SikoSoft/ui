@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var _a;
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import '../../ss-input/ss-input';
 import '../tag-input/tag-input';
 import { theme } from '../../../styles/theme';
 import { TagInputProp, tagInputProps } from './tag-input.models';

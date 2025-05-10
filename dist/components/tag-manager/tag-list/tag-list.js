@@ -10,6 +10,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { theme } from '../../../styles/theme';
 import { TagListProp, tagListProps } from './tag-list.models';
+import { TagDeletedEvent } from './tag-list.events';
 let TagList = class TagList extends LitElement {
     constructor() {
         super(...arguments);
@@ -56,11 +57,7 @@ let TagList = class TagList extends LitElement {
         super.connectedCallback();
     }
     deleteTag(tag) {
-        this.dispatchEvent(new CustomEvent('deleted', {
-            bubbles: true,
-            composed: true,
-            detail: { value: tag },
-        }));
+        this.dispatchEvent(new TagDeletedEvent({ tag }));
     }
     render() {
         return html `

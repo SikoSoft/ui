@@ -1,4 +1,5 @@
 import { LitElement, PropertyValues } from 'lit';
+import '../../ss-input/ss-input';
 import '../tag-input/tag-input';
 import { TagInputProp, TagInputProps } from './tag-input.models';
 export declare class TagInput extends LitElement {

@@ -19,6 +19,7 @@ import {
 } from './tag-input/tag-input.events';
 import { repeat } from 'lit/directives/repeat.js';
 import { msg } from '../../util/msg';
+import { TagDeletedEvent } from './tag-list/tag-list.events';
 
 @customElement('tag-manager')
 export class TagManager extends LitElement {
@@ -152,8 +153,8 @@ export class TagManager extends LitElement {
     this.sendUpdatedEvent();
   }
 
-  private handleDeleted(e: CustomEvent) {
-    this.tags = this.tags.filter(tag => tag !== e.detail.value);
+  private handleDeleted(e: TagDeletedEvent) {
+    this.tags = this.tags.filter(tag => tag !== e.detail.tag);
     this.sendUpdatedEvent();
   }
 
@@ -191,12 +192,14 @@ export class TagManager extends LitElement {
         ${this.tags.length
           ? html` <tag-list
               .tags=${this.tags}
-              @deleted=${(e: CustomEvent) => {
+              @tag-deleted=${(e: CustomEvent) => {
                 this.handleDeleted(e);
               }}
             ></tag-list>`
           : html`<div class="no-tags">${msg('No tags are set')}</div>`}
+
         <slot name="tags"></slot>
+
         <slot name="suggestions"></slot>
       </fieldset>
     `;

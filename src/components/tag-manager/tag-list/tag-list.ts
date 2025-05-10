@@ -4,6 +4,7 @@ import { repeat } from 'lit/directives/repeat.js';
 
 import { theme } from '../../../styles/theme';
 import { TagListProp, tagListProps, TagListProps } from './tag-list.models';
+import { TagDeletedEvent } from './tag-list.events';
 
 @customElement('tag-list')
 export class TagList extends LitElement {
@@ -53,13 +54,7 @@ export class TagList extends LitElement {
   }
 
   private deleteTag(tag: string) {
-    this.dispatchEvent(
-      new CustomEvent('deleted', {
-        bubbles: true,
-        composed: true,
-        detail: { value: tag },
-      }),
-    );
+    this.dispatchEvent(new TagDeletedEvent({ tag }));
   }
 
   render() {
