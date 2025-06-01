@@ -31,7 +31,7 @@ let SSSelect = class SSSelect extends LitElement {
         ${repeat(this.options, option => option.value, option => html `
             <option
               value=${option.value}
-              ?selected=${this.selected === option.value}
+              ?selected=${`${this.selected}` === `${option.value}`}
             >
               ${option.label}
             </option>
