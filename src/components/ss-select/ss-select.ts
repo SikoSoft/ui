@@ -39,7 +39,7 @@ export class SSSelect extends LitElement {
           option => html`
             <option
               value=${option.value}
-              ?selected=${this.selected === option.value}
+              ?selected=${`${this.selected}` === `${option.value}`}
             >
               ${option.label}
             </option>
