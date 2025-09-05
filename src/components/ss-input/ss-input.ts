@@ -59,7 +59,7 @@ export class SSInput extends LitElement {
 
   @state() _value: string = this.value;
   @query('input') inputField!: HTMLInputElement;
-  @query('ss-input-auto') autoCompleteNode!: HTMLElement;
+  @query('ss-input-auto') autoCompleteNode: HTMLElement | undefined;
   @query('span') container!: HTMLSpanElement;
 
   @state() hasFocus: boolean = false;
@@ -157,14 +157,26 @@ export class SSInput extends LitElement {
   };
 
   private sendSuggestionUpEvent() {
+    if (!this.autoCompleteNode) {
+      return;
+    }
+
     this.autoCompleteNode.dispatchEvent(new CustomEvent('select-up'));
   }
 
   private sendSuggestionDownEvent() {
+    if (!this.autoCompleteNode) {
+      return;
+    }
+
     this.autoCompleteNode.dispatchEvent(new CustomEvent('select-down'));
   }
 
   private sendSuggestionSelectEvent() {
+    if (!this.autoCompleteNode) {
+      return;
+    }
+
     this.autoCompleteNode.dispatchEvent(new CustomEvent('select'));
   }
 
