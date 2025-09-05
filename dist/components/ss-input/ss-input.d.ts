@@ -14,7 +14,7 @@ export declare class SSInput extends LitElement {
     [SSInputProp.STEP]?: SSInputProps[SSInputProp.STEP];
     _value: string;
     inputField: HTMLInputElement;
-    autoCompleteNode: HTMLElement;
+    autoCompleteNode: HTMLElement | undefined;
     container: HTMLSpanElement;
     hasFocus: boolean;
     autoDismissed: boolean;

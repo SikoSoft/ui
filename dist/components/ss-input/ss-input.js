@@ -139,12 +139,21 @@ let SSInput = class SSInput extends LitElement {
         }));
     }
     sendSuggestionUpEvent() {
+        if (!this.autoCompleteNode) {
+            return;
+        }
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select-up'));
     }
     sendSuggestionDownEvent() {
+        if (!this.autoCompleteNode) {
+            return;
+        }
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select-down'));
     }
     sendSuggestionSelectEvent() {
+        if (!this.autoCompleteNode) {
+            return;
+        }
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select'));
     }
     sendSubmittedEvent() {
