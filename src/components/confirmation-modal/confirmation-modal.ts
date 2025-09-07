@@ -1,4 +1,4 @@
-import { css, html, LitElement, nothing, PropertyValues } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 import { theme } from '../../styles/theme';
@@ -101,7 +101,13 @@ export class ConfirmationModal extends LitElement {
   render() {
     return html`
       <div class=${classMap(this.classes)} part="container">
-        <pop-up ?open=${this.open} closeButton closeOnOutsideClick closeOnEsc>
+        <pop-up
+          ?open=${this.open}
+          closeButton
+          closeOnOutsideClick
+          closeOnEsc
+          @pop-up-closed=${this.decline}
+        >
           <div class="message" part="message">${this.message}</div>
           <div class="buttons" part="buttons">
             <ss-button positive @click=${this.accept} part="accept-button"
