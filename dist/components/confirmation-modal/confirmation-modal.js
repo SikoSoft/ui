@@ -81,7 +81,13 @@ let ConfirmationModal = class ConfirmationModal extends LitElement {
     render() {
         return html `
       <div class=${classMap(this.classes)} part="container">
-        <pop-up ?open=${this.open} closeButton closeOnOutsideClick closeOnEsc>
+        <pop-up
+          ?open=${this.open}
+          closeButton
+          closeOnOutsideClick
+          closeOnEsc
+          @pop-up-closed=${this.decline}
+        >
           <div class="message" part="message">${this.message}</div>
           <div class="buttons" part="buttons">
             <ss-button positive @click=${this.accept} part="accept-button"
