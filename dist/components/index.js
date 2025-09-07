@@ -1,3 +1,4 @@
+export * as ConfirmationModal from './confirmation-modal/confirmation-modal';
 export * as NotificationProvider from './notification-provider/notification-provider';
 export * as PopUp from './pop-up/pop-up';
 export * as SSButton from './ss-button/ss-button';
