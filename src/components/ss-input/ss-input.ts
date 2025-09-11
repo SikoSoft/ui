@@ -3,15 +3,14 @@ import { property, customElement, state, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { InputType } from '../../models/Input';
+import { SSInputProp, SSInputProps, ssInputProps } from './ss-input.models';
 
-import { InputSubmittedEvent } from '../../events/input-submitted';
-import { InputChangedEvent } from '../../events/input-changed';
+import { InputChangedEvent, InputSubmittedEvent } from './ss-input.events';
+import { SuggestionChangedEvent } from '../ss-input-auto/ss-input-auto.events';
 
 import '../ss-input-auto/ss-input-auto';
 
 import { theme } from '../../styles/theme';
-import { SuggestionChangedEvent } from '../../events/suggestion-changed';
-import { SSInputProp, SSInputProps, ssInputProps } from './ss-input.models';
 
 @customElement('ss-input')
 export class SSInput extends LitElement {

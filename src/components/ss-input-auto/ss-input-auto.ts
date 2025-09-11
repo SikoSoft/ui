@@ -2,8 +2,10 @@ import { html, css, nothing, LitElement } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
-import { SuggestiontSubmittedEvent } from '../../events/suggestion-submitted';
-import { SuggestionChangedEvent } from '../../events/suggestion-changed';
+import {
+  SuggestionChangedEvent,
+  SuggestionSubmittedEvent,
+} from './ss-input-auto.events';
 
 import { theme } from '../../styles/theme';
 import {
@@ -118,7 +120,7 @@ export class SSInputAuto extends LitElement {
 
   private sendSubmitEvent() {
     this.dispatchEvent(
-      new SuggestiontSubmittedEvent({ selectedIndex: this.selectedIndex }),
+      new SuggestionSubmittedEvent({ selectedIndex: this.selectedIndex }),
     );
   }
 

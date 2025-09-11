@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
-import { ToggleChangedEvent } from '../../events/toggle-changed';
+import { ToggleChangedEvent } from './ss-toggle.events';
 import { SSToggleProp, ssToggleProps, SSToggleProps } from './ss-toggle.models';
 
 @customElement('ss-toggle')
