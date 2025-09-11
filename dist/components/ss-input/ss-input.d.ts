@@ -1,6 +1,6 @@
 import { LitElement, PropertyValueMap } from 'lit';
-import '../ss-input-auto/ss-input-auto';
 import { SSInputProp, SSInputProps } from './ss-input.models';
+import '../ss-input-auto/ss-input-auto';
 export declare class SSInput extends LitElement {
     private clickFocusHandler;
     static styles: import("lit").CSSResult[];

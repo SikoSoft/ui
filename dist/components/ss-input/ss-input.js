@@ -9,11 +9,10 @@ import { LitElement, html, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { InputType } from '../../models/Input';
-import { InputSubmittedEvent } from '../../events/input-submitted';
-import { InputChangedEvent } from '../../events/input-changed';
+import { SSInputProp, ssInputProps } from './ss-input.models';
+import { InputChangedEvent, InputSubmittedEvent } from './ss-input.events';
 import '../ss-input-auto/ss-input-auto';
 import { theme } from '../../styles/theme';
-import { SSInputProp, ssInputProps } from './ss-input.models';
 let SSInput = class SSInput extends LitElement {
     constructor() {
         super(...arguments);

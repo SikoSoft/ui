@@ -8,4 +8,4 @@ export class ToggleChangedEvent extends CustomEvent {
         });
     }
 }
-//# sourceMappingURL=toggle-changed.js.map
+//# sourceMappingURL=ss-toggle.events.js.map

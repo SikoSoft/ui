@@ -8,4 +8,4 @@ export class SelectChangedEvent extends CustomEvent {
         });
     }
 }
-//# sourceMappingURL=select-changed.js.map
+//# sourceMappingURL=ss-select.events.js.map

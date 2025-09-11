@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "1.25.1",
+  "version": "2.0.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -129,9 +129,21 @@
       "types": "./dist/components/ss-input-auto/ss-input-auto.d.ts",
       "default": "./dist/components/ss-input-auto/ss-input-auto.js"
     },
+    "./components/ss-input-auto.events": {
+      "types": "./dist/components/ss-input-auto/ss-input-auto.events.d.ts",
+      "default": "./dist/components/ss-input-auto/ss-input-auto.events.js"
+    },
     "./components/ss-input": {
       "types": "./dist/components/ss-input/ss-input.d.ts",
       "default": "./dist/components/ss-input/ss-input.js"
+    },
+    "./components/ss-input.events": {
+      "types": "./dist/components/ss-input/ss-input.events.d.ts",
+      "default": "./dist/components/ss-input/ss-input.events.js"
+    },
+    "./components/ss-input.models": {
+      "types": "./dist/components/ss-input/ss-input.models.d.ts",
+      "default": "./dist/components/ss-input/ss-input.models.js"
     },
     "./components/ss-loader": {
       "types": "./dist/components/ss-loader/ss-loader.d.ts",
@@ -141,9 +153,17 @@
       "types": "./dist/components/ss-select/ss-select.d.ts",
       "default": "./dist/components/ss-select/ss-select.js"
     },
+    "./components/ss-select.events": {
+      "types": "./dist/components/ss-select/ss-select.events.d.ts",
+      "default": "./dist/components/ss-select/ss-select.events.js"
+    },
     "./components/ss-toggle": {
       "types": "./dist/components/ss-toggle/ss-toggle.d.ts",
       "default": "./dist/components/ss-toggle/ss-toggle.js"
+    },
+    "./components/ss-toggle.events": {
+      "types": "./dist/components/ss-toggle/ss-toggle.events.d.ts",
+      "default": "./dist/components/ss-toggle/ss-toggle.events.js"
     },
     "./components/tag-input.events": {
       "types": "./dist/components/tag-manager/tag-input/tag-input.events.d.ts",
@@ -156,30 +176,6 @@
     "./components/tag-manager.events": {
       "types": "./dist/components/tag-manager/tag-manager.events.d.ts",
       "default": "./dist/components/tag-manager/tag-manager.events.js"
-    },
-    "./events/input-changed": {
-      "types": "./dist/events/input-changed.d.ts",
-      "default": "./dist/events/input-changed.js"
-    },
-    "./events/input-submitted": {
-      "types": "./dist/events/input-submitted.d.ts",
-      "default": "./dist/events/input-submitted.js"
-    },
-    "./events/select-changed": {
-      "types": "./dist/events/select-changed.d.ts",
-      "default": "./dist/events/select-changed.js"
-    },
-    "./events/suggestion-changed": {
-      "types": "./dist/events/suggestion-changed.d.ts",
-      "default": "./dist/events/suggestion-changed.js"
-    },
-    "./events/suggestion-submitted": {
-      "types": "./dist/events/suggestion-submitted.d.ts",
-      "default": "./dist/events/suggestion-submitted.js"
-    },
-    "./events/toggle-changed": {
-      "types": "./dist/events/toggle-changed.d.ts",
-      "default": "./dist/events/toggle-changed.js"
     },
     "./models": {
       "types": "./dist/models/index.d.ts",
