@@ -46,12 +46,10 @@ let SSInput = class SSInput extends LitElement {
                     this.autoDismissed = true;
                     return;
                 case 'ArrowUp':
-                    this.sendSuggestionUpEvent();
-                    e.preventDefault();
+                    this.sendSuggestionUpEvent(e);
                     return;
                 case 'ArrowDown':
-                    this.sendSuggestionDownEvent();
-                    e.preventDefault();
+                    this.sendSuggestionDownEvent(e);
                     return;
                 case 'Enter':
                     if (this.showAutoComplete) {
@@ -137,17 +135,19 @@ let SSInput = class SSInput extends LitElement {
             value: '',
         }));
     }
-    sendSuggestionUpEvent() {
+    sendSuggestionUpEvent(e) {
         if (!this.autoCompleteNode) {
             return;
         }
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select-up'));
+        e.preventDefault();
     }
-    sendSuggestionDownEvent() {
+    sendSuggestionDownEvent(e) {
         if (!this.autoCompleteNode) {
             return;
         }
         this.autoCompleteNode.dispatchEvent(new CustomEvent('select-down'));
+        e.preventDefault();
     }
     sendSuggestionSelectEvent() {
         if (!this.autoCompleteNode) {
