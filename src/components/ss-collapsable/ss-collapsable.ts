@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, PropertyValues } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -8,6 +8,7 @@ import {
   ssCollapsableProps,
   SSCollapsableProps,
 } from './ss-collapsable.models';
+import { CollapsableToggledEvent } from './ss-collapsable.events';
 
 @customElement('ss-collapsable')
 export class SSCollapsable extends LitElement {
@@ -53,9 +54,21 @@ export class SSCollapsable extends LitElement {
   [SSCollapsableProp.TITLE]: SSCollapsableProps[SSCollapsableProp.TITLE] =
     ssCollapsableProps[SSCollapsableProp.TITLE].default;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   [SSCollapsableProp.OPEN]: SSCollapsableProps[SSCollapsableProp.OPEN] =
     ssCollapsableProps[SSCollapsableProp.OPEN].default;
+
+  @property({ type: String, reflect: true })
+  [SSCollapsableProp.PANEL_ID]: SSCollapsableProps[SSCollapsableProp.PANEL_ID] =
+    ssCollapsableProps[SSCollapsableProp.PANEL_ID].default;
+
+  protected firstUpdated(changedProperties: PropertyValues): void {
+    super.firstUpdated(changedProperties);
+
+    if (this.panelId === '') {
+      this.panelId = this.title;
+    }
+  }
 
   @state()
   get classes() {
@@ -67,12 +80,21 @@ export class SSCollapsable extends LitElement {
   }
 
   private toggle() {
+    this.open = !this.open;
+
+    /**
+     * @todo remove this event once fully transitioned to CollapsableToggledEvent
+     */
     this.dispatchEvent(
       new CustomEvent('toggled', {
         bubbles: true,
         composed: true,
         detail: this.open,
       }),
+    );
+
+    this.dispatchEvent(
+      new CollapsableToggledEvent({ panelId: this.panelId, isOpen: this.open }),
     );
   }
 
