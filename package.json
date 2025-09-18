@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -109,9 +109,9 @@
       "types": "./dist/components/sortable-list/sortable-list.models.d.ts",
       "default": "./dist/components/sortable-list/sortable-list.models.js"
     },
-    "./components/sortable-list-item": {
-      "types": "./dist/components/sortable-list-item/sortable-list-item.d.ts",
-      "default": "./dist/components/sortable-list-item/sortable-list-item.js"
+    "./components/sortable-item": {
+      "types": "./dist/components/sortable-list/sortable-item/sortable-item.d.ts",
+      "default": "./dist/components/sortable-list/sortable-item/sortable-item.js"
     },
     "./components/ss-button": {
       "types": "./dist/components/ss-button/ss-button.d.ts",
