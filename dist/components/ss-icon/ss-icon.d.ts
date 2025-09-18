@@ -6,6 +6,7 @@ import './svg/svg-valid-circle';
 import './svg/svg-invalid-circle';
 import './svg/svg-gear';
 import './svg/svg-delete';
+import './svg/svg-sort';
 import { SSIconProp, SSIconProps } from './ss-icon.models';
 export declare class SSIcon extends LitElement {
     static styles: import("lit").CSSResult[];

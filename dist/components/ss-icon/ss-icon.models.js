@@ -7,6 +7,7 @@ export var IconName;
     IconName["INVALID_CIRCLE"] = "invalidCircle";
     IconName["GEAR"] = "gear";
     IconName["DELETE"] = "delete";
+    IconName["SORT"] = "sort";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {

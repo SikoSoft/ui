@@ -24,3 +24,4 @@ export declare const ValidCircle: Story;
 export declare const InvalidCircle: Story;
 export declare const Gear: Story;
 export declare const Delete: Story;
+export declare const Sort: Story;

@@ -1,0 +1,83 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+import { LitElement, html, css } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+let SortableItem = class SortableItem extends LitElement {
+    constructor() {
+        super(...arguments);
+        this.id = '';
+        this.dragging = false;
+    }
+    static { this.styles = css `
+    .sortable-item {
+      padding: 1rem;
+      display: flex;
+      border: 1px transparent solid;
+
+      .handle {
+        cursor: grab;
+
+        &:hover {
+          scale: 1.5;
+        }
+      }
+
+      &.dragging {
+        border: 1px #000 dashed;
+
+        .handle {
+          cursor: grabbing;
+        }
+      }
+    }
+  `; }
+    dragStart(event) {
+        this.dragging = true;
+        //console.log("dragstart", { event });
+    }
+    dragEnd(event) {
+        this.dragging = false;
+        //console.log("dragend", { event });
+    }
+    get classes() {
+        return {
+            'sortable-item': true,
+            dragging: this.dragging,
+        };
+    }
+    render() {
+        return html `
+      <div
+        class=${classMap(this.classes)}
+        draggable="true"
+        @dragstart=${this.dragStart}
+        @dragend=${this.dragEnd}
+        part="item"
+      >
+        <div class="handle" part="handle">
+          <ss-icon name="sort" size="20" color="currentColor"></ss-icon>
+        </div>
+        <slot></slot>
+      </div>
+    `;
+    }
+};
+__decorate([
+    property()
+], SortableItem.prototype, "id", void 0);
+__decorate([
+    state()
+], SortableItem.prototype, "dragging", void 0);
+__decorate([
+    state()
+], SortableItem.prototype, "classes", null);
+SortableItem = __decorate([
+    customElement('sortable-item')
+], SortableItem);
+export { SortableItem };
+//# sourceMappingURL=sortable-item.js.map

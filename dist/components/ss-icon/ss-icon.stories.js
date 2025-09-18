@@ -55,4 +55,9 @@ export const Delete = {
         name: IconName.DELETE,
     },
 };
+export const Sort = {
+    args: {
+        name: IconName.SORT,
+    },
+};
 //# sourceMappingURL=ss-icon.stories.js.map
