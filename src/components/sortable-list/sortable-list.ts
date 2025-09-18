@@ -1,5 +1,5 @@
 import { LitElement, html, TemplateResult, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { SortEndEvent, SortUpdatedEvent } from './sortable-list.events';
 import { SortableItem } from './sortable-item/sortable-item';
 import './sortable-item/sortable-item';
@@ -8,6 +8,9 @@ import './sortable-item/sortable-item';
 export class SortableList extends LitElement {
   private draggedElement: SortableItem | undefined;
   private lastSortedState: string[] = [];
+
+  @state()
+  private isDragging: boolean = false;
 
   static styles = css`
     .sortable-list {
@@ -23,12 +26,18 @@ export class SortableList extends LitElement {
   }
 
   dragStart(event: DragEvent) {
-    console.log('dragStart', event);
+    //console.log('dragStart', event);
+    this.isDragging = true;
 
     if (event.target) {
       this.draggedElement = event.target as SortableItem;
       this.lastSortedState = this.getSortedIds();
     }
+  }
+
+  dragEnd(event: DragEvent) {
+    //console.log('dragEnd', event);
+    this.isDragging = false;
   }
 
   dragOver(event: DragEvent) {
@@ -111,6 +120,7 @@ export class SortableList extends LitElement {
     return html`<div
       class="sort-container"
       @dragstart=${this.dragStart}
+      @dragend=${this.dragEnd}
       @dragover=${this.dragOver}
       @drop=${this.drop}
       @mouseover=${this.mouseOver}

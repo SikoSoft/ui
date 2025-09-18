@@ -10,7 +10,20 @@ export class SortableItem extends LitElement {
       display: flex;
       border: 1px transparent solid;
 
+      .handle {
+        cursor: grab;
+
+        &:hover {
+          scale: 1.5;
+        }
+      }
+
       &.dragging {
+        border: 1px #000 dashed;
+
+        .handle {
+          cursor: grabbing;
+        }
       }
     }
   `;
@@ -45,8 +58,11 @@ export class SortableItem extends LitElement {
         draggable="true"
         @dragstart=${this.dragStart}
         @dragend=${this.dragEnd}
+        part="item"
       >
-        <div class="handle" part="handle">↕️</div>
+        <div class="handle" part="handle">
+          <ss-icon name="sort" size="20" color="currentColor"></ss-icon>
+        </div>
         <slot></slot>
       </div>
     `;
