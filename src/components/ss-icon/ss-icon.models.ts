@@ -8,6 +8,7 @@ export enum IconName {
   INVALID_CIRCLE = 'invalidCircle',
   GEAR = 'gear',
   DELETE = 'delete',
+  SORT = 'sort',
 }
 
 export enum SSIconProp {

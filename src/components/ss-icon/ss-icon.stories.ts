@@ -69,3 +69,9 @@ export const Delete: Story = {
     name: IconName.DELETE,
   },
 };
+
+export const Sort: Story = {
+  args: {
+    name: IconName.SORT,
+  },
+};
