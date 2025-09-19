@@ -18,13 +18,24 @@ let SortableItem = class SortableItem extends LitElement {
       padding: 1rem;
       display: flex;
       border: 1px transparent solid;
+      width: 100%;
+      box-sizing: border-box;
 
       .handle {
         cursor: grab;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
 
         &:hover {
           scale: 1.5;
         }
+      }
+
+      .content {
+        flex-grow: 1;
+        padding-left: 1rem;
       }
 
       &.dragging {
@@ -62,7 +73,9 @@ let SortableItem = class SortableItem extends LitElement {
         <div class="handle" part="handle">
           <ss-icon name="sort" size="20" color="currentColor"></ss-icon>
         </div>
-        <slot></slot>
+        <div class="content" part="content">
+          <slot></slot>
+        </div>
       </div>
     `;
     }
