@@ -14,7 +14,6 @@ export class SortableList extends LitElement {
 
   static styles = css`
     .sortable-list {
-      background-color: #eee;
       padding: 1rem;
     }
   `;
@@ -85,7 +84,7 @@ export class SortableList extends LitElement {
     //console.log("getSortedIds");
     const ids: string[] = [];
 
-    const sortItems = this.querySelectorAll('sort-item');
+    const sortItems = this.querySelectorAll('sortable-item');
     for (let sortItem of sortItems) {
       const id = sortItem.getAttribute('id');
 
@@ -118,7 +117,7 @@ export class SortableList extends LitElement {
 
   render(): TemplateResult {
     return html`<div
-      class="sort-container"
+      class="sortable-list"
       @dragstart=${this.dragStart}
       @dragend=${this.dragEnd}
       @dragover=${this.dragOver}
