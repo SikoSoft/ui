@@ -10,12 +10,14 @@ export enum FileUploadProp {
   ENDPOINT_URL = 'endpointUrl',
   ALLOWED_TYPES = 'allowedTypes',
   PREVIEW = 'preview',
+  BUTTON_TEXT = 'buttonText',
 }
 
 export interface FileUploadProps extends PropTypes {
   [FileUploadProp.ENDPOINT_URL]: string;
   [FileUploadProp.ALLOWED_TYPES]: string[];
   [FileUploadProp.PREVIEW]: boolean;
+  [FileUploadProp.BUTTON_TEXT]: string;
 }
 
 export const fileUploadProps: PropConfigMap<FileUploadProps> = {
@@ -33,5 +35,10 @@ export const fileUploadProps: PropConfigMap<FileUploadProps> = {
     default: false,
     control: 'boolean',
     description: 'Whether or not a preview should be shown',
+  },
+  [FileUploadProp.BUTTON_TEXT]: {
+    default: 'Choose file',
+    control: 'text',
+    description: 'The text to display on the upload button',
   },
 };

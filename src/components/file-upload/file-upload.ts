@@ -28,6 +28,10 @@ export class FileUpload extends LitElement {
   [FileUploadProp.PREVIEW]: FileUploadProps[FileUploadProp.PREVIEW] =
     fileUploadProps[FileUploadProp.PREVIEW].default;
 
+  @property()
+  [FileUploadProp.BUTTON_TEXT]: FileUploadProps[FileUploadProp.BUTTON_TEXT] =
+    fileUploadProps[FileUploadProp.BUTTON_TEXT].default;
+
   @state()
   showSelector = false;
 
@@ -107,7 +111,7 @@ export class FileUpload extends LitElement {
           : nothing}
 
         <div class="selector">
-          <button @click=${this.openFileSelector}>Upload file</button>
+          <button @click=${this.openFileSelector}>${this.buttonText}</button>
         </div>
       </div>
     `;

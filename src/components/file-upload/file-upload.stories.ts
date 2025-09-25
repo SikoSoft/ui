@@ -15,6 +15,7 @@ const meta = {
     layout: 'centered',
   },
   args: {
+    buttonText: fileUploadProps.buttonText.default,
     endpointUrl: 'https://example.com/upload',
     allowedTypes: ['image/jpeg', 'image/png', 'image/gif'],
     preview: true,
@@ -22,6 +23,7 @@ const meta = {
   argTypes,
   render: args => html`
     <file-upload
+      buttonText=${args.buttonText}
       endpointUrl=${args.endpointUrl}
       .allowedTypes=${args.allowedTypes}
       ?preview=${args.preview}
@@ -36,5 +38,11 @@ type Story = StoryObj<FileUploadProps>;
 export const Preview: Story = {
   args: {
     preview: true,
+  },
+};
+
+export const NoPreview: Story = {
+  args: {
+    preview: false,
   },
 };
