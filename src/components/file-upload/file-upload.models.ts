@@ -1,5 +1,4 @@
-import { ControlType } from "@/models/Control";
-import { PropConfigMap, PropTypes } from "@/models/Prop";
+import { PropConfigMap, PropTypes } from '@/models/Prop';
 
 export interface FileUploadRequestBody {}
 
@@ -8,9 +7,9 @@ export interface FileUploadResponseBody {
 }
 
 export enum FileUploadProp {
-  ENDPOINT_URL = "endpointUrl",
-  ALLOWED_TYPES = "allowedTypes",
-  PREVIEW = "preview",
+  ENDPOINT_URL = 'endpointUrl',
+  ALLOWED_TYPES = 'allowedTypes',
+  PREVIEW = 'preview',
 }
 
 export interface FileUploadProps extends PropTypes {
@@ -21,25 +20,18 @@ export interface FileUploadProps extends PropTypes {
 
 export const fileUploadProps: PropConfigMap<FileUploadProps> = {
   [FileUploadProp.ENDPOINT_URL]: {
-    default: "",
-    control: {
-      type: ControlType.TEXT,
-    },
-    description: "The URL of the endpoint which the file will be posted to",
+    default: '',
+    control: 'text',
+    description: 'The URL of the endpoint which the file will be posted to',
   },
   [FileUploadProp.ALLOWED_TYPES]: {
     default: [],
-    control: {
-      type: ControlType.SELECT,
-      options: [],
-    },
-    description: "An array of acceptable file types",
+    control: 'text',
+    description: 'An array of acceptable file types',
   },
   [FileUploadProp.PREVIEW]: {
     default: false,
-    control: {
-      type: ControlType.BOOLEAN,
-    },
-    description: "Whether or not a preview should be shown",
+    control: 'boolean',
+    description: 'Whether or not a preview should be shown',
   },
 };
