@@ -32,6 +32,10 @@ export class FileUpload extends LitElement {
   [FileUploadProp.BUTTON_TEXT]: FileUploadProps[FileUploadProp.BUTTON_TEXT] =
     fileUploadProps[FileUploadProp.BUTTON_TEXT].default;
 
+  @property()
+  [FileUploadProp.AUTH_TOKEN]: FileUploadProps[FileUploadProp.AUTH_TOKEN] =
+    fileUploadProps[FileUploadProp.AUTH_TOKEN].default;
+
   @state()
   showSelector = false;
 
@@ -63,10 +67,16 @@ export class FileUpload extends LitElement {
       var data = new FormData();
       data.append('file', file);
 
-      const result = await fetch(this.endpointUrl, {
+      const headers = new Headers();
+      headers.append('authorization', this.authToken);
+
+      const request = new Request(this.endpointUrl, {
         method: 'POST',
+        headers,
         body: data,
       });
+
+      const result = await fetch(request);
 
       if (!result.ok) {
         this.dispatchEvent(new FileUploadFailedEvent({}));

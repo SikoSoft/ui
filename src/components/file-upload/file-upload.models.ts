@@ -11,6 +11,7 @@ export enum FileUploadProp {
   ALLOWED_TYPES = 'allowedTypes',
   PREVIEW = 'preview',
   BUTTON_TEXT = 'buttonText',
+  AUTH_TOKEN = 'authToken',
 }
 
 export interface FileUploadProps extends PropTypes {
@@ -18,6 +19,7 @@ export interface FileUploadProps extends PropTypes {
   [FileUploadProp.ALLOWED_TYPES]: string[];
   [FileUploadProp.PREVIEW]: boolean;
   [FileUploadProp.BUTTON_TEXT]: string;
+  [FileUploadProp.AUTH_TOKEN]: string;
 }
 
 export const fileUploadProps: PropConfigMap<FileUploadProps> = {
@@ -40,5 +42,10 @@ export const fileUploadProps: PropConfigMap<FileUploadProps> = {
     default: 'Choose file',
     control: 'text',
     description: 'The text to display on the upload button',
+  },
+  [FileUploadProp.AUTH_TOKEN]: {
+    default: '',
+    control: 'text',
+    description: 'Authorization token to include in the upload request headers',
   },
 };
