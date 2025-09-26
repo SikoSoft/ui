@@ -4,6 +4,7 @@ export var FileUploadProp;
     FileUploadProp["ALLOWED_TYPES"] = "allowedTypes";
     FileUploadProp["PREVIEW"] = "preview";
     FileUploadProp["BUTTON_TEXT"] = "buttonText";
+    FileUploadProp["AUTH_TOKEN"] = "authToken";
 })(FileUploadProp || (FileUploadProp = {}));
 export const fileUploadProps = {
     [FileUploadProp.ENDPOINT_URL]: {
@@ -25,6 +26,11 @@ export const fileUploadProps = {
         default: 'Choose file',
         control: 'text',
         description: 'The text to display on the upload button',
+    },
+    [FileUploadProp.AUTH_TOKEN]: {
+        default: '',
+        control: 'text',
+        description: 'Authorization token to include in the upload request headers',
     },
 };
 //# sourceMappingURL=file-upload.models.js.map

@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -17,10 +17,11 @@ let FileUpload = class FileUpload extends LitElement {
         this[_b] = fileUploadProps[FileUploadProp.ALLOWED_TYPES].default;
         this[_c] = fileUploadProps[FileUploadProp.PREVIEW].default;
         this[_d] = fileUploadProps[FileUploadProp.BUTTON_TEXT].default;
+        this[_e] = fileUploadProps[FileUploadProp.AUTH_TOKEN].default;
         this.showSelector = false;
         this.url = '';
     }
-    static { _a = FileUploadProp.ENDPOINT_URL, _b = FileUploadProp.ALLOWED_TYPES, _c = FileUploadProp.PREVIEW, _d = FileUploadProp.BUTTON_TEXT; }
+    static { _a = FileUploadProp.ENDPOINT_URL, _b = FileUploadProp.ALLOWED_TYPES, _c = FileUploadProp.PREVIEW, _d = FileUploadProp.BUTTON_TEXT, _e = FileUploadProp.AUTH_TOKEN; }
     static { this.styles = css ``; }
     get classes() {
         return {
@@ -39,10 +40,14 @@ let FileUpload = class FileUpload extends LitElement {
         try {
             var data = new FormData();
             data.append('file', file);
-            const result = await fetch(this.endpointUrl, {
+            const headers = new Headers();
+            headers.append('authorization', this.authToken);
+            const request = new Request(this.endpointUrl, {
                 method: 'POST',
+                headers,
                 body: data,
             });
+            const result = await fetch(request);
             if (!result.ok) {
                 this.dispatchEvent(new FileUploadFailedEvent({}));
                 return;
@@ -99,6 +104,9 @@ __decorate([
 __decorate([
     property()
 ], FileUpload.prototype, _d, void 0);
+__decorate([
+    property()
+], FileUpload.prototype, _e, void 0);
 __decorate([
     state()
 ], FileUpload.prototype, "showSelector", void 0);

@@ -6,6 +6,7 @@ export declare class FileUpload extends LitElement {
     [FileUploadProp.ALLOWED_TYPES]: FileUploadProps[FileUploadProp.ALLOWED_TYPES];
     [FileUploadProp.PREVIEW]: FileUploadProps[FileUploadProp.PREVIEW];
     [FileUploadProp.BUTTON_TEXT]: FileUploadProps[FileUploadProp.BUTTON_TEXT];
+    [FileUploadProp.AUTH_TOKEN]: FileUploadProps[FileUploadProp.AUTH_TOKEN];
     showSelector: boolean;
     url: string;
     get classes(): Record<string, boolean>;
