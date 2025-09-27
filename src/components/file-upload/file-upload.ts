@@ -20,7 +20,7 @@ export class FileUpload extends LitElement {
   [FileUploadProp.ENDPOINT_URL]: FileUploadProps[FileUploadProp.ENDPOINT_URL] =
     fileUploadProps[FileUploadProp.ENDPOINT_URL].default;
 
-  @property({ type: Array })
+  @property()
   [FileUploadProp.ALLOWED_TYPES]: FileUploadProps[FileUploadProp.ALLOWED_TYPES] =
     fileUploadProps[FileUploadProp.ALLOWED_TYPES].default;
 
@@ -102,6 +102,7 @@ export class FileUpload extends LitElement {
   openFileSelector() {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
+    input.setAttribute('accept', this.allowedTypes);
     input.click();
     input.onchange = () => {
       if (input.files) {

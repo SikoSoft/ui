@@ -16,7 +16,7 @@ export enum FileUploadProp {
 
 export interface FileUploadProps extends PropTypes {
   [FileUploadProp.ENDPOINT_URL]: string;
-  [FileUploadProp.ALLOWED_TYPES]: string[];
+  [FileUploadProp.ALLOWED_TYPES]: string;
   [FileUploadProp.PREVIEW]: boolean;
   [FileUploadProp.BUTTON_TEXT]: string;
   [FileUploadProp.AUTH_TOKEN]: string;
@@ -29,9 +29,9 @@ export const fileUploadProps: PropConfigMap<FileUploadProps> = {
     description: 'The URL of the endpoint which the file will be posted to',
   },
   [FileUploadProp.ALLOWED_TYPES]: {
-    default: [],
+    default: '',
     control: 'text',
-    description: 'An array of acceptable file types',
+    description: 'A comma separated list of acceptable file types',
   },
   [FileUploadProp.PREVIEW]: {
     default: false,
