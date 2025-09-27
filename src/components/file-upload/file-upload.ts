@@ -52,9 +52,11 @@ export class FileUpload extends LitElement {
   @state()
   get isImage(): boolean {
     if (
-      this.url.match(/\.jpg$/) ||
-      this.url.match(/\.png$/) ||
-      this.url.match(/\.gif$/)
+      this.url.match(/\.webp$/i) ||
+      this.url.match(/\.jpeg$/i) ||
+      this.url.match(/\.jpg$/i) ||
+      this.url.match(/\.png$/i) ||
+      this.url.match(/\.gif$/i)
     ) {
       return true;
     }
