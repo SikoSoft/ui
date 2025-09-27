@@ -12,9 +12,33 @@ import {
   FileUploadResponseBody,
 } from './file-upload.models';
 
+import '../ss-button/ss-button';
+
 @customElement('file-upload')
 export class FileUpload extends LitElement {
-  static styles = css``;
+  static styles = css`
+    :host {
+      display: block;
+    }
+
+    .file-upload {
+      padding: 1rem;
+    }
+
+    .preview {
+      margin-bottom: 1rem;
+    }
+
+    .preview img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .selector {
+      text-align: center;
+    }
+  `;
 
   @property()
   [FileUploadProp.ENDPOINT_URL]: FileUploadProps[FileUploadProp.ENDPOINT_URL] =
@@ -116,15 +140,17 @@ export class FileUpload extends LitElement {
 
   render(): TemplateResult {
     return html`
-      <div class=${classMap(this.classes)}>
+      <div class=${classMap(this.classes)} part="container">
         ${this.preview && this.isImage
-          ? html`<div class="preview">
-              <img src=${this.url} />
+          ? html`<div class="preview" part="preview">
+              <img src=${this.url} part="image" />
             </div>`
           : nothing}
 
-        <div class="selector">
-          <button @click=${this.openFileSelector}>${this.buttonText}</button>
+        <div class="selector" part="selector">
+          <ss-button @click=${this.openFileSelector}
+            >${this.buttonText}</ss-button
+          >
         </div>
       </div>
     `;
