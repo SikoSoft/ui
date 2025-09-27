@@ -1,5 +1,6 @@
 import { LitElement, TemplateResult } from 'lit';
 import { FileUploadProp, FileUploadProps } from './file-upload.models';
+import '../ss-button/ss-button';
 export declare class FileUpload extends LitElement {
     static styles: import("lit").CSSResult;
     [FileUploadProp.ENDPOINT_URL]: FileUploadProps[FileUploadProp.ENDPOINT_URL];

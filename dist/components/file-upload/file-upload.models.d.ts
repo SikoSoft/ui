@@ -13,7 +13,7 @@ export declare enum FileUploadProp {
 }
 export interface FileUploadProps extends PropTypes {
     [FileUploadProp.ENDPOINT_URL]: string;
-    [FileUploadProp.ALLOWED_TYPES]: string[];
+    [FileUploadProp.ALLOWED_TYPES]: string;
     [FileUploadProp.PREVIEW]: boolean;
     [FileUploadProp.BUTTON_TEXT]: string;
     [FileUploadProp.AUTH_TOKEN]: string;

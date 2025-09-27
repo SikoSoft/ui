@@ -10,7 +10,7 @@ declare const meta: {
     args: {
         buttonText: string;
         endpointUrl: string;
-        allowedTypes: string[];
+        allowedTypes: string;
         preview: true;
     };
     argTypes: Partial<import("@storybook/core/csf").ArgTypes<FileUploadProps>> | undefined;
@@ -20,3 +20,4 @@ export default meta;
 type Story = StoryObj<FileUploadProps>;
 export declare const Preview: Story;
 export declare const NoPreview: Story;
+export declare const OnlyImages: Story;

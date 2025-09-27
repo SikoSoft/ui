@@ -13,9 +13,9 @@ export const fileUploadProps = {
         description: 'The URL of the endpoint which the file will be posted to',
     },
     [FileUploadProp.ALLOWED_TYPES]: {
-        default: [],
+        default: '',
         control: 'text',
-        description: 'An array of acceptable file types',
+        description: 'A comma separated list of acceptable file types',
     },
     [FileUploadProp.PREVIEW]: {
         default: false,

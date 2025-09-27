@@ -10,6 +10,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { FileUploadSuccessEvent, FileUploadFailedEvent, } from './file-upload.events';
 import { FileUploadProp, fileUploadProps, } from './file-upload.models';
+import '../ss-button/ss-button';
 let FileUpload = class FileUpload extends LitElement {
     constructor() {
         super(...arguments);
@@ -22,16 +23,40 @@ let FileUpload = class FileUpload extends LitElement {
         this.url = '';
     }
     static { _a = FileUploadProp.ENDPOINT_URL, _b = FileUploadProp.ALLOWED_TYPES, _c = FileUploadProp.PREVIEW, _d = FileUploadProp.BUTTON_TEXT, _e = FileUploadProp.AUTH_TOKEN; }
-    static { this.styles = css ``; }
+    static { this.styles = css `
+    :host {
+      display: block;
+    }
+
+    .file-upload {
+      padding: 1rem;
+    }
+
+    .preview {
+      margin-bottom: 1rem;
+    }
+
+    .preview img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .selector {
+      text-align: center;
+    }
+  `; }
     get classes() {
         return {
             'file-upload': true,
         };
     }
     get isImage() {
-        if (this.url.match(/\.jpg$/) ||
-            this.url.match(/\.png$/) ||
-            this.url.match(/\.gif$/)) {
+        if (this.url.match(/\.webp$/i) ||
+            this.url.match(/\.jpeg$/i) ||
+            this.url.match(/\.jpg$/i) ||
+            this.url.match(/\.png$/i) ||
+            this.url.match(/\.gif$/i)) {
             return true;
         }
         return false;
@@ -66,6 +91,7 @@ let FileUpload = class FileUpload extends LitElement {
     openFileSelector() {
         const input = document.createElement('input');
         input.setAttribute('type', 'file');
+        input.setAttribute('accept', this.allowedTypes);
         input.click();
         input.onchange = () => {
             if (input.files) {
@@ -78,15 +104,17 @@ let FileUpload = class FileUpload extends LitElement {
     }
     render() {
         return html `
-      <div class=${classMap(this.classes)}>
+      <div class=${classMap(this.classes)} part="container">
         ${this.preview && this.isImage
-            ? html `<div class="preview">
-              <img src=${this.url} />
+            ? html `<div class="preview" part="preview">
+              <img src=${this.url} part="image" />
             </div>`
             : nothing}
 
-        <div class="selector">
-          <button @click=${this.openFileSelector}>${this.buttonText}</button>
+        <div class="selector" part="selector">
+          <ss-button @click=${this.openFileSelector}
+            >${this.buttonText}</ss-button
+          >
         </div>
       </div>
     `;
@@ -96,7 +124,7 @@ __decorate([
     property()
 ], FileUpload.prototype, _a, void 0);
 __decorate([
-    property({ type: Array })
+    property()
 ], FileUpload.prototype, _b, void 0);
 __decorate([
     property({ type: Boolean })
