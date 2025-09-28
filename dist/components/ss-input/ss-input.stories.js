@@ -1,8 +1,7 @@
 import { html } from 'lit';
 import { StoryBook } from '../../lib/StoryBook';
 import './ss-input';
-import { InputType } from '../../models/Input';
-import { ssInputProps } from './ss-input.models';
+import { ssInputProps, InputType } from './ss-input.models';
 const argTypes = StoryBook.buildArgTypes(ssInputProps);
 const meta = {
     title: 'components/ss-input',

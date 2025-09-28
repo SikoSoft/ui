@@ -1,7 +1,6 @@
 import type { StoryObj } from '@storybook/web-components';
 import './ss-input';
-import { InputType } from '../../models/Input';
-import { SSInputProps } from './ss-input.models';
+import { SSInputProps, InputType } from './ss-input.models';
 declare const meta: {
     title: string;
     tags: string[];

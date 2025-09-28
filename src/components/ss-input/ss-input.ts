@@ -2,8 +2,12 @@ import { LitElement, html, PropertyValueMap, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { InputType } from '../../models/Input';
-import { SSInputProp, SSInputProps, ssInputProps } from './ss-input.models';
+import {
+  SSInputProp,
+  SSInputProps,
+  ssInputProps,
+  InputType,
+} from './ss-input.models';
 
 import { InputChangedEvent, InputSubmittedEvent } from './ss-input.events';
 import { SuggestionChangedEvent } from '../ss-input-auto/ss-input-auto.events';

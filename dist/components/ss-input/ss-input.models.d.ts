@@ -1,5 +1,11 @@
 import { PropConfigMap, PropTypes } from '../../models/Prop';
-import { InputType } from '../../models/Input';
+export declare enum InputType {
+    TEXT = "text",
+    DATE = "date",
+    DATETIME_LOCAL = "datetime-local",
+    PASSWORD = "password",
+    NUMBER = "number"
+}
 export declare enum SSInputProp {
     TYPE = "type",
     VALUE = "value",

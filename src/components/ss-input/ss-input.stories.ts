@@ -4,8 +4,7 @@ import { html } from 'lit';
 import { StoryBook } from '../../lib/StoryBook';
 
 import './ss-input';
-import { InputType } from '../../models/Input';
-import { SSInputProps, ssInputProps } from './ss-input.models';
+import { SSInputProps, ssInputProps, InputType } from './ss-input.models';
 
 const argTypes = StoryBook.buildArgTypes(ssInputProps);
 

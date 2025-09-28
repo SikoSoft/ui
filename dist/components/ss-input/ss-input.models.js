@@ -1,4 +1,11 @@
-import { InputType } from '../../models/Input';
+export var InputType;
+(function (InputType) {
+    InputType["TEXT"] = "text";
+    InputType["DATE"] = "date";
+    InputType["DATETIME_LOCAL"] = "datetime-local";
+    InputType["PASSWORD"] = "password";
+    InputType["NUMBER"] = "number";
+})(InputType || (InputType = {}));
 export var SSInputProp;
 (function (SSInputProp) {
     SSInputProp["TYPE"] = "type";
