@@ -117,6 +117,10 @@ let SSCarousel = class SSCarousel extends LitElement {
         opacity: 1;
       }
 
+      ::slotted(.slide:not(.active)) {
+        pointer-events: none;
+      }
+
       ::slotted(.slide.active-initialized) {
         opacity: 1;
         animation: become-active 200ms linear;
