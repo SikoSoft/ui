@@ -7,10 +7,13 @@ declare const meta: {
     parameters: {
         layout: string;
     };
-    args: {};
+    args: {
+        disabled: false;
+    };
     argTypes: Partial<import("@storybook/core/csf").ArgTypes<SortableListProps>> | undefined;
     render: (args: SortableListProps) => import("lit-html").TemplateResult<1>;
 };
 export default meta;
 type Story = StoryObj<SortableListProps>;
 export declare const Default: Story;
+export declare const Disabled: Story;

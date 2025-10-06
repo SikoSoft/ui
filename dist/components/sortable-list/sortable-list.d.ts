@@ -1,12 +1,13 @@
 import { LitElement, TemplateResult } from 'lit';
 import { SortableItem } from './sortable-item/sortable-item';
 import './sortable-item/sortable-item';
+import { SortableListProp, SortableListProps } from './sortable-list.models';
 export declare class SortableList extends LitElement {
     private draggedElement;
     private lastSortedState;
+    [SortableListProp.DISABLED]: SortableListProps[SortableListProp.DISABLED];
     private isDragging;
     static styles: import("lit").CSSResult;
-    connectedCallback(): void;
     dragStart(event: DragEvent): void;
     dragEnd(event: DragEvent): void;
     dragOver(event: DragEvent): void;
@@ -14,6 +15,6 @@ export declare class SortableList extends LitElement {
     drop(event: DragEvent): void;
     getSortedIds(): string[];
     isBefore(el1: SortableItem, el2: SortableItem): boolean;
-    mouseOver(event: MouseEvent): void;
+    get classes(): Record<string, boolean>;
     render(): TemplateResult;
 }

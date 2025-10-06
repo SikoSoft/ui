@@ -4,27 +4,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var _a;
 import { LitElement, html, css } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { SortEndEvent, SortUpdatedEvent } from './sortable-list.events';
 import './sortable-item/sortable-item';
+import { SortableListProp, sortableListProps, } from './sortable-list.models';
+import { classMap } from 'lit/directives/class-map.js';
 let SortableList = class SortableList extends LitElement {
     constructor() {
         super(...arguments);
         this.lastSortedState = [];
+        this[_a] = sortableListProps[SortableListProp.DISABLED].default;
         this.isDragging = false;
     }
+    static { _a = SortableListProp.DISABLED; }
     static { this.styles = css `
-    .sortable-list {
+    :host {
+      display: block;
+    }
+
+    .sortable-list:not(.disabled) {
       padding: 1rem;
     }
   `; }
-    connectedCallback() {
-        super.connectedCallback();
-        //window.addEventListener("dragover", this.dragOver);
-    }
     dragStart(event) {
-        //console.log('dragStart', event);
+        if (this.disabled) {
+            return;
+        }
         this.isDragging = true;
         if (event.target) {
             this.draggedElement = event.target;
@@ -32,11 +39,15 @@ let SortableList = class SortableList extends LitElement {
         }
     }
     dragEnd(event) {
-        //console.log('dragEnd', event);
+        if (this.disabled) {
+            return;
+        }
         this.isDragging = false;
     }
     dragOver(event) {
-        //console.log("dragover", event.target);
+        if (this.disabled) {
+            return;
+        }
         if (!(event.target instanceof HTMLElement)) {
             return;
         }
@@ -57,7 +68,9 @@ let SortableList = class SortableList extends LitElement {
         return element?.nodeName === 'SORTABLE-ITEM';
     }
     drop(event) {
-        //console.log("drop", event);
+        if (this.disabled) {
+            return;
+        }
         const sortedIds = this.getSortedIds();
         this.dispatchEvent(new SortEndEvent({ sortedIds }));
         if (JSON.stringify(this.lastSortedState) !== JSON.stringify(sortedIds)) {
@@ -65,7 +78,6 @@ let SortableList = class SortableList extends LitElement {
         }
     }
     getSortedIds() {
-        //console.log("getSortedIds");
         const ids = [];
         const sortItems = this.querySelectorAll('sortable-item');
         for (let sortItem of sortItems) {
@@ -74,7 +86,6 @@ let SortableList = class SortableList extends LitElement {
                 ids.push(id);
             }
         }
-        console.log(sortItems);
         return ids;
     }
     isBefore(el1, el2) {
@@ -85,25 +96,34 @@ let SortableList = class SortableList extends LitElement {
                 }
         return false;
     }
-    mouseOver(event) {
-        //  console.log({ event });
+    get classes() {
+        return {
+            'sortable-list': true,
+            dragging: this.isDragging,
+            disabled: this[SortableListProp.DISABLED],
+        };
     }
     render() {
         return html `<div
-      class="sortable-list"
+      class=${classMap(this.classes)}
       @dragstart=${this.dragStart}
       @dragend=${this.dragEnd}
       @dragover=${this.dragOver}
       @drop=${this.drop}
-      @mouseover=${this.mouseOver}
     >
       <slot></slot>
     </div>`;
     }
 };
 __decorate([
+    property({ type: Boolean })
+], SortableList.prototype, _a, void 0);
+__decorate([
     state()
 ], SortableList.prototype, "isDragging", void 0);
+__decorate([
+    state()
+], SortableList.prototype, "classes", null);
 SortableList = __decorate([
     customElement('sortable-list')
 ], SortableList);
