@@ -46,12 +46,10 @@ export class SortableItem extends LitElement {
 
   dragStart(event: DragEvent) {
     this.dragging = true;
-    //console.log("dragstart", { event });
   }
 
   dragEnd(event: DragEvent) {
     this.dragging = false;
-    //console.log("dragend", { event });
   }
 
   @state()

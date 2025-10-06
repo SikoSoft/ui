@@ -18,14 +18,7 @@ export class SortableList extends LitElement {
     }
   `;
 
-  connectedCallback(): void {
-    super.connectedCallback();
-
-    //window.addEventListener("dragover", this.dragOver);
-  }
-
   dragStart(event: DragEvent) {
-    //console.log('dragStart', event);
     this.isDragging = true;
 
     if (event.target) {
@@ -35,13 +28,10 @@ export class SortableList extends LitElement {
   }
 
   dragEnd(event: DragEvent) {
-    //console.log('dragEnd', event);
     this.isDragging = false;
   }
 
   dragOver(event: DragEvent) {
-    //console.log("dragover", event.target);
-
     if (!(event.target instanceof HTMLElement)) {
       return;
     }
@@ -69,8 +59,6 @@ export class SortableList extends LitElement {
   }
 
   drop(event: DragEvent) {
-    //console.log("drop", event);
-
     const sortedIds = this.getSortedIds();
 
     this.dispatchEvent(new SortEndEvent({ sortedIds }));
@@ -81,7 +69,6 @@ export class SortableList extends LitElement {
   }
 
   getSortedIds(): string[] {
-    //console.log("getSortedIds");
     const ids: string[] = [];
 
     const sortItems = this.querySelectorAll('sortable-item');
@@ -92,8 +79,6 @@ export class SortableList extends LitElement {
         ids.push(id);
       }
     }
-
-    console.log(sortItems);
 
     return ids;
   }
@@ -111,10 +96,6 @@ export class SortableList extends LitElement {
     return false;
   }
 
-  mouseOver(event: MouseEvent) {
-    //  console.log({ event });
-  }
-
   render(): TemplateResult {
     return html`<div
       class="sortable-list"
@@ -122,7 +103,6 @@ export class SortableList extends LitElement {
       @dragend=${this.dragEnd}
       @dragover=${this.dragOver}
       @drop=${this.drop}
-      @mouseover=${this.mouseOver}
     >
       <slot></slot>
     </div>`;
