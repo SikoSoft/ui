@@ -1,11 +1,20 @@
-import { LitElement, html, TemplateResult, css } from 'lit';
+import { LitElement, html, TemplateResult, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import {
+  SortableItemProp,
+  SortableItemProps,
+  sortableItemProps,
+} from './sortable-item.models';
 
 @customElement('sortable-item')
 export class SortableItem extends LitElement {
   static styles = css`
-    .sortable-item {
+    :host {
+      display: block;
+    }
+
+    .sortable-item:not(.disabled) {
       padding: 1rem;
       display: flex;
       border: 1px transparent solid;
@@ -39,16 +48,28 @@ export class SortableItem extends LitElement {
     }
   `;
 
+  @property({ type: Boolean })
+  [SortableItemProp.DISABLED]: SortableItemProps[SortableItemProp.DISABLED] =
+    sortableItemProps[SortableItemProp.DISABLED].default;
+
   @property()
   id = '';
 
   @state() dragging = false;
 
   dragStart(event: DragEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     this.dragging = true;
   }
 
   dragEnd(event: DragEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     this.dragging = false;
   }
 
@@ -57,6 +78,7 @@ export class SortableItem extends LitElement {
     return {
       'sortable-item': true,
       dragging: this.dragging,
+      disabled: this[SortableItemProp.DISABLED],
     };
   }
 
@@ -64,14 +86,18 @@ export class SortableItem extends LitElement {
     return html`
       <div
         class=${classMap(this.classes)}
-        draggable="true"
+        draggable="${!this.disabled}"
         @dragstart=${this.dragStart}
         @dragend=${this.dragEnd}
         part="item"
       >
-        <div class="handle" part="handle">
-          <ss-icon name="sort" size="20" color="currentColor"></ss-icon>
-        </div>
+        ${!this.disabled
+          ? html`
+              <div class="handle" part="handle">
+                <ss-icon name="sort" size="20" color="currentColor"></ss-icon>
+              </div>
+            `
+          : nothing}
         <div class="content" part="content">
           <slot></slot>
         </div>

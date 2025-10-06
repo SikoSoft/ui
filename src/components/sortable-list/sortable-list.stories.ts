@@ -14,14 +14,14 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  args: {},
+  args: { disabled: false },
   argTypes,
   render: args => html`
-    <sortable-list>
-      <sortable-item>Item 1</sortable-item>
-      <sortable-item>Item 2</sortable-item>
-      <sortable-item>Item 3</sortable-item>
-      <sortable-item>Item 4</sortable-item>
+    <sortable-list ?disabled=${args.disabled}>
+      <sortable-item ?disabled=${args.disabled}>Item 1</sortable-item>
+      <sortable-item ?disabled=${args.disabled}>Item 2</sortable-item>
+      <sortable-item ?disabled=${args.disabled}>Item 3</sortable-item>
+      <sortable-item ?disabled=${args.disabled}>Item 4</sortable-item>
     </sortable-list>
   `,
 } satisfies Meta<SortableListProps>;
@@ -31,4 +31,10 @@ type Story = StoryObj<SortableListProps>;
 
 export const Default: Story = {
   args: {},
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
 };

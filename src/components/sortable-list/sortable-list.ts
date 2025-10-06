@@ -1,24 +1,42 @@
 import { LitElement, html, TemplateResult, css } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { SortEndEvent, SortUpdatedEvent } from './sortable-list.events';
 import { SortableItem } from './sortable-item/sortable-item';
 import './sortable-item/sortable-item';
+import {
+  SortableListProp,
+  sortableListProps,
+  SortableListProps,
+} from './sortable-list.models';
+import { classMap } from 'lit/directives/class-map.js';
 
 @customElement('sortable-list')
 export class SortableList extends LitElement {
   private draggedElement: SortableItem | undefined;
   private lastSortedState: string[] = [];
 
+  @property({ type: Boolean })
+  [SortableListProp.DISABLED]: SortableListProps[SortableListProp.DISABLED] =
+    sortableListProps[SortableListProp.DISABLED].default;
+
   @state()
   private isDragging: boolean = false;
 
   static styles = css`
-    .sortable-list {
+    :host {
+      display: block;
+    }
+
+    .sortable-list:not(.disabled) {
       padding: 1rem;
     }
   `;
 
   dragStart(event: DragEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     this.isDragging = true;
 
     if (event.target) {
@@ -28,10 +46,18 @@ export class SortableList extends LitElement {
   }
 
   dragEnd(event: DragEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     this.isDragging = false;
   }
 
   dragOver(event: DragEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     if (!(event.target instanceof HTMLElement)) {
       return;
     }
@@ -59,6 +85,10 @@ export class SortableList extends LitElement {
   }
 
   drop(event: DragEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     const sortedIds = this.getSortedIds();
 
     this.dispatchEvent(new SortEndEvent({ sortedIds }));
@@ -96,9 +126,18 @@ export class SortableList extends LitElement {
     return false;
   }
 
+  @state()
+  get classes(): Record<string, boolean> {
+    return {
+      'sortable-list': true,
+      dragging: this.isDragging,
+      disabled: this[SortableListProp.DISABLED],
+    };
+  }
+
   render(): TemplateResult {
     return html`<div
-      class="sortable-list"
+      class=${classMap(this.classes)}
       @dragstart=${this.dragStart}
       @dragend=${this.dragEnd}
       @dragover=${this.dragOver}
