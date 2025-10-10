@@ -3,7 +3,7 @@
   "description": "Common web components",
   "license": "MIT",
   "author": "Aaron Wright",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -200,6 +200,26 @@
     "./components/tag-input.events": {
       "types": "./dist/components/tag-manager/tag-input/tag-input.events.d.ts",
       "default": "./dist/components/tag-manager/tag-input/tag-input.events.js"
+    },
+    "./components/tab-container": {
+      "types": "./dist/components/tab-container/tab-container.d.ts",
+      "default": "./dist/components/tab-container/tab-container.js"
+    },
+    "./components/tab-container.events": {
+      "types": "./dist/components/tab-container/tab-container.events.d.ts",
+      "default": "./dist/components/tab-container/tab-container.events.js"
+    },
+    "./components/tab-container.models": {
+      "types": "./dist/components/tab-container/tab-container.models.d.ts",
+      "default": "./dist/components/tab-container/tab-container.models.js"
+    },
+    "./components/tab-pane": {
+      "types": "./dist/components/tab-container/tab-pane/tab-pane.d.ts",
+      "default": "./dist/components/tab-container/tab-pane/tab-pane.js"
+    },
+    "./components/tab-pane.models": {
+      "types": "./dist/components/tab-container/tab-pane/tab-pane.models.d.ts",
+      "default": "./dist/components/tab-container/tab-pane/tab-pane.models.js"
     },
     "./components/tag-manager": {
       "types": "./dist/components/tag-manager/tag-manager.d.ts",

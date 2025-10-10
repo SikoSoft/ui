@@ -28,6 +28,33 @@ let SortableList = class SortableList extends LitElement {
       padding: 1rem;
     }
   `; }
+    get items() {
+        return [...this.children].filter(child => child.nodeName !== 'STYLE');
+    }
+    firstUpdated(changedProperties) {
+        super.firstUpdated(changedProperties);
+        this.setupItems();
+        this.setupSlot();
+    }
+    setupSlot() {
+        const slotNode = this.shadowRoot?.querySelector('slot');
+        if (slotNode) {
+            slotNode.addEventListener('slotchange', () => {
+                this.setupItems();
+            });
+        }
+    }
+    setupItems() {
+        if (this.items.length > 0) {
+            this.items.forEach((item, index) => {
+                if (item.classList.contains('item')) {
+                    item.classList.remove('item');
+                }
+                item.classList.add('item');
+                item.setAttribute('data-index', index.toString());
+            });
+        }
+    }
     dragStart(event) {
         if (this.disabled) {
             return;

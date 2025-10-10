@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult } from 'lit';
+import { LitElement, TemplateResult, PropertyValues } from 'lit';
 import { SortableItem } from './sortable-item/sortable-item';
 import './sortable-item/sortable-item';
 import { SortableListProp, SortableListProps } from './sortable-list.models';
@@ -8,6 +8,10 @@ export declare class SortableList extends LitElement {
     [SortableListProp.DISABLED]: SortableListProps[SortableListProp.DISABLED];
     private isDragging;
     static styles: import("lit").CSSResult;
+    get items(): HTMLElement[];
+    protected firstUpdated(changedProperties: PropertyValues): void;
+    setupSlot(): void;
+    setupItems(): void;
     dragStart(event: DragEvent): void;
     dragEnd(event: DragEvent): void;
     dragOver(event: DragEvent): void;
