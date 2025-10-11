@@ -26,13 +26,19 @@ let SSSelect = class SSSelect extends LitElement {
     handleSelectChanged() {
         this.dispatchEvent(new SelectChangedEvent({ value: this.selectNode.value }));
     }
+    valueIsSelected(value) {
+        if (this.multiple && Array.isArray(this.selected)) {
+            return this.selected.map(String).includes(value);
+        }
+        return `${this.selected}` === `${value}`;
+    }
     render() {
         return html `
       <select @change=${this.handleSelectChanged} ?multiple=${this.multiple}>
         ${repeat(this.options, option => option.value, option => html `
             <option
               value=${option.value}
-              ?selected=${`${this.selected}` === `${option.value}`}
+              ?selected=${this.valueIsSelected(option.value)}
             >
               ${option.label}
             </option>

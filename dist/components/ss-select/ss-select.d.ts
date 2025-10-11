@@ -8,5 +8,6 @@ export declare class SSSelect extends LitElement {
     selectNode: HTMLSelectElement;
     get value(): string;
     private handleSelectChanged;
+    valueIsSelected(value: string): boolean;
     render(): import("lit-html").TemplateResult<1>;
 }
