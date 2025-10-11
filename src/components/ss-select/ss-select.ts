@@ -29,9 +29,15 @@ export class SSSelect extends LitElement {
   }
 
   private handleSelectChanged() {
-    this.dispatchEvent(
-      new SelectChangedEvent({ value: this.selectNode.value }),
-    );
+    let value: string | string[] = this.selectNode.value;
+    if (this.multiple) {
+      value = [...this.selectNode.selectedOptions].reduce(
+        (acc: string[], option) => [...acc, option.value],
+        [],
+      );
+    }
+
+    this.dispatchEvent(new SelectChangedEvent({ value }));
   }
 
   valueIsSelected(value: string): boolean {
