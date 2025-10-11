@@ -8,6 +8,7 @@ declare const meta: {
         layout: string;
     };
     args: {
+        multiple: false;
         options: {
             label: string;
             value: string;
@@ -19,3 +20,4 @@ declare const meta: {
 export default meta;
 type Story = StoryObj<SSSelectProps>;
 export declare const PreSelectedOption: Story;
+export declare const MultipleSelect: Story;
