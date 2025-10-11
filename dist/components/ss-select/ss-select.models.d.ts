@@ -5,10 +5,12 @@ export interface SelectOption {
 }
 export declare enum SSSelectProp {
     OPTIONS = "options",
-    SELECTED = "selected"
+    SELECTED = "selected",
+    MULTIPLE = "multiple"
 }
 export interface SSSelectProps extends PropTypes {
     [SSSelectProp.OPTIONS]: SelectOption[];
     [SSSelectProp.SELECTED]: string;
+    [SSSelectProp.MULTIPLE]: boolean;
 }
 export declare const ssSelectProps: PropConfigMap<SSSelectProps>;

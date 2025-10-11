@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b;
+var _a, _b, _c;
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -16,8 +16,9 @@ let SSSelect = class SSSelect extends LitElement {
         super(...arguments);
         this[_a] = ssSelectProps[SSSelectProp.OPTIONS].default;
         this[_b] = ssSelectProps[SSSelectProp.SELECTED].default;
+        this[_c] = ssSelectProps[SSSelectProp.MULTIPLE].default;
     }
-    static { _a = SSSelectProp.OPTIONS, _b = SSSelectProp.SELECTED; }
+    static { _a = SSSelectProp.OPTIONS, _b = SSSelectProp.SELECTED, _c = SSSelectProp.MULTIPLE; }
     static { this.styles = [theme]; }
     get value() {
         return this.selectNode.value;
@@ -27,7 +28,7 @@ let SSSelect = class SSSelect extends LitElement {
     }
     render() {
         return html `
-      <select @change=${this.handleSelectChanged}>
+      <select @change=${this.handleSelectChanged} ?multiple=${this.multiple}>
         ${repeat(this.options, option => option.value, option => html `
             <option
               value=${option.value}
@@ -46,6 +47,9 @@ __decorate([
 __decorate([
     property()
 ], SSSelect.prototype, _b, void 0);
+__decorate([
+    property({ type: Boolean })
+], SSSelect.prototype, _c, void 0);
 __decorate([
     query('select')
 ], SSSelect.prototype, "selectNode", void 0);

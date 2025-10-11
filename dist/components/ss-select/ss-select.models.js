@@ -2,6 +2,7 @@ export var SSSelectProp;
 (function (SSSelectProp) {
     SSSelectProp["OPTIONS"] = "options";
     SSSelectProp["SELECTED"] = "selected";
+    SSSelectProp["MULTIPLE"] = "multiple";
 })(SSSelectProp || (SSSelectProp = {}));
 export const ssSelectProps = {
     [SSSelectProp.OPTIONS]: {
@@ -13,6 +14,11 @@ export const ssSelectProps = {
         default: '',
         description: 'The value of the selected option',
         control: 'text',
+    },
+    [SSSelectProp.MULTIPLE]: {
+        default: false,
+        description: 'Whether multiple options can be selected',
+        control: 'boolean',
     },
 };
 //# sourceMappingURL=ss-select.models.js.map

@@ -4,6 +4,7 @@ export declare class SSSelect extends LitElement {
     static styles: import("lit").CSSResult[];
     [SSSelectProp.OPTIONS]: SSSelectProps[SSSelectProp.OPTIONS];
     [SSSelectProp.SELECTED]: SSSelectProps[SSSelectProp.SELECTED];
+    [SSSelectProp.MULTIPLE]: SSSelectProps[SSSelectProp.MULTIPLE];
     selectNode: HTMLSelectElement;
     get value(): string;
     private handleSelectChanged;
