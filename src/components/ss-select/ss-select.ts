@@ -34,6 +34,14 @@ export class SSSelect extends LitElement {
     );
   }
 
+  valueIsSelected(value: string): boolean {
+    if (this.multiple && Array.isArray(this.selected)) {
+      return this.selected.map(String).includes(value);
+    }
+
+    return `${this.selected}` === `${value}`;
+  }
+
   render() {
     return html`
       <select @change=${this.handleSelectChanged} ?multiple=${this.multiple}>
@@ -43,7 +51,7 @@ export class SSSelect extends LitElement {
           option => html`
             <option
               value=${option.value}
-              ?selected=${`${this.selected}` === `${option.value}`}
+              ?selected=${this.valueIsSelected(option.value)}
             >
               ${option.label}
             </option>
