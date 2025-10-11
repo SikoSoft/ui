@@ -8,11 +8,13 @@ export interface SelectOption {
 export enum SSSelectProp {
   OPTIONS = 'options',
   SELECTED = 'selected',
+  MULTIPLE = 'multiple',
 }
 
 export interface SSSelectProps extends PropTypes {
   [SSSelectProp.OPTIONS]: SelectOption[];
   [SSSelectProp.SELECTED]: string;
+  [SSSelectProp.MULTIPLE]: boolean;
 }
 
 export const ssSelectProps: PropConfigMap<SSSelectProps> = {
@@ -25,5 +27,10 @@ export const ssSelectProps: PropConfigMap<SSSelectProps> = {
     default: '',
     description: 'The value of the selected option',
     control: 'text',
+  },
+  [SSSelectProp.MULTIPLE]: {
+    default: false,
+    description: 'Whether multiple options can be selected',
+    control: 'boolean',
   },
 };

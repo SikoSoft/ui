@@ -18,6 +18,10 @@ export class SSSelect extends LitElement {
   @property() [SSSelectProp.SELECTED]: SSSelectProps[SSSelectProp.SELECTED] =
     ssSelectProps[SSSelectProp.SELECTED].default;
 
+  @property({ type: Boolean })
+  [SSSelectProp.MULTIPLE]: SSSelectProps[SSSelectProp.MULTIPLE] =
+    ssSelectProps[SSSelectProp.MULTIPLE].default;
+
   @query('select') selectNode!: HTMLSelectElement;
 
   get value(): string {
@@ -32,7 +36,7 @@ export class SSSelect extends LitElement {
 
   render() {
     return html`
-      <select @change=${this.handleSelectChanged}>
+      <select @change=${this.handleSelectChanged} ?multiple=${this.multiple}>
         ${repeat(
           this.options,
           option => option.value,
