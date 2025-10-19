@@ -42,7 +42,7 @@ export class SSSelect extends LitElement {
 
   valueIsSelected(value: string): boolean {
     if (this.multiple && Array.isArray(this.selected)) {
-      return this.selected.map(String).includes(value);
+      return this.selected.map(String).includes(String(value));
     }
 
     return `${this.selected}` === `${value}`;
