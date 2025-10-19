@@ -32,7 +32,7 @@ let SSSelect = class SSSelect extends LitElement {
     }
     valueIsSelected(value) {
         if (this.multiple && Array.isArray(this.selected)) {
-            return this.selected.map(String).includes(value);
+            return this.selected.map(String).includes(String(value));
         }
         return `${this.selected}` === `${value}`;
     }
