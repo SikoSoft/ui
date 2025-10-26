@@ -32,13 +32,6 @@ const meta = {
       navigationIndex=${args.navigationIndex}
     >
       <div class="something">Test</div>
-      <div class="different">Text</div>
-      <div>3</div>
-      <div>4</div>
-      <span>Cat</span>
-      <div>6</div>
-      <div>Dog</div>
-      <div>8</div>
     </ss-carousel>
   `,
 };
