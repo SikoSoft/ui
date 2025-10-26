@@ -358,7 +358,7 @@ export class SSCarousel extends LitElement {
       }
     });
 
-    document.addEventListener('touchend', e => {
+    document.addEventListener('touchend', _ => {
       this.dragDistance = 0;
       const xDiff = this.latestContactPoint.x - this.startContactPoint.x;
       if (this.hasContact) {
@@ -452,7 +452,9 @@ export class SSCarousel extends LitElement {
 
       if (
         index === this.slideIndex - 1 ||
-        (this.slideIndex === 0 && index === this.totalSlides - 1)
+        (this.slideIndex === 0 &&
+          index === this.totalSlides - 1 &&
+          this.totalSlides > 1)
       ) {
         child.classList.add('previous');
       }
@@ -466,7 +468,9 @@ export class SSCarousel extends LitElement {
 
       if (
         index === this.slideIndex + 1 ||
-        (this.slideIndex === this.totalSlides - 1 && index === 0)
+        (this.slideIndex === this.totalSlides - 1 &&
+          index === 0 &&
+          this.totalSlides > 1)
       ) {
         child.classList.add('next');
       }
