@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { TabPane } from './tab-pane/tab-pane';
 import { repeat } from 'lit/directives/repeat.js';
@@ -10,10 +10,15 @@ import {
   tabContainerProps,
   TabContainerProps,
 } from './tab-container.models';
+import { TabPaneReadyChangedEvent } from './tab-pane/tab-pane.events';
 
 @customElement('tab-container')
 export class TabContainer extends LitElement {
   static styles = css`
+    .slot-container {
+      display: none;
+    }
+
     .tab-headers {
       display: flex;
       border-bottom: 1px solid var(--border-color, #ccc);
@@ -66,21 +71,60 @@ export class TabContainer extends LitElement {
   @state()
   tabs: Tab[] = [];
 
-  connectedCallback(): void {
-    super.connectedCallback();
+  get panes(): HTMLElement[] {
+    this.updateComplete;
+    console.log('Getting panes...', this.paneId, this.isConnected, [
+      ...this.children,
+    ]);
 
-    this.setupPanes();
+    /*
+    const slot = this.shadowRoot?.querySelector('slot');
+    if (slot) {
+      return slot.assignedElements() as TabPane[];
+    }
+    return [];
+    */
+
+    return [...this.children].filter(
+      child => child.nodeName === 'TAB-PANE',
+    ) as HTMLElement[];
   }
 
-  setupPanes() {
-    const panes = this.querySelectorAll('tab-pane');
-    panes.forEach((pane, index) => {
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('tab-pane-ready', this.tabPaneReady as EventListener);
+  }
+
+  tabPaneReady(event: TabPaneReadyChangedEvent): void {
+    console.log('Tab pane is ready:', event);
+  }
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    this.setupPanes();
+
+    this.setupSlot();
+  }
+
+  setupSlot() {
+    const slotNode = this.shadowRoot?.querySelector('slot');
+    if (slotNode) {
+      slotNode.addEventListener('slotchange', () => {
+        this.setupPanes();
+      });
+    }
+  }
+
+  async setupPanes() {
+    await this.updateComplete;
+    const tabs: Tab[] = [];
+    this.panes.forEach((pane, index) => {
       const tabPane = pane as TabPane;
-      this.tabs.push({
+      tabs.push({
         title: pane.getAttribute('title') || `Tab ${index + 1}`,
-        content: tabPane,
+        content: tabPane.cloneNode(true) as TabPane,
       });
     });
+    this.tabs = tabs;
   }
 
   setActiveIndex(index: number) {
@@ -93,6 +137,10 @@ export class TabContainer extends LitElement {
 
   render() {
     return html`
+      <div class="slot-container" part="slot-container">
+        <slot></slot>
+      </div>
+
       <div class="tab-container" part="container">
         <div class="tab-headers" part="headers">
           ${repeat(
