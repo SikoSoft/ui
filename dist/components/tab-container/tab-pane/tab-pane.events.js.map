@@ -1,0 +1,1 @@
+{"version":3,"file":"tab-pane.events.js","sourceRoot":"","sources":["../../../../src/components/tab-container/tab-pane/tab-pane.events.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,4BAA4B,GAAG,gBAAgB,CAAC;AAI7D,MAAM,OAAO,wBAAyB,SAAQ,WAAuC;IACnF,YAAY,MAAkC;QAC5C,KAAK,CAAC,4BAA4B,EAAE;YAClC,MAAM;YACN,OAAO,EAAE,IAAI;YACb,QAAQ,EAAE,IAAI;SACf,CAAC,CAAC;IACL,CAAC;CACF"}

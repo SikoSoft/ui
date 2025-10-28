@@ -20,6 +20,10 @@ let TabContainer = class TabContainer extends LitElement {
     }
     static { _a = TabContainerProp.INDEX, _b = TabContainerProp.PANE_ID; }
     static { this.styles = css `
+    .slot-container {
+      display: none;
+    }
+
     .tab-headers {
       display: flex;
       border-bottom: 1px solid var(--border-color, #ccc);
@@ -60,19 +64,32 @@ let TabContainer = class TabContainer extends LitElement {
       }
     }
   `; }
-    connectedCallback() {
-        super.connectedCallback();
-        this.setupPanes();
+    get panes() {
+        return [...this.children].filter(child => child.nodeName === 'TAB-PANE');
     }
-    setupPanes() {
-        const panes = this.querySelectorAll('tab-pane');
-        panes.forEach((pane, index) => {
+    firstUpdated(_changedProperties) {
+        this.setupPanes();
+        this.setupSlot();
+    }
+    setupSlot() {
+        const slotNode = this.shadowRoot?.querySelector('slot');
+        if (slotNode) {
+            slotNode.addEventListener('slotchange', () => {
+                this.setupPanes();
+            });
+        }
+    }
+    async setupPanes() {
+        await this.updateComplete;
+        const tabs = [];
+        this.panes.forEach((pane, index) => {
             const tabPane = pane;
-            this.tabs.push({
+            tabs.push({
                 title: pane.getAttribute('title') || `Tab ${index + 1}`,
-                content: tabPane,
+                content: tabPane.cloneNode(true),
             });
         });
+        this.tabs = tabs;
     }
     setActiveIndex(index) {
         this.index = index;
@@ -80,6 +97,10 @@ let TabContainer = class TabContainer extends LitElement {
     }
     render() {
         return html `
+      <div class="slot-container" part="slot-container">
+        <slot></slot>
+      </div>
+
       <div class="tab-container" part="container">
         <div class="tab-headers" part="headers">
           ${repeat(this.tabs, (tab, index) => html `

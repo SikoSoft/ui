@@ -228,6 +228,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         return index;
     }
     get slides() {
+        //console.log('Getting slides...');
         return [...this.children].filter(child => child.nodeName !== 'STYLE');
     }
     connectedCallback() {
@@ -246,8 +247,10 @@ let SSCarousel = class SSCarousel extends LitElement {
         }, 50);
     }
     setupSlot() {
+        //console.log('CAROUSEL: Setting up slot...');
         const slotNode = this.shadowRoot?.querySelector('slot');
         if (slotNode) {
+            //console.log('CAROUSEL: slot found, so setup listener');
             slotNode.addEventListener('slotchange', () => {
                 this.setupSlides();
                 this.updateSlides();
@@ -255,6 +258,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         }
     }
     setupSlides() {
+        console.log('CAROUSEL: Setting up slides...', this.slides.length);
         if (this.slides.length > 0) {
             this.slides.forEach((slide, index) => {
                 if (slide.classList.contains('slide')) {
