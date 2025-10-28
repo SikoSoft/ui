@@ -10,7 +10,6 @@ import {
   tabContainerProps,
   TabContainerProps,
 } from './tab-container.models';
-import { TabPaneReadyChangedEvent } from './tab-pane/tab-pane.events';
 
 @customElement('tab-container')
 export class TabContainer extends LitElement {
@@ -72,31 +71,9 @@ export class TabContainer extends LitElement {
   tabs: Tab[] = [];
 
   get panes(): HTMLElement[] {
-    this.updateComplete;
-    console.log('Getting panes...', this.paneId, this.isConnected, [
-      ...this.children,
-    ]);
-
-    /*
-    const slot = this.shadowRoot?.querySelector('slot');
-    if (slot) {
-      return slot.assignedElements() as TabPane[];
-    }
-    return [];
-    */
-
     return [...this.children].filter(
       child => child.nodeName === 'TAB-PANE',
     ) as HTMLElement[];
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.addEventListener('tab-pane-ready', this.tabPaneReady as EventListener);
-  }
-
-  tabPaneReady(event: TabPaneReadyChangedEvent): void {
-    console.log('Tab pane is ready:', event);
   }
 
   protected firstUpdated(_changedProperties: PropertyValues): void {
