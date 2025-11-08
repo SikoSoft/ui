@@ -82,16 +82,18 @@ let SSCollapsable = class SSCollapsable extends LitElement {
     }
     render() {
         return html `
-      <div class=${classMap(this.classes)}>
-        <div class="head">
+      <div class=${classMap(this.classes)} part="container">
+        <div class="head" part="header">
           <div class="title">${this.title}</div>
+
           <div class="icon">
             <button @click=${() => this.handleIconClick()}>
               ${this.open ? '-' : '+'}
             </button>
           </div>
         </div>
-        <div class="body">
+
+        <div class="body" part="content">
           <slot></slot>
         </div>
       </div>

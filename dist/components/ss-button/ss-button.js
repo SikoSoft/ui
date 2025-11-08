@@ -39,15 +39,21 @@ let SSButton = class SSButton extends LitElement {
         }
 
         &.positive {
-          background-color: var(--positive-background-color);
-          color: var(--positive-color);
-          border-color: var(--positive-color);
+          background-color: var(
+            --positive-background-color,
+            var(--ssui-positive-background-color)
+          );
+          color: var(--positive-color, var(--ssui-positive-color));
+          border-color: var(--positive-color, var(--ssui-positive-color));
         }
 
         &.negative {
-          background-color: var(--negative-background-color);
-          color: var(--negative-color);
-          border-color: var(--negative-color);
+          background-color: var(
+            --negative-background-color,
+            var(--ssui-negative-background-color)
+          );
+          color: var(--ssui-negative-color, var(--ssui-negative-color));
+          border-color: var(--negative-color, var(--ssui-negative-color));
         }
 
         &.disabled {
