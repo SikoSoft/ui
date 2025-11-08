@@ -2,10 +2,12 @@ import { css } from 'lit';
 
 export const theme = css`
   :host {
-    --negative-color: #600;
-    --negative-background-color: #ffc4c4;
-    --positive-color: #060;
-    --positive-background-color: #c4ffc4;
+    --ssui-negative-color: #600;
+    --ssui-negative-background-color: #ffc4c4;
+    --ssui-positive-color: #060;
+    --ssui-positive-background-color: #c4ffc4;
+    --ssui-box-background-color: #fff;
+    --ssui-box-border-color: #aaa;
   }
 
   input[type='text'],
@@ -29,8 +31,11 @@ export const theme = css`
   }
 
   .box {
-    background-color: #fff;
+    background-color: var(
+      --box-background-color,
+      var(--ssui-box-background-color)
+    );
     border-radius: 8px;
-    border: 1px #aaa solid;
+    border: 1px var(--box-border-color, var(--ssui-box-border-color)) solid;
   }
 `;
