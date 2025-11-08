@@ -1,4 +1,4 @@
-import { LitElement, html, TemplateResult, css } from 'lit';
+import { LitElement, html, TemplateResult, css, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { SortEndEvent, SortUpdatedEvent } from './sortable-list.events';
 import { SortableItem } from './sortable-item/sortable-item';
@@ -31,6 +31,42 @@ export class SortableList extends LitElement {
       padding: 1rem;
     }
   `;
+
+  get items(): HTMLElement[] {
+    return [...this.children].filter(
+      child => child.nodeName !== 'STYLE',
+    ) as HTMLElement[];
+  }
+
+  protected firstUpdated(changedProperties: PropertyValues): void {
+    super.firstUpdated(changedProperties);
+
+    this.setupItems();
+
+    this.setupSlot();
+  }
+
+  setupSlot() {
+    const slotNode = this.shadowRoot?.querySelector('slot');
+    if (slotNode) {
+      slotNode.addEventListener('slotchange', () => {
+        this.setupItems();
+      });
+    }
+  }
+
+  setupItems() {
+    if (this.items.length > 0) {
+      this.items.forEach((item, index) => {
+        if (item.classList.contains('item')) {
+          item.classList.remove('item');
+        }
+
+        item.classList.add('item');
+        item.setAttribute('data-index', index.toString());
+      });
+    }
+  }
 
   dragStart(event: DragEvent) {
     if (this.disabled) {

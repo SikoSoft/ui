@@ -10,6 +10,7 @@ export enum SSCarouselProp {
   GAP = 'gap',
   PERSPECTIVE = 'perspective',
   DISCRETE = 'discrete',
+  ICON_COLOR = 'iconColor',
 }
 
 export interface SSCarouselProps extends PropTypes {
@@ -22,6 +23,7 @@ export interface SSCarouselProps extends PropTypes {
   [SSCarouselProp.GAP]: number;
   [SSCarouselProp.PERSPECTIVE]: number;
   [SSCarouselProp.DISCRETE]: boolean;
+  [SSCarouselProp.ICON_COLOR]: string;
 }
 
 export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
@@ -70,6 +72,11 @@ export const ssCarouselProps: PropConfigMap<SSCarouselProps> = {
     control: 'boolean',
     description:
       'Whether the carousel should show inactive frames when it does not have contact',
+  },
+  [SSCarouselProp.ICON_COLOR]: {
+    default: '#000',
+    control: 'text',
+    description: 'The color of the navigation icons',
   },
 };
 

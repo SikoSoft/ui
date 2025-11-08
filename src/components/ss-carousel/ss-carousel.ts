@@ -204,6 +204,10 @@ export class SSCarousel extends LitElement {
   [SSCarouselProp.DISCRETE]: SSCarouselProps[SSCarouselProp.DISCRETE] =
     ssCarouselProps[SSCarouselProp.DISCRETE].default;
 
+  @property({ type: String })
+  [SSCarouselProp.ICON_COLOR]: SSCarouselProps[SSCarouselProp.ICON_COLOR] =
+    ssCarouselProps[SSCarouselProp.ICON_COLOR].default;
+
   @query('.carousel')
   carousel!: HTMLDivElement;
 
@@ -550,7 +554,7 @@ export class SSCarousel extends LitElement {
                 >
                   <ss-icon
                     name="arrowCircleLeft"
-                    color="#000"
+                    color=${this[SSCarouselProp.ICON_COLOR]}
                     size="48"
                   ></ss-icon>
                 </button>
@@ -567,7 +571,7 @@ export class SSCarousel extends LitElement {
                 >
                   <ss-icon
                     name="arrowCircleRight"
-                    color="#000"
+                    color=${this[SSCarouselProp.ICON_COLOR]}
                     size="48"
                   ></ss-icon>
                 </button>
