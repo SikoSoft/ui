@@ -32,8 +32,13 @@ let TagList = class TagList extends LitElement {
         display: inline-block;
         padding: 0.25rem;
         border-radius: 0.125rem;
-        border: 1px #ccc solid;
-        background-color: #efefef;
+        border: 1px
+          var(--input-border-color, var(--ssui-input-border-color, #ccc)) solid;
+        background-color: var(
+          --input-background-color,
+          var(--ssui-input-background-color, #fff)
+        );
+        color: var(--input-text-color, var(--ssui-input-text-color, #000));
         position: relative;
       }
 
