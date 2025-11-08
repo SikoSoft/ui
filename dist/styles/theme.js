@@ -7,6 +7,9 @@ export const theme = css `
     --ssui-positive-background-color: #c4ffc4;
     --ssui-box-background-color: #fff;
     --ssui-box-border-color: #aaa;
+    --ssui-input-background-color: #fff;
+    --ssui-input-border-color: #ccc;
+    --ssui-input-text-color: #000;
   }
 
   input[type='text'],
@@ -20,6 +23,14 @@ export const theme = css `
     padding: 0.5rem;
     box-sizing: border-box;
     width: 100%;
+    color: var(--input-text-color, var(--ssui-input-text-color, #000));
+    background-color: var(
+      --input-background-color,
+      var(--ssui-input-background-color, #fff)
+    );
+    border: 1px solid
+      var(--input-border-color, var(--ssui-input-border-color, #ccc));
+    border-radius: 0.5rem;
   }
   main {
     margin-top: 1rem;
