@@ -26,8 +26,12 @@ let TabContainer = class TabContainer extends LitElement {
 
     .tab-headers {
       display: flex;
-      border-bottom: 1px solid var(--border-color, #ccc);
-      background-color: var(--header-bg-color, #f9f9f9);
+      border-bottom: 1px solid
+        var(--tabs-border-color, var(--ssui-tabs-border-color, #ccc));
+      background-color: var(
+        --tabs-header-bg-color,
+        var(--ssui-tabs-header-bg-color, #f9f9f9)
+      );
 
       .tab-header {
         padding: 12px 16px;
@@ -37,13 +41,20 @@ let TabContainer = class TabContainer extends LitElement {
         margin-bottom: -1px;
 
         &:hover {
-          background-color: var(--header-hover-bg-color, #eee);
+          background-color: var(
+            --tabs-header-hover-bg-color,
+            var(--ssui-tabs-header-hover-bg-color, #eee)
+          );
         }
 
         &.active {
-          border: 1px solid var(--border-color, #ccc);
+          border: 1px solid
+            var(--tabs-border-color, var(--ssui-tabs-border-color, #ccc));
           border-bottom: none;
-          background-color: var(--active-header-bg-color, #fff);
+          background-color: var(
+            --tabs-active-header-bg-color,
+            var(--ssui-tabs-active-header-bg-color, #fff)
+          );
           font-weight: bold;
         }
       }
