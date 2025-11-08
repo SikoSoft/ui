@@ -28,7 +28,8 @@ export class TagManager extends LitElement {
     css`
       .tag-manager {
         border-radius: 0.25rem;
-        border: 1px #ccc solid;
+        border: 1px var(--box-border-color, var(--ssui-box-border-color, #ccc))
+          solid;
       }
 
       .no-tags {
