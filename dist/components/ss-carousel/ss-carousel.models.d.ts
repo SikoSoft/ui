@@ -8,7 +8,8 @@ export declare enum SSCarouselProp {
     HEIGHT = "height",
     GAP = "gap",
     PERSPECTIVE = "perspective",
-    DISCRETE = "discrete"
+    DISCRETE = "discrete",
+    ICON_COLOR = "iconColor"
 }
 export interface SSCarouselProps extends PropTypes {
     [SSCarouselProp.INFINITE]: boolean;
@@ -20,6 +21,7 @@ export interface SSCarouselProps extends PropTypes {
     [SSCarouselProp.GAP]: number;
     [SSCarouselProp.PERSPECTIVE]: number;
     [SSCarouselProp.DISCRETE]: boolean;
+    [SSCarouselProp.ICON_COLOR]: string;
 }
 export declare const ssCarouselProps: PropConfigMap<SSCarouselProps>;
 export interface ContactPoint {

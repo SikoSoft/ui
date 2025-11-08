@@ -12,6 +12,7 @@ export declare class SSCarousel extends LitElement {
     [SSCarouselProp.GAP]: SSCarouselProps[SSCarouselProp.GAP];
     [SSCarouselProp.PERSPECTIVE]: SSCarouselProps[SSCarouselProp.PERSPECTIVE];
     [SSCarouselProp.DISCRETE]: SSCarouselProps[SSCarouselProp.DISCRETE];
+    [SSCarouselProp.ICON_COLOR]: SSCarouselProps[SSCarouselProp.ICON_COLOR];
     carousel: HTMLDivElement;
     initialized: boolean;
     get totalSlides(): number;

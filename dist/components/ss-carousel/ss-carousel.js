@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b, _c, _d, _e, _f, _g, _h;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 import { LitElement, html, css, nothing } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -36,6 +36,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         this[_f] = ssCarouselProps[SSCarouselProp.GAP].default;
         this[_g] = ssCarouselProps[SSCarouselProp.PERSPECTIVE].default;
         this[_h] = ssCarouselProps[SSCarouselProp.DISCRETE].default;
+        this[_j] = ssCarouselProps[SSCarouselProp.ICON_COLOR].default;
         this.initialized = false;
         this.actualWidth = 0;
         this.mouseOver = false;
@@ -44,7 +45,7 @@ let SSCarousel = class SSCarousel extends LitElement {
         this.latestContactPoint = { x: 0, y: 0 };
         this.dragDistance = 0;
     }
-    static { _a = SSCarouselProp.INFINITE, _b = SSCarouselProp.NAVIGATION_INDEX, _c = SSCarouselProp.SHOW_BUTTONS, _d = SSCarouselProp.WIDTH, _e = SSCarouselProp.HEIGHT, _f = SSCarouselProp.GAP, _g = SSCarouselProp.PERSPECTIVE, _h = SSCarouselProp.DISCRETE; }
+    static { _a = SSCarouselProp.INFINITE, _b = SSCarouselProp.NAVIGATION_INDEX, _c = SSCarouselProp.SHOW_BUTTONS, _d = SSCarouselProp.WIDTH, _e = SSCarouselProp.HEIGHT, _f = SSCarouselProp.GAP, _g = SSCarouselProp.PERSPECTIVE, _h = SSCarouselProp.DISCRETE, _j = SSCarouselProp.ICON_COLOR; }
     static { this.styles = [
         theme,
         css `
@@ -228,7 +229,6 @@ let SSCarousel = class SSCarousel extends LitElement {
         return index;
     }
     get slides() {
-        //console.log('Getting slides...');
         return [...this.children].filter(child => child.nodeName !== 'STYLE');
     }
     connectedCallback() {
@@ -247,10 +247,8 @@ let SSCarousel = class SSCarousel extends LitElement {
         }, 50);
     }
     setupSlot() {
-        //console.log('CAROUSEL: Setting up slot...');
         const slotNode = this.shadowRoot?.querySelector('slot');
         if (slotNode) {
-            //console.log('CAROUSEL: slot found, so setup listener');
             slotNode.addEventListener('slotchange', () => {
                 this.setupSlides();
                 this.updateSlides();
@@ -258,7 +256,6 @@ let SSCarousel = class SSCarousel extends LitElement {
         }
     }
     setupSlides() {
-        console.log('CAROUSEL: Setting up slides...', this.slides.length);
         if (this.slides.length > 0) {
             this.slides.forEach((slide, index) => {
                 if (slide.classList.contains('slide')) {
@@ -457,7 +454,7 @@ let SSCarousel = class SSCarousel extends LitElement {
                 >
                   <ss-icon
                     name="arrowCircleLeft"
-                    color="#000"
+                    color=${this[SSCarouselProp.ICON_COLOR]}
                     size="48"
                   ></ss-icon>
                 </button>
@@ -474,7 +471,7 @@ let SSCarousel = class SSCarousel extends LitElement {
                 >
                   <ss-icon
                     name="arrowCircleRight"
-                    color="#000"
+                    color=${this[SSCarouselProp.ICON_COLOR]}
                     size="48"
                   ></ss-icon>
                 </button>
@@ -509,6 +506,9 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], SSCarousel.prototype, _h, void 0);
+__decorate([
+    property({ type: String })
+], SSCarousel.prototype, _j, void 0);
 __decorate([
     query('.carousel')
 ], SSCarousel.prototype, "carousel", void 0);

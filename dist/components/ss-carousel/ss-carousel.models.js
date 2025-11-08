@@ -9,6 +9,7 @@ export var SSCarouselProp;
     SSCarouselProp["GAP"] = "gap";
     SSCarouselProp["PERSPECTIVE"] = "perspective";
     SSCarouselProp["DISCRETE"] = "discrete";
+    SSCarouselProp["ICON_COLOR"] = "iconColor";
 })(SSCarouselProp || (SSCarouselProp = {}));
 export const ssCarouselProps = {
     [SSCarouselProp.INFINITE]: {
@@ -55,6 +56,11 @@ export const ssCarouselProps = {
         default: false,
         control: 'boolean',
         description: 'Whether the carousel should show inactive frames when it does not have contact',
+    },
+    [SSCarouselProp.ICON_COLOR]: {
+        default: '#000',
+        control: 'text',
+        description: 'The color of the navigation icons',
     },
 };
 //# sourceMappingURL=ss-carousel.models.js.map
