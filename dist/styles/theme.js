@@ -10,6 +10,8 @@ export const theme = css `
     --ssui-input-background-color: #fff;
     --ssui-input-border-color: #ccc;
     --ssui-input-text-color: #000;
+    --ssui-loader-color1: #000;
+    --ssui-loader-color2: #0002;
   }
 
   input[type='text'],
