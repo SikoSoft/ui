@@ -38,20 +38,32 @@ export class SSInputAuto extends LitElement {
 
       li {
         padding: 0.5rem;
-        background-color: #fff;
+        background-color: var(
+          --input-suggestion-background-color,
+          var(--ssui-input-suggestion-background-color, #fff)
+        );
         transition: all 0.2s;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         height: 2rem;
         line-height: 2rem;
-        color: #888;
+        color: var(
+          --input-suggestion-text-color,
+          var(--ssui-input-suggestion-text-color, #888)
+        );
         text-align: left;
       }
 
       li.selected {
-        color: #000;
-        background-color: #ddd;
+        color: var(
+          --input-suggestion-selected-text-color,
+          var(--ssui-input-suggestion-selected-text-color, #000)
+        );
+        background-color: var(
+          --input-suggestion-selected-background-color,
+          var(--ssui-input-suggestion-selected-background-color, #ddd)
+        );
       }
     `,
   ];
