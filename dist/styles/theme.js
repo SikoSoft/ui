@@ -7,6 +7,7 @@ export const theme = css `
     --ssui-positive-background-color: #c4ffc4;
     --ssui-box-background-color: #fff;
     --ssui-box-border-color: #aaa;
+    --ssui-box-text-color: #000;
     --ssui-input-background-color: #fff;
     --ssui-input-border-color: #ccc;
     --ssui-input-text-color: #000;

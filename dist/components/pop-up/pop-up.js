@@ -48,8 +48,12 @@ let PopUp = class PopUp extends LitElement {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
-        border: 1px solid #666;
+        color: var(--box-text-color, var(--ssui-box-text-color, #000));
+        background-color: var(
+          --box-background-color,
+          var(--ssui-box-background-color)
+        );
+        border: 1px solid var(--box-border-color, var(--ssui-box-border-color));
 
         z-index: 1000;
         border-radius: 0.5rem;
