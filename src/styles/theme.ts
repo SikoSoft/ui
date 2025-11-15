@@ -18,6 +18,13 @@ export const theme = css`
     --ssui-input-suggestion-selected-text-color: #000;
     --ssui-loader-color1: #000;
     --ssui-loader-color2: #0002;
+    --ssui-toggle-outer-background-color1: #777;
+    --ssui-toggle-outer-background-color2: #999;
+    --ssui-toggle-inner-background-color1: #ccc;
+    --ssui-toggle-inner-background-color2: #aaa;
+    --ssui-toggle-ball-background-color1: #555;
+    --ssui-toggle-ball-background-color2: #777;
+    --ssui-toggle-ball-border-color: #222;
   }
 
   input[type='text'],
