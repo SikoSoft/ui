@@ -109,6 +109,8 @@ export class PopUp extends LitElement {
           this.newlyOpened = false;
         }, 100);
       } else {
+        this.dispatchEvent(new PopUpClosedEvent({}));
+
         this.newlyOpened = false;
       }
     }
