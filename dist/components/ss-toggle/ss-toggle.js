@@ -24,7 +24,16 @@ let SSToggle = class SSToggle extends LitElement {
       height: 3rem;
       width: 6rem;
       border-radius: 1.5rem;
-      background: linear-gradient(#777, #999);
+      background: linear-gradient(
+        var(
+          --toggle-outer-background-color1,
+          var(--ssui-toggle-outer-background-color1, #777)
+        ),
+        var(
+          --toggle-outer-background-color2,
+          var(--ssui-toggle-outer-background-color2, #999)
+        )
+      );
       position: relative;
       transition: all 0.1s;
       cursor: pointer;
@@ -46,7 +55,16 @@ let SSToggle = class SSToggle extends LitElement {
       top: 0.3rem;
       left: 0.3rem;
 
-      background: linear-gradient(#ccc, #aaa);
+      background: linear-gradient(
+        var(
+          --toggle-inner-background-color1,
+          var(--ssui-toggle-inner-background-color1, #ccc)
+        ),
+        var(
+          --toggle-inner-background-color2,
+          var(--ssui-toggle-inner-background-color2, #aaa)
+        )
+      );
       border-radius: 1.2rem;
     }
 
@@ -68,9 +86,24 @@ let SSToggle = class SSToggle extends LitElement {
       width: 2rem;
       left: 0.5rem;
       top: 0.5rem;
-      background: linear-gradient(45deg, #555, #777);
+      background: linear-gradient(
+        45deg,
+        var(
+          --toggle-ball-background-color1,
+          var(--ssui-toggle-ball-background-color1, #555)
+        ),
+        var(
+          --toggle-ball-background-color2,
+          var(--ssui-toggle-ball-background-color2, #777)
+        )
+      );
       border-radius: 1rem;
-      border: 2px #222 solid;
+      border: 2px
+        var(
+          --toggle-ball-border-color,
+          var(--ssui-toggle-ball-border-color, #222)
+        )
+        solid;
       box-sizing: border-box;
       transition: all 0.3s;
     }
