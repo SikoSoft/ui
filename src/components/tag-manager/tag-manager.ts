@@ -173,8 +173,8 @@ export class TagManager extends LitElement {
 
   render() {
     return html`
-      <fieldset class="tag-manager">
-        <legend>${msg('Tags')}</legend>
+      <fieldset class="tag-manager" part="fieldset">
+        <legend part="legend">${msg('Tags')}</legend>
 
         <tag-input
           value=${this.value}
