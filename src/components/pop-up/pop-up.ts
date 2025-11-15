@@ -4,7 +4,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { theme } from '../../styles/theme';
 import { PopUpProp, PopUpProps, popUpProps } from './pop-up.models';
 import { classMap } from 'lit/directives/class-map.js';
-import { PopUpClosedEvent } from './pop-up.events';
+import { PopUpClosedEvent, PopUpOpenedEvent } from './pop-up.events';
 
 @customElement('pop-up')
 export class PopUp extends LitElement {
@@ -102,6 +102,8 @@ export class PopUp extends LitElement {
     super.updated(_changedProperties);
     if (_changedProperties.has(PopUpProp.OPEN)) {
       if (this[PopUpProp.OPEN]) {
+        this.dispatchEvent(new PopUpOpenedEvent({}));
+
         this.newlyOpened = true;
         setTimeout(() => {
           this.newlyOpened = false;
