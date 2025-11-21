@@ -10,7 +10,12 @@ import {
   InputType,
 } from './ss-input.models';
 
-import { InputChangedEvent, InputSubmittedEvent } from './ss-input.events';
+import {
+  InputBlurredEvent,
+  InputChangedEvent,
+  InputFocusedEvent,
+  InputSubmittedEvent,
+} from './ss-input.events';
 import { SuggestionChangedEvent } from '../ss-input-auto/ss-input-auto.events';
 
 import '../ss-input-auto/ss-input-auto';
@@ -227,12 +232,14 @@ export class SSInput extends LitElement {
   private handleFocus = (e: Event): void => {
     this.hasFocus = true;
     this.autoDismissed = false;
+    this.dispatchEvent(new InputFocusedEvent({ value: this._value }));
   };
 
   private handleBlur = (e: Event): void => {
     setTimeout(() => {
       this.hasFocus = false;
     }, 200);
+    this.dispatchEvent(new InputBlurredEvent({ value: this._value }));
   };
 
   private suggestionSelectHandler = (e: SuggestionChangedEvent): void => {

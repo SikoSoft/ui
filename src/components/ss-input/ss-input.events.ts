@@ -29,3 +29,35 @@ export class InputSubmittedEvent extends CustomEvent<InputSubmittedEventPayload>
     });
   }
 }
+
+export const inputFocusedEventName = 'input-focused';
+
+export interface InputFocusedEventPayload {
+  value: string;
+}
+
+export class InputFocusedEvent extends CustomEvent<InputFocusedEventPayload> {
+  constructor(payload: InputFocusedEventPayload) {
+    super(inputFocusedEventName, {
+      bubbles: true,
+      composed: true,
+      detail: payload,
+    });
+  }
+}
+
+export const inputBlurredEventName = 'input-blurred';
+
+export interface InputBlurredEventPayload {
+  value: string;
+}
+
+export class InputBlurredEvent extends CustomEvent<InputBlurredEventPayload> {
+  constructor(payload: InputBlurredEventPayload) {
+    super(inputBlurredEventName, {
+      bubbles: true,
+      composed: true,
+      detail: payload,
+    });
+  }
+}
