@@ -101,8 +101,11 @@ let SSInput = class SSInput extends LitElement {
 
       input.unsaved {
         border-color: var(
-          --ssui-input-unsaved-border-color,
-          var(--ssui-input-border-color, #ccc)
+          --input-unsaved-border-color,
+          var(
+            --ssui-input-unsaved-border-color,
+            var(--ssui-input-border-color, #ccc)
+          )
         );
       }
     `,
