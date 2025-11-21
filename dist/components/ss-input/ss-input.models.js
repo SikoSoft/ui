@@ -16,6 +16,7 @@ export var SSInputProp;
     SSInputProp["MIN"] = "min";
     SSInputProp["MAX"] = "max";
     SSInputProp["STEP"] = "step";
+    SSInputProp["UNSAVED"] = "unsaved";
 })(SSInputProp || (SSInputProp = {}));
 export const ssInputProps = {
     [SSInputProp.TYPE]: {
@@ -57,6 +58,11 @@ export const ssInputProps = {
         default: 1,
         description: 'The step value for a number input',
         control: 'number',
+    },
+    [SSInputProp.UNSAVED]: {
+        default: false,
+        description: 'Indicates whether the current value is unsaved',
+        control: 'boolean',
     },
 };
 //# sourceMappingURL=ss-input.models.js.map

@@ -14,7 +14,8 @@ export declare enum SSInputProp {
     SUGGESTIONS = "suggestions",
     MIN = "min",
     MAX = "max",
-    STEP = "step"
+    STEP = "step",
+    UNSAVED = "unsaved"
 }
 export interface SSInputProps extends PropTypes {
     [SSInputProp.TYPE]: InputType;
@@ -25,5 +26,6 @@ export interface SSInputProps extends PropTypes {
     [SSInputProp.MIN]: number;
     [SSInputProp.MAX]: number;
     [SSInputProp.STEP]: number;
+    [SSInputProp.UNSAVED]: boolean;
 }
 export declare const ssInputProps: PropConfigMap<SSInputProps>;

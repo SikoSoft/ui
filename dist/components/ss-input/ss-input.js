@@ -4,10 +4,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b, _c, _d, _e, _f, _g, _h;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 import { LitElement, html, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { SSInputProp, ssInputProps, InputType, } from './ss-input.models';
 import { InputChangedEvent, InputSubmittedEvent } from './ss-input.events';
 import '../ss-input-auto/ss-input-auto';
@@ -21,6 +22,7 @@ let SSInput = class SSInput extends LitElement {
         this[_c] = ssInputProps[SSInputProp.AUTO_COMPLETE].default;
         this[_d] = ssInputProps[SSInputProp.PLACEHOLDER].default;
         this[_e] = ssInputProps[SSInputProp.SUGGESTIONS].default;
+        this[_j] = ssInputProps[SSInputProp.UNSAVED].default;
         this._value = this.value;
         this.hasFocus = false;
         this.autoDismissed = false;
@@ -88,12 +90,20 @@ let SSInput = class SSInput extends LitElement {
             this.inputField.dispatchEvent(new InputChangedEvent({ value: e.detail.value }));
         };
     }
-    static { _a = SSInputProp.TYPE, _b = SSInputProp.VALUE, _c = SSInputProp.AUTO_COMPLETE, _d = SSInputProp.PLACEHOLDER, _e = SSInputProp.SUGGESTIONS, _f = SSInputProp.MIN, _g = SSInputProp.MAX, _h = SSInputProp.STEP; }
+    static { _a = SSInputProp.TYPE, _b = SSInputProp.VALUE, _c = SSInputProp.AUTO_COMPLETE, _d = SSInputProp.PLACEHOLDER, _e = SSInputProp.SUGGESTIONS, _f = SSInputProp.MIN, _g = SSInputProp.MAX, _h = SSInputProp.STEP, _j = SSInputProp.UNSAVED; }
     static { this.styles = [
         theme,
         css `
-      input:focus {
+      input:focus,
+      input.focused {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      input.unsaved {
+        border-color: var(
+          --ssui-input-unsaved-border-color,
+          var(--ssui-input-border-color, #ccc)
+        );
       }
     `,
     ]; }
@@ -164,6 +174,7 @@ let SSInput = class SSInput extends LitElement {
         return html `
       <span part="container">
         <input
+          class=${classMap({ focused: this.hasFocus, unsaved: this.unsaved })}
           part="input"
           type=${this.type}
           value=${this.value}
@@ -217,6 +228,9 @@ __decorate([
 __decorate([
     property({ type: Number, reflect: true })
 ], SSInput.prototype, _h, void 0);
+__decorate([
+    property({ type: Boolean })
+], SSInput.prototype, _j, void 0);
 __decorate([
     state()
 ], SSInput.prototype, "_value", void 0);
