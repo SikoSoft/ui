@@ -8,6 +8,8 @@ export var IconName;
     IconName["GEAR"] = "gear";
     IconName["DELETE"] = "delete";
     IconName["SORT"] = "sort";
+    IconName["THEME"] = "theme";
+    IconName["TRASH"] = "trash";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {

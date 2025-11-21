@@ -60,4 +60,14 @@ export const Sort = {
         name: IconName.SORT,
     },
 };
+export const Theme = {
+    args: {
+        name: IconName.THEME,
+    },
+};
+export const Trash = {
+    args: {
+        name: IconName.TRASH,
+    },
+};
 //# sourceMappingURL=ss-icon.stories.js.map
