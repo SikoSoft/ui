@@ -9,6 +9,8 @@ import './svg/svg-invalid-circle';
 import './svg/svg-gear';
 import './svg/svg-delete';
 import './svg/svg-sort';
+import './svg/svg-theme';
+import './svg/svg-trash';
 
 import { theme } from '../../styles/theme';
 import {
@@ -83,6 +85,10 @@ export class SSIcon extends LitElement {
         return html`<svg-delete></svg-delete>`;
       case IconName.SORT:
         return html`<svg-sort></svg-sort>`;
+      case IconName.THEME:
+        return html`<svg-theme></svg-theme>`;
+      case IconName.TRASH:
+        return html`<svg-trash></svg-trash>`;
       default:
         return nothing;
     }

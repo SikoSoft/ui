@@ -75,3 +75,15 @@ export const Sort: Story = {
     name: IconName.SORT,
   },
 };
+
+export const Theme: Story = {
+  args: {
+    name: IconName.THEME,
+  },
+};
+
+export const Trash: Story = {
+  args: {
+    name: IconName.TRASH,
+  },
+};

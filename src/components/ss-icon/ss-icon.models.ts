@@ -9,6 +9,8 @@ export enum IconName {
   GEAR = 'gear',
   DELETE = 'delete',
   SORT = 'sort',
+  THEME = 'theme',
+  TRASH = 'trash',
 }
 
 export enum SSIconProp {
