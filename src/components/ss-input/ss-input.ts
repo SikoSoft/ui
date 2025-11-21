@@ -131,6 +131,10 @@ export class SSInput extends LitElement {
     this.inputField.focus();
   }
 
+  blur() {
+    this.inputField.blur();
+  }
+
   clear() {
     this.inputField.value = '';
     this.dispatchEvent(
