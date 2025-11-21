@@ -17,6 +17,7 @@ export enum SSInputProp {
   MIN = 'min',
   MAX = 'max',
   STEP = 'step',
+  UNSAVED = 'unsaved',
 }
 
 export interface SSInputProps extends PropTypes {
@@ -28,6 +29,7 @@ export interface SSInputProps extends PropTypes {
   [SSInputProp.MIN]: number;
   [SSInputProp.MAX]: number;
   [SSInputProp.STEP]: number;
+  [SSInputProp.UNSAVED]: boolean;
 }
 
 export const ssInputProps: PropConfigMap<SSInputProps> = {
@@ -70,5 +72,10 @@ export const ssInputProps: PropConfigMap<SSInputProps> = {
     default: 1,
     description: 'The step value for a number input',
     control: 'number',
+  },
+  [SSInputProp.UNSAVED]: {
+    default: false,
+    description: 'Indicates whether the current value is unsaved',
+    control: 'boolean',
   },
 };

@@ -11,6 +11,7 @@ export const theme = css`
     --ssui-box-text-color: #000;
     --ssui-input-background-color: #fff;
     --ssui-input-border-color: #ccc;
+    --ssui-input-unsaved-border-color: #b60;
     --ssui-input-text-color: #000;
     --ssui-input-suggestion-background-color: #fff;
     --ssui-input-suggestion-text-color: #888;
@@ -46,6 +47,7 @@ export const theme = css`
     border: 1px solid
       var(--input-border-color, var(--ssui-input-border-color, #ccc));
     border-radius: 0.5rem;
+    outline: none;
   }
   main {
     margin-top: 1rem;

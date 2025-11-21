@@ -27,6 +27,7 @@ const meta = {
       min=${args.min}
       max=${args.max}
       step=${args.step}
+      ?unsaved=${args.unsaved}
     ></ss-input>
   `,
 } satisfies Meta<SSInputProps>;
@@ -46,5 +47,12 @@ export const Number: Story = {
     min: 0,
     max: 100,
     step: 1,
+  },
+};
+
+export const Unsaved: Story = {
+  args: {
+    type: InputType.TEXT,
+    unsaved: true,
   },
 };

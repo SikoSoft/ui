@@ -1,6 +1,7 @@
 import { LitElement, html, PropertyValueMap, nothing, css } from 'lit';
 import { property, customElement, state, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 import {
   SSInputProp,
@@ -25,8 +26,16 @@ export class SSInput extends LitElement {
   static styles = [
     theme,
     css`
-      input:focus {
+      input:focus,
+      input.focused {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      input.unsaved {
+        border-color: var(
+          --ssui-input-unsaved-border-color,
+          var(--ssui-input-border-color, #ccc)
+        );
       }
     `,
   ];
@@ -59,6 +68,10 @@ export class SSInput extends LitElement {
 
   @property({ type: Number, reflect: true })
   [SSInputProp.STEP]?: SSInputProps[SSInputProp.STEP];
+
+  @property({ type: Boolean })
+  [SSInputProp.UNSAVED]: SSInputProps[SSInputProp.UNSAVED] =
+    ssInputProps[SSInputProp.UNSAVED].default;
 
   @state() _value: string = this.value;
   @query('input') inputField!: HTMLInputElement;
@@ -231,6 +244,7 @@ export class SSInput extends LitElement {
     return html`
       <span part="container">
         <input
+          class=${classMap({ focused: this.hasFocus, unsaved: this.unsaved })}
           part="input"
           type=${this.type}
           value=${this.value}
