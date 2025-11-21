@@ -24,6 +24,7 @@ export declare class SSInput extends LitElement {
     disconnectedCallback(): void;
     updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void;
     focus(): void;
+    blur(): void;
     clear(): void;
     private handleChange;
     private handleKeyDown;

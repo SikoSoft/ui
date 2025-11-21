@@ -143,6 +143,9 @@ let SSInput = class SSInput extends LitElement {
     focus() {
         this.inputField.focus();
     }
+    blur() {
+        this.inputField.blur();
+    }
     clear() {
         this.inputField.value = '';
         this.dispatchEvent(new InputChangedEvent({
