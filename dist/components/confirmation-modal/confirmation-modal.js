@@ -72,8 +72,9 @@ let ConfirmationModal = class ConfirmationModal extends LitElement {
         this.close();
     }
     decline() {
+        console.log('decline called and dispatching event');
         this.dispatchEvent(new ConfirmationDeclinedEvent({}));
-        this.close();
+        //this.close();
     }
     close() {
         this.open = false;

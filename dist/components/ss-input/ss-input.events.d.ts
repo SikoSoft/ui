@@ -12,3 +12,17 @@ export interface InputSubmittedEventPayload {
 export declare class InputSubmittedEvent extends CustomEvent<InputSubmittedEventPayload> {
     constructor(payload: InputSubmittedEventPayload);
 }
+export declare const inputFocusedEventName = "input-focused";
+export interface InputFocusedEventPayload {
+    value: string;
+}
+export declare class InputFocusedEvent extends CustomEvent<InputFocusedEventPayload> {
+    constructor(payload: InputFocusedEventPayload);
+}
+export declare const inputBlurredEventName = "input-blurred";
+export interface InputBlurredEventPayload {
+    value: string;
+}
+export declare class InputBlurredEvent extends CustomEvent<InputBlurredEventPayload> {
+    constructor(payload: InputBlurredEventPayload);
+}

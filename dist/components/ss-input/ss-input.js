@@ -10,7 +10,7 @@ import { property, customElement, state, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { SSInputProp, ssInputProps, InputType, } from './ss-input.models';
-import { InputChangedEvent, InputSubmittedEvent } from './ss-input.events';
+import { InputBlurredEvent, InputChangedEvent, InputFocusedEvent, InputSubmittedEvent, } from './ss-input.events';
 import '../ss-input-auto/ss-input-auto';
 import { theme } from '../../styles/theme';
 let SSInput = class SSInput extends LitElement {
@@ -78,11 +78,13 @@ let SSInput = class SSInput extends LitElement {
         this.handleFocus = (e) => {
             this.hasFocus = true;
             this.autoDismissed = false;
+            this.dispatchEvent(new InputFocusedEvent({ value: this._value }));
         };
         this.handleBlur = (e) => {
             setTimeout(() => {
                 this.hasFocus = false;
             }, 200);
+            this.dispatchEvent(new InputBlurredEvent({ value: this._value }));
         };
         this.suggestionSelectHandler = (e) => {
             this.autoDismissed = true;

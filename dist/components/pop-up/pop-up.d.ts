@@ -7,6 +7,8 @@ export declare class PopUp extends LitElement {
     [PopUpProp.CLOSE_ON_OUTSIDE_CLICK]: PopUpProps[PopUpProp.CLOSE_ON_OUTSIDE_CLICK];
     [PopUpProp.CLOSE_ON_ESC]: PopUpProps[PopUpProp.CLOSE_ON_ESC];
     newlyOpened: boolean;
+    lastOpenedState: boolean;
+    lastOpenedChangeTime: number | null;
     private container;
     get classes(): {
         'pop-up': boolean;
@@ -14,7 +16,8 @@ export declare class PopUp extends LitElement {
     };
     connectedCallback(): void;
     disconnectedCallback(): void;
-    protected updated(_changedProperties: PropertyValues): void;
+    protected firstUpdated(changedProperties: PropertyValues): void;
+    protected updated(_changedProperties: PropertyValues): Promise<void>;
     private handleClickOutside;
     private handleKeyDown;
     render(): import("lit-html").TemplateResult<1>;
