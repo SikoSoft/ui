@@ -87,3 +87,9 @@ export const Trash: Story = {
     name: IconName.TRASH,
   },
 };
+
+export const Add: Story = {
+  args: {
+    name: IconName.ADD,
+  },
+};
