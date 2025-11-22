@@ -27,3 +27,4 @@ export declare const Delete: Story;
 export declare const Sort: Story;
 export declare const Theme: Story;
 export declare const Trash: Story;
+export declare const Add: Story;

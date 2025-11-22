@@ -9,7 +9,8 @@ export declare enum IconName {
     DELETE = "delete",
     SORT = "sort",
     THEME = "theme",
-    TRASH = "trash"
+    TRASH = "trash",
+    ADD = "add"
 }
 export declare enum SSIconProp {
     NAME = "name",

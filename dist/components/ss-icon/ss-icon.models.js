@@ -10,6 +10,7 @@ export var IconName;
     IconName["SORT"] = "sort";
     IconName["THEME"] = "theme";
     IconName["TRASH"] = "trash";
+    IconName["ADD"] = "add";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {

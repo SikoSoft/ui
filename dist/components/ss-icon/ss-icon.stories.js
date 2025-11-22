@@ -70,4 +70,9 @@ export const Trash = {
         name: IconName.TRASH,
     },
 };
+export const Add = {
+    args: {
+        name: IconName.ADD,
+    },
+};
 //# sourceMappingURL=ss-icon.stories.js.map
