@@ -30,7 +30,7 @@ export const ssIconProps = {
         control: 'number',
     },
     [SSIconProp.COLOR]: {
-        default: '#000',
+        default: 'currentColor',
         description: 'The color of the icon',
         control: 'text',
     },
