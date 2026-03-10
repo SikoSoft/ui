@@ -28,6 +28,7 @@ const meta = {
     <tag-manager
       value=${args.value}
       ?enableSuggestions=${args.enableSuggestions}
+      label=${args.label}
     >
       <div slot="tags">
         <data-item>monkey</data-item>

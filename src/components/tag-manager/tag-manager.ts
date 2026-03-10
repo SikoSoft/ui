@@ -52,6 +52,10 @@ export class TagManager extends LitElement {
   [TagManagerProp.ENABLE_SUGGESTIONS]: TagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS] =
     tagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS].default;
 
+  @property()
+  [TagManagerProp.LABEL]: TagManagerProps[TagManagerProp.LABEL] =
+    tagManagerProps[TagManagerProp.LABEL].default;
+
   @state() tags: string[] = [];
   @state() suggestions: string[] = [];
 
@@ -174,7 +178,7 @@ export class TagManager extends LitElement {
   render() {
     return html`
       <fieldset class="tag-manager" part="fieldset">
-        <legend part="legend">${msg('Tags')}</legend>
+        <legend part="legend">${this.label}</legend>
 
         <tag-input
           value=${this.value}
