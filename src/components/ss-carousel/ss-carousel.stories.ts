@@ -36,7 +36,12 @@ const meta = {
       ?discrete=${args.discrete}
       navigationIndex=${args.navigationIndex}
     >
-      <div class="something">Test</div>
+      <div class="something">Test1</div>
+      <div class="something">Test2</div>
+      <div class="something">Test3</div>
+      <div class="something">Test4</div>
+      <div class="something">Test5</div>
+      <div class="something">Test6</div>
     </ss-carousel>
   `,
 } satisfies Meta<SSCarouselProps>;
