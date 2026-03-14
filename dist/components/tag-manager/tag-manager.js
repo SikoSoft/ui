@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b;
+var _a, _b, _c;
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { TagsUpdatedEvent } from './tag-manager.events';
@@ -19,10 +19,11 @@ let TagManager = class TagManager extends LitElement {
         super(...arguments);
         this[_a] = tagManagerProps[TagManagerProp.VALUE].default;
         this[_b] = tagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS].default;
+        this[_c] = tagManagerProps[TagManagerProp.LABEL].default;
         this.tags = [];
         this.suggestions = [];
     }
-    static { _a = TagManagerProp.VALUE, _b = TagManagerProp.ENABLE_SUGGESTIONS; }
+    static { _a = TagManagerProp.VALUE, _b = TagManagerProp.ENABLE_SUGGESTIONS, _c = TagManagerProp.LABEL; }
     static { this.styles = [
         theme,
         css `
@@ -134,7 +135,7 @@ let TagManager = class TagManager extends LitElement {
     render() {
         return html `
       <fieldset class="tag-manager" part="fieldset">
-        <legend part="legend">${msg('Tags')}</legend>
+        <legend part="legend">${this.label}</legend>
 
         <tag-input
           value=${this.value}
@@ -168,6 +169,9 @@ __decorate([
 __decorate([
     property({ type: Boolean, reflect: true })
 ], TagManager.prototype, _b, void 0);
+__decorate([
+    property()
+], TagManager.prototype, _c, void 0);
 __decorate([
     state()
 ], TagManager.prototype, "tags", void 0);

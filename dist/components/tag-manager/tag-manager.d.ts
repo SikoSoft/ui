@@ -6,6 +6,7 @@ export declare class TagManager extends LitElement {
     static styles: import("lit").CSSResult[];
     [TagManagerProp.VALUE]: TagManagerProps[TagManagerProp.VALUE];
     [TagManagerProp.ENABLE_SUGGESTIONS]: TagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS];
+    [TagManagerProp.LABEL]: TagManagerProps[TagManagerProp.LABEL];
     tags: string[];
     suggestions: string[];
     connectedCallback(): void;
