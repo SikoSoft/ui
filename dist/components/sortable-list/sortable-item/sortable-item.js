@@ -23,7 +23,6 @@ let SortableItem = class SortableItem extends LitElement {
     }
 
     .sortable-item:not(.disabled) {
-      padding: 1rem;
       display: flex;
       border: 1px transparent solid;
       width: 100%;
