@@ -12,6 +12,7 @@ export enum IconName {
   THEME = 'theme',
   TRASH = 'trash',
   ADD = 'add',
+  COPY = 'copy',
 }
 
 export enum SSIconProp {
