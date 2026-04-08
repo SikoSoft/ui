@@ -11,6 +11,7 @@ export var IconName;
     IconName["THEME"] = "theme";
     IconName["TRASH"] = "trash";
     IconName["ADD"] = "add";
+    IconName["COPY"] = "copy";
 })(IconName || (IconName = {}));
 export var SSIconProp;
 (function (SSIconProp) {

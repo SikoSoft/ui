@@ -10,7 +10,8 @@ export declare enum IconName {
     SORT = "sort",
     THEME = "theme",
     TRASH = "trash",
-    ADD = "add"
+    ADD = "add",
+    COPY = "copy"
 }
 export declare enum SSIconProp {
     NAME = "name",

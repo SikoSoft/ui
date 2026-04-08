@@ -18,6 +18,7 @@ import './svg/svg-sort';
 import './svg/svg-theme';
 import './svg/svg-trash';
 import './svg/svg-add';
+import './svg/svg-copy';
 import { theme } from '../../styles/theme';
 import { IconName, SSIconProp, ssIconProps, } from './ss-icon.models';
 let SSIcon = class SSIcon extends LitElement {
@@ -82,6 +83,8 @@ let SSIcon = class SSIcon extends LitElement {
                 return html `<svg-trash></svg-trash>`;
             case IconName.ADD:
                 return html `<svg-add></svg-add>`;
+            case IconName.COPY:
+                return html `<svg-copy></svg-copy>`;
             default:
                 return nothing;
         }

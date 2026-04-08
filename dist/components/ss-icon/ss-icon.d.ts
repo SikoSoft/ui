@@ -10,6 +10,7 @@ import './svg/svg-sort';
 import './svg/svg-theme';
 import './svg/svg-trash';
 import './svg/svg-add';
+import './svg/svg-copy';
 import { SSIconProp, SSIconProps } from './ss-icon.models';
 export declare class SSIcon extends LitElement {
     static styles: import("lit").CSSResult[];
