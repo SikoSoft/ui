@@ -26,10 +26,6 @@ export class SortableList extends LitElement {
     :host {
       display: block;
     }
-
-    .sortable-list:not(.disabled) {
-      padding: 1rem;
-    }
   `;
 
   get items(): HTMLElement[] {
