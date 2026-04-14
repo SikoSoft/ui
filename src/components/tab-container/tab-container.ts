@@ -1,6 +1,5 @@
-import { css, html, LitElement, PropertyValues } from 'lit';
+import { css, html, LitElement, PropertyValues, TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { TabPane } from './tab-pane/tab-pane';
 import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { TabIndexChangedEvent } from './tab-container.events';
@@ -14,10 +13,6 @@ import {
 @customElement('tab-container')
 export class TabContainer extends LitElement {
   static styles = css`
-    .slot-container {
-      display: none;
-    }
-
     .tab-headers {
       display: flex;
       border-bottom: 1px solid
@@ -50,21 +45,6 @@ export class TabContainer extends LitElement {
             var(--ssui-tabs-active-header-bg-color, #fff)
           );
           font-weight: bold;
-        }
-      }
-    }
-
-    .tab-content {
-      .tab-pane {
-        display: none;
-        padding: 16px;
-
-        &.active {
-          display: block;
-        }
-
-        &.hidden {
-          display: none;
         }
       }
     }
@@ -106,29 +86,35 @@ export class TabContainer extends LitElement {
     await this.updateComplete;
     const tabs: Tab[] = [];
     this.panes.forEach((pane, index) => {
-      const tabPane = pane as TabPane;
       tabs.push({
         title: pane.getAttribute('title') || `Tab ${index + 1}`,
-        content: tabPane.cloneNode(true) as TabPane,
       });
     });
     this.tabs = tabs;
+    this.updatePaneVisibility();
   }
 
-  setActiveIndex(index: number) {
+  updatePaneVisibility(): void {
+    this.panes.forEach((pane, index) => {
+      if (index === this.index) {
+        pane.setAttribute('active', '');
+      } else {
+        pane.removeAttribute('active');
+      }
+    });
+  }
+
+  setActiveIndex(index: number): void {
     this.index = index;
+    this.updatePaneVisibility();
 
     this.dispatchEvent(
       new TabIndexChangedEvent({ index, paneId: this.paneId }),
     );
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
-      <div class="slot-container" part="slot-container">
-        <slot></slot>
-      </div>
-
       <div class="tab-container" part="container">
         <div class="tab-headers" part="headers">
           ${repeat(
@@ -150,22 +136,7 @@ export class TabContainer extends LitElement {
           )}
         </div>
 
-        <div class="tab-content" part="content">
-          ${repeat(
-            this.tabs,
-            (tab, index) => html`
-              <div
-                part="pane"
-                class=${classMap({
-                  'tab-pane': true,
-                  active: this.index === index,
-                })}
-              >
-                ${tab.content}
-              </div>
-            `,
-          )}
-        </div>
+        <slot></slot>
       </div>
     `;
   }

@@ -2,7 +2,6 @@ import { PropConfigMap, PropTypes } from '@/models/Prop';
 
 export interface Tab {
   title: string;
-  content: HTMLElement;
 }
 
 export enum TabContainerProp {
