@@ -1,7 +1,6 @@
 import { PropConfigMap, PropTypes } from '@/models/Prop';
 export interface Tab {
     title: string;
-    content: HTMLElement;
 }
 export declare enum TabContainerProp {
     INDEX = "index",

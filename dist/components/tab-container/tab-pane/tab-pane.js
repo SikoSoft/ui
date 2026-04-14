@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var _a;
-import { html, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { TabPaneProp, tabPaneProps } from './tab-pane.models';
 let TabPane = class TabPane extends LitElement {
@@ -14,12 +14,18 @@ let TabPane = class TabPane extends LitElement {
         this[_a] = tabPaneProps[TabPaneProp.TITLE].default;
     }
     static { _a = TabPaneProp.TITLE; }
+    static { this.styles = css `
+    :host {
+      display: none;
+    }
+
+    :host([active]) {
+      display: block;
+      padding: 16px;
+    }
+  `; }
     render() {
-        return html `
-      <div class="tab-pane">
-        <slot></slot>
-      </div>
-    `;
+        return html `<slot></slot>`;
     }
 };
 __decorate([

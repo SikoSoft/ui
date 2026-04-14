@@ -1,4 +1,4 @@
-import { LitElement, PropertyValues } from 'lit';
+import { LitElement, PropertyValues, TemplateResult } from 'lit';
 import { Tab, TabContainerProp, TabContainerProps } from './tab-container.models';
 export declare class TabContainer extends LitElement {
     static styles: import("lit").CSSResult;
@@ -9,6 +9,7 @@ export declare class TabContainer extends LitElement {
     protected firstUpdated(_changedProperties: PropertyValues): void;
     setupSlot(): void;
     setupPanes(): Promise<void>;
+    updatePaneVisibility(): void;
     setActiveIndex(index: number): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): TemplateResult;
 }
