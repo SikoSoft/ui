@@ -41,6 +41,18 @@ export class TagInput extends LitElement {
   [TagInputProp.VALUE]: TagInputProps[TagInputProp.VALUE] =
     tagInputProps[TagInputProp.VALUE].default;
 
+  @property({ type: Boolean, reflect: true })
+  [TagInputProp.ENABLE_SUGGESTIONS]: TagInputProps[TagInputProp.ENABLE_SUGGESTIONS] =
+    tagInputProps[TagInputProp.ENABLE_SUGGESTIONS].default;
+
+  @property()
+  [TagInputProp.MSG_TAG]: TagInputProps[TagInputProp.MSG_TAG] =
+    tagInputProps[TagInputProp.MSG_TAG].default;
+
+  @property()
+  [TagInputProp.MSG_ADD]: TagInputProps[TagInputProp.MSG_ADD] =
+    tagInputProps[TagInputProp.MSG_ADD].default;
+
   @state() suggestions: string[] = [];
   @state() lastInputHadResults: boolean = true;
   @state() lastInput: string = '';
@@ -120,7 +132,7 @@ export class TagInput extends LitElement {
         <ss-input
           @input-submitted=${this.handleSubmitted}
           @input-changed=${this.handleChanged}
-          placeholder="Tag"
+          placeholder=${this.msgTag}
           value=${this.value}
           .suggestions=${this.suggestions}
           autoComplete
@@ -128,7 +140,10 @@ export class TagInput extends LitElement {
 
         ${this.showButton
           ? html`
-              <ss-button text="Add" @click=${this.handleSaveClick}></ss-button>
+              <ss-button
+                text=${this.msgAdd}
+                @click=${this.handleSaveClick}
+              ></ss-button>
             `
           : nothing}
       </div>

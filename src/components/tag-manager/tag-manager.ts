@@ -53,8 +53,20 @@ export class TagManager extends LitElement {
     tagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS].default;
 
   @property()
-  [TagManagerProp.LABEL]: TagManagerProps[TagManagerProp.LABEL] =
-    tagManagerProps[TagManagerProp.LABEL].default;
+  [TagManagerProp.MSG_HEADING]: TagManagerProps[TagManagerProp.MSG_HEADING] =
+    tagManagerProps[TagManagerProp.MSG_HEADING].default;
+
+  @property()
+  [TagManagerProp.MSG_NO_TAGS]: TagManagerProps[TagManagerProp.MSG_NO_TAGS] =
+    tagManagerProps[TagManagerProp.MSG_NO_TAGS].default;
+
+  @property()
+  [TagManagerProp.MSG_TAG]: TagManagerProps[TagManagerProp.MSG_TAG] =
+    tagManagerProps[TagManagerProp.MSG_TAG].default;
+
+  @property()
+  [TagManagerProp.MSG_ADD]: TagManagerProps[TagManagerProp.MSG_ADD] =
+    tagManagerProps[TagManagerProp.MSG_ADD].default;
 
   @state() tags: string[] = [];
   @state() suggestions: string[] = [];
@@ -178,10 +190,12 @@ export class TagManager extends LitElement {
   render() {
     return html`
       <fieldset class="tag-manager" part="fieldset">
-        <legend part="legend">${this.label}</legend>
+        <legend part="legend">${this.msgHeading}</legend>
 
         <tag-input
           value=${this.value}
+          msgTag=${this.msgTag}
+          msgAdd=${this.msgAdd}
           ?enableSuggestions=${this.enableSuggestions}
           @tag-input-updated=${this.handleInputUpdated}
           @tag-added=${this.handleTagAdded}
@@ -201,7 +215,7 @@ export class TagManager extends LitElement {
                 this.handleDeleted(e);
               }}
             ></tag-list>`
-          : html`<div class="no-tags">${msg('No tags are set')}</div>`}
+          : html`<div class="no-tags">${this.msgNoTags}</div>`}
 
         <slot name="tags"></slot>
 
