@@ -6,6 +6,9 @@ export declare class TagInput extends LitElement {
     private suggestionTimeout;
     static styles: import("lit").CSSResult[];
     [TagInputProp.VALUE]: TagInputProps[TagInputProp.VALUE];
+    [TagInputProp.ENABLE_SUGGESTIONS]: TagInputProps[TagInputProp.ENABLE_SUGGESTIONS];
+    [TagInputProp.MSG_TAG]: TagInputProps[TagInputProp.MSG_TAG];
+    [TagInputProp.MSG_ADD]: TagInputProps[TagInputProp.MSG_ADD];
     suggestions: string[];
     lastInputHadResults: boolean;
     lastInput: string;

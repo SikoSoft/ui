@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a, _b, _c;
+var _a, _b, _c, _d, _e, _f;
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { TagsUpdatedEvent } from './tag-manager.events';
@@ -13,17 +13,19 @@ import './tag-list/tag-list';
 import { theme } from '../../styles/theme';
 import { TagManagerProp, tagManagerProps, } from './tag-manager.models';
 import { repeat } from 'lit/directives/repeat.js';
-import { msg } from '../../util/msg';
 let TagManager = class TagManager extends LitElement {
     constructor() {
         super(...arguments);
         this[_a] = tagManagerProps[TagManagerProp.VALUE].default;
         this[_b] = tagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS].default;
-        this[_c] = tagManagerProps[TagManagerProp.LABEL].default;
+        this[_c] = tagManagerProps[TagManagerProp.MSG_HEADING].default;
+        this[_d] = tagManagerProps[TagManagerProp.MSG_NO_TAGS].default;
+        this[_e] = tagManagerProps[TagManagerProp.MSG_TAG].default;
+        this[_f] = tagManagerProps[TagManagerProp.MSG_ADD].default;
         this.tags = [];
         this.suggestions = [];
     }
-    static { _a = TagManagerProp.VALUE, _b = TagManagerProp.ENABLE_SUGGESTIONS, _c = TagManagerProp.LABEL; }
+    static { _a = TagManagerProp.VALUE, _b = TagManagerProp.ENABLE_SUGGESTIONS, _c = TagManagerProp.MSG_HEADING, _d = TagManagerProp.MSG_NO_TAGS, _e = TagManagerProp.MSG_TAG, _f = TagManagerProp.MSG_ADD; }
     static { this.styles = [
         theme,
         css `
@@ -135,10 +137,12 @@ let TagManager = class TagManager extends LitElement {
     render() {
         return html `
       <fieldset class="tag-manager" part="fieldset">
-        <legend part="legend">${this.label}</legend>
+        <legend part="legend">${this.msgHeading}</legend>
 
         <tag-input
           value=${this.value}
+          msgTag=${this.msgTag}
+          msgAdd=${this.msgAdd}
           ?enableSuggestions=${this.enableSuggestions}
           @tag-input-updated=${this.handleInputUpdated}
           @tag-added=${this.handleTagAdded}
@@ -154,7 +158,7 @@ let TagManager = class TagManager extends LitElement {
                 this.handleDeleted(e);
             }}
             ></tag-list>`
-            : html `<div class="no-tags">${msg('No tags are set')}</div>`}
+            : html `<div class="no-tags">${this.msgNoTags}</div>`}
 
         <slot name="tags"></slot>
 
@@ -172,6 +176,15 @@ __decorate([
 __decorate([
     property()
 ], TagManager.prototype, _c, void 0);
+__decorate([
+    property()
+], TagManager.prototype, _d, void 0);
+__decorate([
+    property()
+], TagManager.prototype, _e, void 0);
+__decorate([
+    property()
+], TagManager.prototype, _f, void 0);
 __decorate([
     state()
 ], TagManager.prototype, "tags", void 0);

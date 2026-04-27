@@ -10,6 +10,10 @@ declare const meta: {
     args: {
         value: string;
         enableSuggestions: boolean;
+        msgHeading: string;
+        msgNoTags: string;
+        msgTag: string;
+        msgAdd: string;
     };
     argTypes: Partial<import("@storybook/core/csf").ArgTypes<TagManagerProps>> | undefined;
     render: (args: TagManagerProps) => import("lit-html").TemplateResult<1>;
@@ -18,3 +22,4 @@ export default meta;
 type Story = StoryObj<TagManagerProps>;
 export declare const WithSuggestions: Story;
 export declare const WithoutSuggestions: Story;
+export declare const CustomMessages: Story;

@@ -12,11 +12,19 @@ const meta = {
     args: {
         value: '',
         enableSuggestions: tagManagerProps[TagManagerProp.ENABLE_SUGGESTIONS].default,
+        msgHeading: tagManagerProps[TagManagerProp.MSG_HEADING].default,
+        msgNoTags: tagManagerProps[TagManagerProp.MSG_NO_TAGS].default,
+        msgTag: tagManagerProps[TagManagerProp.MSG_TAG].default,
+        msgAdd: tagManagerProps[TagManagerProp.MSG_ADD].default,
     },
     argTypes,
     render: args => html `
     <tag-manager
       value=${args.value}
+      msgHeading=${args.msgHeading}
+      msgNoTags=${args.msgNoTags}
+      msgTag=${args.msgTag}
+      msgAdd=${args.msgAdd}
       ?enableSuggestions=${args.enableSuggestions}
       label=${args.label}
     >
@@ -48,6 +56,14 @@ export const WithSuggestions = {
 export const WithoutSuggestions = {
     args: {
         enableSuggestions: false,
+    },
+};
+export const CustomMessages = {
+    args: {
+        msgHeading: 'Options',
+        msgNoTags: 'No options added yet',
+        msgTag: 'Enter an option',
+        msgAdd: 'Add Option',
     },
 };
 //# sourceMappingURL=tag-manager.stories.js.map

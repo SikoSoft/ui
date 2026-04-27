@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var _a;
+var _a, _b, _c, _d;
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import '../../ss-input/ss-input';
@@ -17,11 +17,14 @@ let TagInput = class TagInput extends LitElement {
         super(...arguments);
         this.suggestionTimeout = null;
         this[_a] = tagInputProps[TagInputProp.VALUE].default;
+        this[_b] = tagInputProps[TagInputProp.ENABLE_SUGGESTIONS].default;
+        this[_c] = tagInputProps[TagInputProp.MSG_TAG].default;
+        this[_d] = tagInputProps[TagInputProp.MSG_ADD].default;
         this.suggestions = [];
         this.lastInputHadResults = true;
         this.lastInput = '';
     }
-    static { _a = TagInputProp.VALUE; }
+    static { _a = TagInputProp.VALUE, _b = TagInputProp.ENABLE_SUGGESTIONS, _c = TagInputProp.MSG_TAG, _d = TagInputProp.MSG_ADD; }
     static { this.styles = [
         theme,
         css `
@@ -100,7 +103,7 @@ let TagInput = class TagInput extends LitElement {
         <ss-input
           @input-submitted=${this.handleSubmitted}
           @input-changed=${this.handleChanged}
-          placeholder="Tag"
+          placeholder=${this.msgTag}
           value=${this.value}
           .suggestions=${this.suggestions}
           autoComplete
@@ -108,7 +111,10 @@ let TagInput = class TagInput extends LitElement {
 
         ${this.showButton
             ? html `
-              <ss-button text="Add" @click=${this.handleSaveClick}></ss-button>
+              <ss-button
+                text=${this.msgAdd}
+                @click=${this.handleSaveClick}
+              ></ss-button>
             `
             : nothing}
       </div>
@@ -118,6 +124,15 @@ let TagInput = class TagInput extends LitElement {
 __decorate([
     property({ type: String, reflect: true })
 ], TagInput.prototype, _a, void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], TagInput.prototype, _b, void 0);
+__decorate([
+    property()
+], TagInput.prototype, _c, void 0);
+__decorate([
+    property()
+], TagInput.prototype, _d, void 0);
 __decorate([
     state()
 ], TagInput.prototype, "suggestions", void 0);
