@@ -67,6 +67,12 @@ let PopUp = class PopUp extends LitElement {
           display: block;
         }
 
+        @media (max-width: 768px) {
+          width: 90vw;
+          max-height: 90vh;
+          overflow: auto;
+        }
+
         .inner {
           padding: 3rem;
           position: relative;

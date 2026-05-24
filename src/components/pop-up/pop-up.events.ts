@@ -1,6 +1,8 @@
 export const popUpOpenedEventName = 'pop-up-opened';
 
-export type PopUpOpenedEventPayload = Record<string, never>;
+export interface PopUpOpenedEventPayload {
+  changeTime: number | null;
+}
 
 export class PopUpOpenedEvent extends CustomEvent<PopUpOpenedEventPayload> {
   constructor(payload: PopUpOpenedEventPayload) {
@@ -14,7 +16,9 @@ export class PopUpOpenedEvent extends CustomEvent<PopUpOpenedEventPayload> {
 
 export const popUpClosedEventName = 'pop-up-closed';
 
-export type PopUpClosedEventPayload = Record<string, never>;
+export interface PopUpClosedEventPayload {
+  changeTime: number | null;
+}
 
 export class PopUpClosedEvent extends CustomEvent<PopUpClosedEventPayload> {
   constructor(payload: PopUpClosedEventPayload) {

@@ -37,6 +37,12 @@ export class PopUp extends LitElement {
           display: block;
         }
 
+        @media (max-width: 768px) {
+          width: 90vw;
+          max-height: 90vh;
+          overflow: auto;
+        }
+
         .inner {
           padding: 3rem;
           position: relative;
@@ -75,6 +81,12 @@ export class PopUp extends LitElement {
   @state()
   newlyOpened = false;
 
+  @state()
+  lastOpenedState = false;
+
+  @state()
+  lastOpenedChangeTime: number | null = null;
+
   @query('.pop-up')
   private container!: HTMLDivElement;
 
@@ -98,20 +110,45 @@ export class PopUp extends LitElement {
     document.removeEventListener('click', this.handleClickOutside);
   }
 
-  protected updated(_changedProperties: PropertyValues): void {
+  protected firstUpdated(changedProperties: PropertyValues): void {
+    super.firstUpdated(changedProperties);
+
+    this.lastOpenedState = this.open;
+  }
+
+  protected async updated(_changedProperties: PropertyValues): Promise<void> {
     super.updated(_changedProperties);
+
+    await this.updateComplete;
+
     if (_changedProperties.has(PopUpProp.OPEN)) {
       if (this[PopUpProp.OPEN]) {
-        this.dispatchEvent(new PopUpOpenedEvent({}));
-
         this.newlyOpened = true;
         setTimeout(() => {
           this.newlyOpened = false;
         }, 100);
       } else {
-        this.dispatchEvent(new PopUpClosedEvent({}));
-
         this.newlyOpened = false;
+      }
+
+      if (this[PopUpProp.OPEN] === this.lastOpenedState) {
+        console.log('No state change detected, skipping event dispatch.');
+        return;
+      }
+
+      this.lastOpenedState = this[PopUpProp.OPEN];
+      this.lastOpenedChangeTime = new Date().getTime();
+
+      if (this[PopUpProp.OPEN]) {
+        console.log('Pop-up opened event dispatched.');
+        this.dispatchEvent(
+          new PopUpOpenedEvent({ changeTime: this.lastOpenedChangeTime }),
+        );
+      } else {
+        console.log('Pop-up closed event dispatched.');
+        this.dispatchEvent(
+          new PopUpClosedEvent({ changeTime: this.lastOpenedChangeTime }),
+        );
       }
     }
   }
@@ -123,13 +160,19 @@ export class PopUp extends LitElement {
       this[PopUpProp.OPEN] &&
       !e.composedPath().includes(this.container)
     ) {
-      this.dispatchEvent(new PopUpClosedEvent({}));
+      this.lastOpenedChangeTime = new Date().getTime();
+      this.dispatchEvent(
+        new PopUpClosedEvent({ changeTime: this.lastOpenedChangeTime }),
+      );
     }
   };
 
   private handleKeyDown = (e: KeyboardEvent) => {
     if (this[PopUpProp.CLOSE_ON_ESC] && e.key === 'Escape') {
-      this.dispatchEvent(new PopUpClosedEvent({}));
+      this.lastOpenedChangeTime = new Date().getTime();
+      this.dispatchEvent(
+        new PopUpClosedEvent({ changeTime: this.lastOpenedChangeTime }),
+      );
     }
   };
 
@@ -142,7 +185,12 @@ export class PopUp extends LitElement {
                 <div
                   class="close-button"
                   @click=${() => {
-                    this.dispatchEvent(new PopUpClosedEvent({}));
+                    this.lastOpenedChangeTime = new Date().getTime();
+                    this.dispatchEvent(
+                      new PopUpClosedEvent({
+                        changeTime: this.lastOpenedChangeTime,
+                      }),
+                    );
                   }}
                 >
                   &#215;
