@@ -22,6 +22,7 @@ let TabContainer = class TabContainer extends LitElement {
     static { this.styles = css `
     .tab-headers {
       display: flex;
+      overflow-x: auto;
       border-bottom: 1px solid
         var(--tabs-border-color, var(--ssui-tabs-border-color, #ccc));
       background-color: var(
