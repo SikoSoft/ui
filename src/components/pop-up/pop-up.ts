@@ -32,6 +32,8 @@ export class PopUp extends LitElement {
         z-index: 1000;
         border-radius: 0.5rem;
         box-shadow: 0 0 5rem rgba(0, 0, 0, 0.75);
+        max-height: 90vh;
+        overflow-y: auto;
 
         &.open {
           display: block;
